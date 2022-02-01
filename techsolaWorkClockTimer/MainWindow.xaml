@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:techsolaWorkClockTimer"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:TechsolaClock/>
+    </Window.DataContext>
     <TabControl>
         <TabItem Header="Work Clock">
             <Grid>
@@ -32,7 +35,7 @@
                        Width="400">
                 <TextBlock 
                        x:Name="timeElapsed" 
-                       Text= "{Binding Test}"
+                       Text= "{Binding Timer}"
                        FontSize="50" 
                        FontWeight="Normal"
                        Foreground="White"
@@ -48,8 +51,7 @@
                 Background="Gray"
                 Foreground="Black"
                 FontSize="40"
-                FontStyle="Normal"
-                Click="startStopClock_Click"
+                FontStyle="Normal" Click="startStopClock_Click"
                 >
                 Start/Stop
             </Button>
