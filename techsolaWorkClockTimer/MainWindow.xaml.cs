@@ -1,8 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Threading;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System.Windows;
 
 namespace techsolaWorkClockTimer
 {
@@ -16,10 +12,5 @@ namespace techsolaWorkClockTimer
             InitializeComponent();
         }
 
-        private void startStopClock_Click(object sender, RoutedEventArgs e)
-        {
-            TechsolaClock clock = new TechsolaClock();
-            clock.StartClock();
-        }
     }
 }

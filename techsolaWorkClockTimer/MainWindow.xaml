@@ -51,7 +51,7 @@
                 Background="Gray"
                 Foreground="Black"
                 FontSize="40"
-                FontStyle="Normal" Click="startStopClock_Click"
+                FontStyle="Normal" 
                 >
                 Start/Stop
             </Button>
