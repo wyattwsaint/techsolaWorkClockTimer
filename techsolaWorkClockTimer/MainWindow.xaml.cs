@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 
 namespace techsolaWorkClockTimer
 {
@@ -10,7 +11,13 @@ namespace techsolaWorkClockTimer
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new TechsolaClock();
         }
 
+        private void StartStopClock_Click(object sender, RoutedEventArgs e)
+        {
+            var clock = (TechsolaClock)DataContext;
+            clock.startStop();
+        }
     }
 }

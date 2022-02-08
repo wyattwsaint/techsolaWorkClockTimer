@@ -6,9 +6,6 @@
         xmlns:local="clr-namespace:techsolaWorkClockTimer"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Window.DataContext>
-        <local:TechsolaClock/>
-    </Window.DataContext>
     <TabControl>
         <TabItem Header="Work Clock">
             <Grid>
@@ -52,6 +49,7 @@
                 Foreground="Black"
                 FontSize="40"
                 FontStyle="Normal" 
+                Click="StartStopClock_Click"
                 >
                 Start/Stop
             </Button>
