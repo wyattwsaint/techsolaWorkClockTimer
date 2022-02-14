@@ -17,7 +17,12 @@ namespace techsolaWorkClockTimer
         private void StartStopClock_Click(object sender, RoutedEventArgs e)
         {
             var clock = (TechsolaClock)DataContext;
-            clock.startStop();
+           
+
+            if (!clock.IsRunning)
+                clock.Start();
+            else
+                clock.Stop();
         }
     }
 }
