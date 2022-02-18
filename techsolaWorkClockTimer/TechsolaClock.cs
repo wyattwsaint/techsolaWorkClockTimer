@@ -10,7 +10,9 @@ namespace techsolaWorkClockTimer
     public class TechsolaClock : ObservableObject
     {
         private CancellationTokenSource? cancellationTokenSource;
-
+        public bool IsHeritageRunning;
+        public bool IsExactisRunning;
+        public bool IsCapriCorkRunning;
 
         private string? techsolaTime;
         public string? TechsolaTime
@@ -69,9 +71,9 @@ namespace techsolaWorkClockTimer
                     {
                         
                         TechsolaTime = $@"{GetCurrentTime("Techsola Internal"):hh\:mm\:ss}";
-                        HeritageTime = $@"{GetCurrentTime("Heritage"):hh\:mm\:ss}";
-                        ExactisTime = $@"{GetCurrentTime("Exactis"):hh\:mm\:ss}";
-                        CapriCorkTime = $@"{GetCurrentTime("Capri Cork"):hh\:mm\:ss}";
+                        HeritageTime = IsHeritageRunning ? $@"{GetCurrentTime("Heritage"):hh\:mm\:ss}" : heritageTime;
+                        ExactisTime = IsExactisRunning ? $@"{GetCurrentTime("Exactis"):hh\:mm\:ss}" : exactisTime;
+                        CapriCorkTime = IsCapriCorkRunning ? $@"{GetCurrentTime("Capri Cork"):hh\:mm\:ss}" : capriCorkTime;
                         await Task.Delay(1000, cancellationTokenSource.Token);
                     }
                 }
