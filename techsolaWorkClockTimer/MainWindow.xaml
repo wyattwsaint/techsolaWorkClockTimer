@@ -4,76 +4,167 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:techsolaWorkClockTimer"
+        d:DataContext="{d:DesignInstance Type=local:TechsolaClock}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <TabControl>
         <TabItem Header="Work Clock">
             <Grid>
-            <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="10"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="10"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="10" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="10" />
                 </Grid.RowDefinitions>
-            <DockPanel
+                <DockPanel
                     Grid.Column="1"
+                    Grid.ColumnSpan="10"
                     Grid.Row="1"
                     x:Name="panel"
-                       Background="Green"
-                       Height="70"
-                       Width="400">
-                <TextBlock 
-                       x:Name="timeElapsed" 
-                       Text= "{Binding Timer}"
-                       FontSize="50" 
-                       FontWeight="Normal"
-                       Foreground="White"
-                       HorizontalAlignment="Center" FontFamily="Stencil">
+                    Background="PowderBlue"
+                    Height="70"
+                    Width="400">
+                    <TextBlock
+                        x:Name="timeElapsed"
+                        Text="{Binding TechsolaTime}"
+                        FontSize="50"
+                        FontWeight="SemiBold"
+                        Foreground="Black"
+                        HorizontalAlignment="Center" FontFamily="Sans Serif"
+                        VerticalAlignment="Center">
+                    </TextBlock>
+                </DockPanel>
+                <Button
+                    Grid.Column="1"
+                    Grid.ColumnSpan="10"
+                    Grid.Row="2"
+                    x:Name="startStopClock"
+                    Width="400"
+                    Height="70"
+                    Background="Green"
+                    Foreground="Black"
+                    FontSize="40"
+                    FontStyle="Normal"
+                    Click="StartPauseClock_Click">
+                    Start/Pause
+                </Button>
+                <Button
+                    Grid.Column="1"
+                    Grid.ColumnSpan="10"
+                    Grid.Row="3"
+                    x:Name="endOfDay"
+                    Width="400"
+                    Height="70"
+                    Background="Gray"
+                    Foreground="Black"
+                    FontSize="40"
+                    FontStyle="Normal" Click="EndOfDay_Click">
+                    End Of Day
+                </Button>
+                <Button
+                    Grid.Column="1"
+                    Grid.ColumnSpan="5"
+                    Grid.Row="5"
+                    x:Name="Heritage"
+                    HorizontalAlignment="Center"
+                    Width="200"
+                    Height="35"
+                    Background="PaleVioletRed"
+                    Foreground="Black"
+                    FontSize="20"
+                    FontStyle="Normal" Click="Heritage_Click">
+                    Heritage
+                </Button>
+                <TextBlock
+                    Grid.Column="6"
+                    Grid.ColumnSpan="5"
+                    Grid.Row="5"
+                    x:Name="HeritageTimeElapsed"
+                    Text="{Binding HeritageTime}"
+                    FontSize="20"
+                    FontWeight="SemiBold"
+                    Foreground="Black"
+                    HorizontalAlignment="Center" FontFamily="Sans Serif"
+                    VerticalAlignment="Center"
+                    Visibility="Collapsed">
                 </TextBlock>
-            </DockPanel>
-            <Button
-                Grid.Column="1"
-                Grid.Row="2"
-                x:Name="startStopClock"
-                Width="auto"
-                Height="70"
-                Background="Gray"
-                Foreground="Black"
-                FontSize="40"
-                FontStyle="Normal" 
-                Click="StartStopClock_Click"
-                >
-                Start/Stop
-            </Button>
-            <Button
-                Grid.Column="1"
-                Grid.Row="3"
-                x:Name="endOfDay"
-                Width="400"
-                Height="70"
-                Background="Gray"
-                Foreground="Black"
-                FontSize="40"
-                FontStyle="Normal"
-                >
-                End Of Day
-            </Button>
+                <Button
+                    Grid.Column="1"
+                    Grid.ColumnSpan="5"
+                    Grid.Row="6"
+                    x:Name="Exactis"
+                    HorizontalAlignment="Center"
+                    Width="200"
+                    Height="35"
+                    Background="PaleTurquoise"
+                    Foreground="Black"
+                    FontSize="20"
+                    FontStyle="Normal" Click="Exactis_Click">
+                    Exactis
+                </Button>
+                <TextBlock
+                    Grid.Column="6"
+                    Grid.ColumnSpan="5"
+                    Grid.Row="6"
+                    x:Name="ExactisTimeElapsed"
+                    Text="{Binding ExactisTime}"
+                    FontSize="20"
+                    FontWeight="SemiBold"
+                    Foreground="Black"
+                    HorizontalAlignment="Center" FontFamily="Sans Serif"
+                    VerticalAlignment="Center"
+                    Visibility="Collapsed">
+                </TextBlock>
+                <Button
+                    Grid.Column="1"
+                    Grid.ColumnSpan="5"
+                    Grid.Row="7"
+                    x:Name="CapriCork"
+                    HorizontalAlignment="Center"
+                    Width="200"
+                    Height="35"
+                    Background="PaleGoldenrod"
+                    Foreground="Black"
+                    FontSize="20"
+                    FontStyle="Normal" Click="CapriCork_Click">
+                    Capri Cork
+                </Button>
+                <TextBlock
+                    Grid.Column="6"
+                    Grid.ColumnSpan="5"
+                    Grid.Row="7"
+                    x:Name="CapriCorkTimeElapsed"
+                    Text="{Binding CapriCorkTime}"
+                    FontSize="20"
+                    FontWeight="SemiBold"
+                    Foreground="Black"
+                    HorizontalAlignment="Center" FontFamily="Sans Serif"
+                    VerticalAlignment="Center"
+                    Visibility="Collapsed">
+                </TextBlock>
             </Grid>
         </TabItem>
-        <TabItem Header="Settings">
-            
-        </TabItem>
-
-
-
-
     </TabControl>
 </Window>
