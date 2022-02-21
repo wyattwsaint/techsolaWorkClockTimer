@@ -47,18 +47,19 @@ namespace techsolaWorkClockTimer
 
 
         public readonly List<TimeSegment> Segments = new();
-
+        
         public bool IsRunning => cancellationTokenSource is not null;
 
         public void Start(string project)
         {
             Segments.Add(new TimeSegment(DateTime.Now, project));
-            if (Segments.Any(segment => segment.Project == "Heritage"))
+            if (Segments.Any(segment => segment.Project == "Heritage" && IsHeritageRunning))
                 Segments.Add(new TimeSegment(DateTime.Now, "Heritage"));
-            if (Segments.Any(segment => segment.Project == "Exactis"))
+            if (Segments.Any(segment => segment.Project == "Exactis" && IsExactisRunning))
                 Segments.Add(new TimeSegment(DateTime.Now, "Exactis"));
-            if (Segments.Any(segment => segment.Project == "Capri Cork"))
+            if (Segments.Any(segment => segment.Project == "Capri Cork" && IsCapriCorkRunning))
                 Segments.Add(new TimeSegment(DateTime.Now, "Capri Cork"));
+
 
             cancellationTokenSource = new();
             OnPropertyChanged(nameof(IsRunning));
