@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Accessibility;
 
 namespace techsolaWorkClockTimer
 {
@@ -70,7 +69,6 @@ namespace techsolaWorkClockTimer
                 {
                     while (true)
                     {
-                        
                         TechsolaTime = $@"{GetCurrentTime("Techsola Internal"):hh\:mm\:ss}";
                         HeritageTime = IsHeritageRunning ? $@"{GetCurrentTime("Heritage"):hh\:mm\:ss}" : heritageTime;
                         ExactisTime = IsExactisRunning ? $@"{GetCurrentTime("Exactis"):hh\:mm\:ss}" : exactisTime;
