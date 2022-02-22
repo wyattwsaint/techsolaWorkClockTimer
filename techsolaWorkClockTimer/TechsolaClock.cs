@@ -85,11 +85,11 @@ namespace techsolaWorkClockTimer
         public void Stop()
         {
             Segments.FindLast(segment => segment.Project == "Techsola Internal")!.End = DateTime.Now;
-            if (Segments.Any(segment => segment.Project == "Heritage"))
+            if (Segments.Any(segment => segment.Project == "Heritage" && IsHeritageRunning))
                 Segments.FindLast(segment => segment.Project == "Heritage")!.End = DateTime.Now;
-            if (Segments.Any(segment => segment.Project == "Exactis"))
+            if (Segments.Any(segment => segment.Project == "Exactis" && IsExactisRunning))
                 Segments.FindLast(segment => segment.Project == "Exactis")!.End = DateTime.Now;
-            if (Segments.Any(segment => segment.Project == "Capri Cork"))
+            if (Segments.Any(segment => segment.Project == "Capri Cork" && IsCapriCorkRunning))
                 Segments.FindLast(segment => segment.Project == "Capri Cork")!.End = DateTime.Now;
 
             cancellationTokenSource.Cancel();
