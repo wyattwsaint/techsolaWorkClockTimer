@@ -73,7 +73,7 @@ namespace techsolaWorkClockTimer
                         HeritageTime = IsHeritageRunning ? $@"{GetCurrentTime("Heritage"):hh\:mm\:ss}" : heritageTime;
                         ExactisTime = IsExactisRunning ? $@"{GetCurrentTime("Exactis"):hh\:mm\:ss}" : exactisTime;
                         CapriCorkTime = IsCapriCorkRunning ? $@"{GetCurrentTime("Capri Cork"):hh\:mm\:ss}" : capriCorkTime;
-                        await Task.Delay(1000, cancellationTokenSource.Token);
+                        await Task.Delay(250, cancellationTokenSource.Token);
                     }
                 }
                 catch (OperationCanceledException)
