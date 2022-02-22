@@ -39,13 +39,14 @@ namespace techsolaWorkClockTimer
             var clock = (TechsolaClock)DataContext;
 
             if (clock.Segments.Where(segment => segment.Project == "Heritage").Any(segment => segment.End == null))
-                return; //To keep from adding new time start time segments with no end
+                return; //To keep from adding new time start time segment property if Heritage clock is already running
 
             if (clock.IsRunning)
             {
                 HeritageTimeElapsed.Visibility = Visibility.Visible;
                 clock.Segments.Add(new TimeSegment(DateTime.Now, "Heritage"));
                 clock.IsHeritageRunning = true;
+
                 if (clock.IsExactisRunning)
                 {
                     clock.Segments.FindLast(segment => segment.Project == "Exactis")!.End = DateTime.Now;
@@ -72,11 +73,13 @@ namespace techsolaWorkClockTimer
                 ExactisTimeElapsed.Visibility = Visibility.Visible;
                 clock.Segments.Add(new TimeSegment(DateTime.Now, "Exactis"));
                 clock.IsExactisRunning = true;
+
                 if (clock.IsHeritageRunning)
                 {
                     clock.Segments.FindLast(segment => segment.Project == "Heritage")!.End = DateTime.Now;
                     clock.IsHeritageRunning = false;
                 }
+
                 if (clock.IsCapriCorkRunning)
                 {
                     clock.Segments.FindLast(segment => segment.Project == "Capri Cork")!.End = DateTime.Now;
@@ -97,11 +100,13 @@ namespace techsolaWorkClockTimer
                 CapriCorkTimeElapsed.Visibility = Visibility.Visible;
                 clock.Segments.Add(new TimeSegment(DateTime.Now, "Capri Cork"));
                 clock.IsCapriCorkRunning = true;
+
                 if (clock.IsHeritageRunning)
                 {
                     clock.Segments.FindLast(segment => segment.Project == "Heritage")!.End = DateTime.Now;
                     clock.IsHeritageRunning = false;
                 }
+
                 if (clock.IsExactisRunning)
                 {
                     clock.Segments.FindLast(segment => segment.Project == "Exactis")!.End = DateTime.Now;
