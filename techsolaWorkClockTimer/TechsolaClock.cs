@@ -18,9 +18,11 @@ namespace techsolaWorkClockTimer
             set => Set(ref totalTime, value);
         }
 
+        public const string DefaultProjectName = "Techsola Internal";
+
         public ObservableCollection<ProjectTime> Times { get; } = new()
         {
-            new("Techsola Internal", "White"),
+            new(DefaultProjectName, "White"),
             new("Heritage", "PaleVioletRed"),
             new("Exactis", "PaleTurquoise"),
             new("Capri Cork", "PaleGoldenrod"),

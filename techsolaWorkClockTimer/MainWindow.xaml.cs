@@ -22,7 +22,7 @@ namespace techsolaWorkClockTimer
             var clock = (TechsolaClock)DataContext;
 
             if (!clock.IsRunning)
-                clock.Start("Techsola Internal");
+                clock.Start(TechsolaClock.DefaultProjectName);
             else
                 clock.Stop();
         }
