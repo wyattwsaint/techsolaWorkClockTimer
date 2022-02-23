@@ -94,7 +94,7 @@
                     Background="PaleVioletRed"
                     Foreground="Black"
                     FontSize="20"
-                    FontStyle="Normal" Click="Heritage_Click">
+                    FontStyle="Normal" Click="ProjectButton_Click">
                     Heritage
                 </Button>
                 <Button
@@ -108,7 +108,7 @@
                     Background="PaleTurquoise"
                     Foreground="Black"
                     FontSize="20"
-                    FontStyle="Normal" Click="Exactis_Click">
+                    FontStyle="Normal" Click="ProjectButton_Click">
                     Exactis
                 </Button>
                 <Button
@@ -122,7 +122,7 @@
                     Background="PaleGoldenrod"
                     Foreground="Black"
                     FontSize="20"
-                    FontStyle="Normal" Click="CapriCork_Click">
+                    FontStyle="Normal" Click="ProjectButton_Click">
                     Capri Cork
                 </Button>
                 <ItemsControl ItemsSource="{Binding Times}"

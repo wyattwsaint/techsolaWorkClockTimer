@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 
 namespace techsolaWorkClockTimer
@@ -34,43 +35,18 @@ namespace techsolaWorkClockTimer
                 clock.Stop();
         }
 
-        private void Heritage_Click(object sender, RoutedEventArgs e)
+        private void ProjectButton_Click(object sender, RoutedEventArgs e)
         {
             var clock = (TechsolaClock)DataContext;
-
-            if (clock.Segments.Where(segment => segment.Project == "Heritage").Any(segment => segment.End == null))
-                return; //To keep from adding new time start time segment property if Heritage clock is already running
-
-            if (clock.IsRunning)
-                clock.Stop();
-
-            clock.Start("Heritage");
-        }
-
-        private void Exactis_Click(object sender, RoutedEventArgs e)
-        {
-            var clock = (TechsolaClock)DataContext;
-
-            if (clock.Segments.Where(segment => segment.Project == "Exactis")
+            var projectName = (string)((Button)sender).Content;
+            
+            if (clock.Segments.Where(segment => segment.Project == projectName)
                 .Any(segment => segment.End == null)) return;
 
             if (clock.IsRunning)
                 clock.Stop();
 
-            clock.Start("Exactis");
-        }
-
-        private void CapriCork_Click(object sender, RoutedEventArgs e)
-        {
-            var clock = (TechsolaClock)DataContext;
-
-            if (clock.Segments.Where(segment => segment.Project == "Capri Cork")
-                .Any(segment => segment.End == null)) return;
-
-            if (clock.IsRunning)
-                clock.Stop();
-
-            clock.Start("Capri Cork");
+            clock.Start(projectName);
         }
     }
 }
