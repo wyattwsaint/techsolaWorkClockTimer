@@ -28,19 +28,21 @@ namespace techsolaWorkClockTimer
             new("Capri Cork", "PaleGoldenrod"),
         };
         
-        public readonly List<TimeSegment> Segments = new();
-        
-        public bool IsRunning => cancellationTokenSource is not null;
+        private readonly List<TimeSegment> segments = new();
+
+        public TimeSegment? RunningSegment => segments.LastOrDefault() is { End: null } runningSegment
+            ? runningSegment
+            : null;
 
         public void Start(string project)
         {
-            if (Segments.LastOrDefault() is { End: null })
+            if (segments.LastOrDefault() is { End: null })
                 throw new InvalidOperationException("Multiple segments must not run at the same time.");
 
-            Segments.Add(new TimeSegment(DateTime.Now, project));
+            segments.Add(new TimeSegment(DateTime.Now, project));
+            OnPropertyChanged(nameof(RunningSegment));
 
             cancellationTokenSource = new();
-            OnPropertyChanged(nameof(IsRunning));
 
             Task.Run(async () =>
             {
@@ -64,17 +66,17 @@ namespace techsolaWorkClockTimer
 
         public void Stop()
         {
-            Segments[^1].End = DateTime.Now;
+            segments[^1].End = DateTime.Now;
+            OnPropertyChanged(nameof(RunningSegment));
 
             cancellationTokenSource.Cancel();
 
             cancellationTokenSource = null;
-            OnPropertyChanged(nameof(IsRunning));
         }
 
         public TimeSpan GetCurrentTime(string? project)
         {
-            return Segments
+            return segments
                 .Where(segment => project is null || segment.Project == project)
                 .Sum(s => (s.End ?? DateTime.Now) - s.Start);
         }
