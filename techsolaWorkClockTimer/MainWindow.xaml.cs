@@ -39,9 +39,13 @@ namespace techsolaWorkClockTimer
         {
             var clock = (TechsolaClock)DataContext;
             var projectTime = (ProjectTime)((Button)sender).DataContext;
-            
+
             if (clock.RunningSegment?.Project == projectTime.ProjectName)
+            {
+                clock.Stop();
+                clock.Start(TechsolaClock.DefaultProjectName);
                 return;
+            }
 
             if (clock.RunningSegment is not null)
                 clock.Stop();
