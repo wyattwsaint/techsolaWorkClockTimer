@@ -28,7 +28,9 @@ namespace techsolaWorkClockTimer
             new("Capri Cork", "PaleGoldenrod"),
         };
         
-        private readonly List<TimeSegment> segments = new();
+        private readonly ObservableCollection<TimeSegment> segments = new();
+
+        public ReadOnlyObservableCollection<TimeSegment> Segments => new(segments);
 
         public TimeSegment? RunningSegment => segments.LastOrDefault() is { End: null } runningSegment
             ? runningSegment
