@@ -97,19 +97,6 @@
                     FontStyle="Normal" Click="Heritage_Click">
                     Heritage
                 </Button>
-                <TextBlock
-                    Grid.Column="6"
-                    Grid.ColumnSpan="5"
-                    Grid.Row="5"
-                    x:Name="HeritageTimeElapsed"
-                    Text="{Binding HeritageTime}"
-                    FontSize="20"
-                    FontWeight="SemiBold"
-                    Foreground="Black"
-                    HorizontalAlignment="Center" FontFamily="Sans Serif"
-                    VerticalAlignment="Center"
-                    Visibility="Collapsed">
-                </TextBlock>
                 <Button
                     Grid.Column="1"
                     Grid.ColumnSpan="5"
@@ -124,19 +111,6 @@
                     FontStyle="Normal" Click="Exactis_Click">
                     Exactis
                 </Button>
-                <TextBlock
-                    Grid.Column="6"
-                    Grid.ColumnSpan="5"
-                    Grid.Row="6"
-                    x:Name="ExactisTimeElapsed"
-                    Text="{Binding ExactisTime}"
-                    FontSize="20"
-                    FontWeight="SemiBold"
-                    Foreground="Black"
-                    HorizontalAlignment="Center" FontFamily="Sans Serif"
-                    VerticalAlignment="Center"
-                    Visibility="Collapsed">
-                </TextBlock>
                 <Button
                     Grid.Column="1"
                     Grid.ColumnSpan="5"
@@ -151,19 +125,23 @@
                     FontStyle="Normal" Click="CapriCork_Click">
                     Capri Cork
                 </Button>
-                <TextBlock
-                    Grid.Column="6"
-                    Grid.ColumnSpan="5"
-                    Grid.Row="7"
-                    x:Name="CapriCorkTimeElapsed"
-                    Text="{Binding CapriCorkTime}"
-                    FontSize="20"
-                    FontWeight="SemiBold"
-                    Foreground="Black"
-                    HorizontalAlignment="Center" FontFamily="Sans Serif"
-                    VerticalAlignment="Center"
-                    Visibility="Collapsed">
-                </TextBlock>
+                <ItemsControl ItemsSource="{Binding Times}"
+                              Grid.Column="6"
+                              Grid.ColumnSpan="5"
+                              Grid.Row="5"
+                              Grid.RowSpan="4">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Text="{Binding TotalTime}"
+                                FontSize="20"
+                                FontWeight="SemiBold"
+                                Foreground="Black"
+                                HorizontalAlignment="Center" FontFamily="Sans Serif"
+                                VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </Grid>
         </TabItem>
     </TabControl>

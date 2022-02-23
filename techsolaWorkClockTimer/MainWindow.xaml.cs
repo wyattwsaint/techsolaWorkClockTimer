@@ -43,7 +43,6 @@ namespace techsolaWorkClockTimer
 
             if (clock.IsRunning)
             {
-                HeritageTimeElapsed.Visibility = Visibility.Visible;
                 clock.Segments.Add(new TimeSegment(DateTime.Now, "Heritage"));
                 clock.IsHeritageRunning = true;
 
@@ -70,7 +69,6 @@ namespace techsolaWorkClockTimer
 
             if (clock.IsRunning)
             {
-                ExactisTimeElapsed.Visibility = Visibility.Visible;
                 clock.Segments.Add(new TimeSegment(DateTime.Now, "Exactis"));
                 clock.IsExactisRunning = true;
 
@@ -97,7 +95,6 @@ namespace techsolaWorkClockTimer
 
             if (clock.IsRunning)
             {
-                CapriCorkTimeElapsed.Visibility = Visibility.Visible;
                 clock.Segments.Add(new TimeSegment(DateTime.Now, "Capri Cork"));
                 clock.IsCapriCorkRunning = true;
 

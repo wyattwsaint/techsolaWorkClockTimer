@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,31 +21,14 @@ namespace techsolaWorkClockTimer
             set => Set(ref techsolaTime, value);
         }
 
-
-        private string? heritageTime;
-        public string? HeritageTime
+        public ObservableCollection<ProjectTime> Times { get; } = new()
         {
-            get => heritageTime;
-            set => Set(ref heritageTime, value);
-        }
-
-
-        private string? exactisTime;
-        public string? ExactisTime
-        {
-            get => exactisTime;
-            set => Set(ref exactisTime, value);
-        }
-
-
-        private string? capriCorkTime;
-        public string? CapriCorkTime
-        {
-            get => capriCorkTime;
-            set => Set(ref capriCorkTime, value);
-        }
-
-
+            new("Techsola Internal"),
+            new("Heritage"),
+            new("Exactis"),
+            new("Capri Cork"),
+        };
+        
         public readonly List<TimeSegment> Segments = new();
         
         public bool IsRunning => cancellationTokenSource is not null;
@@ -69,16 +53,10 @@ namespace techsolaWorkClockTimer
                 {
                     while (true)
                     {
-                        TechsolaTime = $@"{GetCurrentTime("Techsola Internal"):hh\:mm\:ss}";
+                        TechsolaTime = $@"{GetCurrentTime(project: null):hh\:mm\:ss}";
 
-                        if (IsHeritageRunning)
-                            HeritageTime = $@"{GetCurrentTime("Heritage"):hh\:mm\:ss}";
-
-                        if (IsExactisRunning)
-                            ExactisTime = $@"{GetCurrentTime("Exactis"):hh\:mm\:ss}";
-
-                        if (IsCapriCorkRunning)
-                            CapriCorkTime = $@"{GetCurrentTime("Capri Cork"):hh\:mm\:ss}";
+                        foreach (var projectTime in Times)
+                            projectTime.TotalTime = $@"{GetCurrentTime(projectTime.ProjectName):hh\:mm\:ss}";
 
                         await Task.Delay(250, cancellationTokenSource.Token);
                     }
@@ -91,13 +69,7 @@ namespace techsolaWorkClockTimer
 
         public void Stop()
         {
-            Segments.FindLast(segment => segment.Project == "Techsola Internal")!.End = DateTime.Now;
-            if (Segments.Any(segment => segment.Project == "Heritage" && IsHeritageRunning))
-                Segments.FindLast(segment => segment.Project == "Heritage")!.End = DateTime.Now;
-            if (Segments.Any(segment => segment.Project == "Exactis" && IsExactisRunning))
-                Segments.FindLast(segment => segment.Project == "Exactis")!.End = DateTime.Now;
-            if (Segments.Any(segment => segment.Project == "Capri Cork" && IsCapriCorkRunning))
-                Segments.FindLast(segment => segment.Project == "Capri Cork")!.End = DateTime.Now;
+            Segments[^1].End = DateTime.Now;
 
             cancellationTokenSource.Cancel();
 
@@ -105,9 +77,11 @@ namespace techsolaWorkClockTimer
             OnPropertyChanged(nameof(IsRunning));
         }
 
-        public TimeSpan GetCurrentTime(string project)
+        public TimeSpan GetCurrentTime(string? project)
         {
-            return Segments.Where(segment => segment.Project == project).Sum(s => (s.End ?? DateTime.Now) - s.Start);
+            return Segments
+                .Where(segment => project is null || segment.Project == project)
+                .Sum(s => (s.End ?? DateTime.Now) - s.Start);
         }
     }
 }
