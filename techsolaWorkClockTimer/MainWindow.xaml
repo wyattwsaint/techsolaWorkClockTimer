@@ -48,7 +48,7 @@
                     Width="400">
                     <TextBlock
                         x:Name="timeElapsed"
-                        Text="{Binding TechsolaTime}"
+                        Text="{Binding TotalTime}"
                         FontSize="50"
                         FontWeight="SemiBold"
                         Foreground="Black"

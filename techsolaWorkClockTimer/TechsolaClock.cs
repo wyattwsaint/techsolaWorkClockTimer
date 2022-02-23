@@ -14,11 +14,11 @@ namespace techsolaWorkClockTimer
         public bool IsExactisRunning;
         public bool IsCapriCorkRunning;
 
-        private string? techsolaTime;
-        public string? TechsolaTime
+        private string? totalTime;
+        public string? TotalTime
         {
-            get => techsolaTime;
-            set => Set(ref techsolaTime, value);
+            get => totalTime;
+            set => Set(ref totalTime, value);
         }
 
         public ObservableCollection<ProjectTime> Times { get; } = new()
@@ -53,7 +53,7 @@ namespace techsolaWorkClockTimer
                 {
                     while (true)
                     {
-                        TechsolaTime = $@"{GetCurrentTime(project: null):hh\:mm\:ss}";
+                        TotalTime = $@"{GetCurrentTime(project: null):hh\:mm\:ss}";
 
                         foreach (var projectTime in Times)
                             projectTime.TotalTime = $@"{GetCurrentTime(projectTime.ProjectName):hh\:mm\:ss}";
