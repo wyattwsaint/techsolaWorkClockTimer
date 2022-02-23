@@ -36,7 +36,7 @@ namespace techsolaWorkClockTimer
 
         public void Start(string project)
         {
-            if (segments.LastOrDefault() is { End: null })
+            if (RunningSegment is not null)
                 throw new InvalidOperationException("Multiple segments must not run at the same time.");
 
             segments.Add(new TimeSegment(DateTime.Now, project));
