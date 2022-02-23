@@ -10,9 +10,6 @@ namespace techsolaWorkClockTimer
     public class TechsolaClock : ObservableObject
     {
         private CancellationTokenSource? cancellationTokenSource;
-        public bool IsHeritageRunning;
-        public bool IsExactisRunning;
-        public bool IsCapriCorkRunning;
 
         private string? totalTime;
         public string? TotalTime
@@ -35,14 +32,10 @@ namespace techsolaWorkClockTimer
 
         public void Start(string project)
         {
-            Segments.Add(new TimeSegment(DateTime.Now, project));
-            if (Segments.Any(segment => segment.Project == "Heritage" && IsHeritageRunning))
-                Segments.Add(new TimeSegment(DateTime.Now, "Heritage"));
-            if (Segments.Any(segment => segment.Project == "Exactis" && IsExactisRunning))
-                Segments.Add(new TimeSegment(DateTime.Now, "Exactis"));
-            if (Segments.Any(segment => segment.Project == "Capri Cork" && IsCapriCorkRunning))
-                Segments.Add(new TimeSegment(DateTime.Now, "Capri Cork"));
+            if (Segments.LastOrDefault() is { End: null })
+                throw new InvalidOperationException("Multiple segments must not run at the same time.");
 
+            Segments.Add(new TimeSegment(DateTime.Now, project));
 
             cancellationTokenSource = new();
             OnPropertyChanged(nameof(IsRunning));

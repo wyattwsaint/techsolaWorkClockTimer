@@ -42,22 +42,9 @@ namespace techsolaWorkClockTimer
                 return; //To keep from adding new time start time segment property if Heritage clock is already running
 
             if (clock.IsRunning)
-            {
-                clock.Segments.Add(new TimeSegment(DateTime.Now, "Heritage"));
-                clock.IsHeritageRunning = true;
+                clock.Stop();
 
-                if (clock.IsExactisRunning)
-                {
-                    clock.Segments.FindLast(segment => segment.Project == "Exactis")!.End = DateTime.Now;
-                    clock.IsExactisRunning = false;
-                }
-
-                if (clock.IsCapriCorkRunning)
-                {
-                    clock.Segments.FindLast(segment => segment.Project == "Capri Cork")!.End = DateTime.Now;
-                    clock.IsCapriCorkRunning = false;
-                }
-            }
+            clock.Start("Heritage");
         }
 
         private void Exactis_Click(object sender, RoutedEventArgs e)
@@ -68,22 +55,9 @@ namespace techsolaWorkClockTimer
                 .Any(segment => segment.End == null)) return;
 
             if (clock.IsRunning)
-            {
-                clock.Segments.Add(new TimeSegment(DateTime.Now, "Exactis"));
-                clock.IsExactisRunning = true;
+                clock.Stop();
 
-                if (clock.IsHeritageRunning)
-                {
-                    clock.Segments.FindLast(segment => segment.Project == "Heritage")!.End = DateTime.Now;
-                    clock.IsHeritageRunning = false;
-                }
-
-                if (clock.IsCapriCorkRunning)
-                {
-                    clock.Segments.FindLast(segment => segment.Project == "Capri Cork")!.End = DateTime.Now;
-                    clock.IsCapriCorkRunning = false;
-                }
-            }
+            clock.Start("Exactis");
         }
 
         private void CapriCork_Click(object sender, RoutedEventArgs e)
@@ -94,22 +68,9 @@ namespace techsolaWorkClockTimer
                 .Any(segment => segment.End == null)) return;
 
             if (clock.IsRunning)
-            {
-                clock.Segments.Add(new TimeSegment(DateTime.Now, "Capri Cork"));
-                clock.IsCapriCorkRunning = true;
+                clock.Stop();
 
-                if (clock.IsHeritageRunning)
-                {
-                    clock.Segments.FindLast(segment => segment.Project == "Heritage")!.End = DateTime.Now;
-                    clock.IsHeritageRunning = false;
-                }
-
-                if (clock.IsExactisRunning)
-                {
-                    clock.Segments.FindLast(segment => segment.Project == "Exactis")!.End = DateTime.Now;
-                    clock.IsExactisRunning = false;
-                }
-            }
+            clock.Start("Capri Cork");
         }
     }
 }
