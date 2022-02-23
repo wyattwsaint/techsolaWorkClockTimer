@@ -40,8 +40,8 @@ namespace techsolaWorkClockTimer
             var clock = (TechsolaClock)DataContext;
             var projectTime = (ProjectTime)((Button)sender).DataContext;
             
-            if (clock.Segments.Where(segment => segment.Project == projectTime.ProjectName)
-                .Any(segment => segment.End == null)) return;
+            if (clock.Segments.Any(segment => segment.Project == projectTime.ProjectName && segment.End == null))
+                return;
 
             if (clock.IsRunning)
                 clock.Stop();
