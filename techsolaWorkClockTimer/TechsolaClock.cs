@@ -20,10 +20,10 @@ namespace techsolaWorkClockTimer
 
         public ObservableCollection<ProjectTime> Times { get; } = new()
         {
-            new("Techsola Internal"),
-            new("Heritage"),
-            new("Exactis"),
-            new("Capri Cork"),
+            new("Techsola Internal", "White"),
+            new("Heritage", "PaleVioletRed"),
+            new("Exactis", "PaleTurquoise"),
+            new("Capri Cork", "PaleGoldenrod"),
         };
         
         public readonly List<TimeSegment> Segments = new();

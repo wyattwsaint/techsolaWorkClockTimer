@@ -83,62 +83,36 @@
                     FontStyle="Normal" Click="EndOfDay_Click">
                     End Of Day
                 </Button>
-                <Button
-                    Grid.Column="1"
-                    Grid.ColumnSpan="5"
-                    Grid.Row="5"
-                    x:Name="Heritage"
-                    HorizontalAlignment="Center"
-                    Width="200"
-                    Height="35"
-                    Background="PaleVioletRed"
-                    Foreground="Black"
-                    FontSize="20"
-                    FontStyle="Normal" Click="ProjectButton_Click">
-                    Heritage
-                </Button>
-                <Button
-                    Grid.Column="1"
-                    Grid.ColumnSpan="5"
-                    Grid.Row="6"
-                    x:Name="Exactis"
-                    HorizontalAlignment="Center"
-                    Width="200"
-                    Height="35"
-                    Background="PaleTurquoise"
-                    Foreground="Black"
-                    FontSize="20"
-                    FontStyle="Normal" Click="ProjectButton_Click">
-                    Exactis
-                </Button>
-                <Button
-                    Grid.Column="1"
-                    Grid.ColumnSpan="5"
-                    Grid.Row="7"
-                    x:Name="CapriCork"
-                    HorizontalAlignment="Center"
-                    Width="200"
-                    Height="35"
-                    Background="PaleGoldenrod"
-                    Foreground="Black"
-                    FontSize="20"
-                    FontStyle="Normal" Click="ProjectButton_Click">
-                    Capri Cork
-                </Button>
                 <ItemsControl ItemsSource="{Binding Times}"
-                              Grid.Column="6"
-                              Grid.ColumnSpan="5"
+                              Grid.Column="1"
+                              Grid.ColumnSpan="10"
                               Grid.Row="5"
                               Grid.RowSpan="4">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock
-                                Text="{Binding TotalTime}"
-                                FontSize="20"
-                                FontWeight="SemiBold"
-                                Foreground="Black"
-                                HorizontalAlignment="Center" FontFamily="Sans Serif"
-                                VerticalAlignment="Center"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button
+                                    Grid.Column="0"
+                                    Content="{Binding ProjectName}"
+                                    HorizontalAlignment="Stretch"
+                                    Height="35"
+                                    Background="{Binding Color}"
+                                    Foreground="Black"
+                                    FontSize="20"
+                                    FontStyle="Normal" Click="ProjectButton_Click"/>
+                                <TextBlock
+                                    Grid.Column="1"
+                                    Text="{Binding TotalTime}"
+                                    FontSize="20"
+                                    FontWeight="SemiBold"
+                                    Foreground="Black"
+                                    HorizontalAlignment="Center" FontFamily="Sans Serif"
+                                    VerticalAlignment="Center"/>
+                            </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
