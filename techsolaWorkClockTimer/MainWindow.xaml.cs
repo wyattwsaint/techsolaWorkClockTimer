@@ -38,15 +38,15 @@ namespace techsolaWorkClockTimer
         private void ProjectButton_Click(object sender, RoutedEventArgs e)
         {
             var clock = (TechsolaClock)DataContext;
-            var projectName = (string)((Button)sender).Content;
+            var projectTime = (ProjectTime)((Button)sender).DataContext;
             
-            if (clock.Segments.Where(segment => segment.Project == projectName)
+            if (clock.Segments.Where(segment => segment.Project == projectTime.ProjectName)
                 .Any(segment => segment.End == null)) return;
 
             if (clock.IsRunning)
                 clock.Stop();
 
-            clock.Start(projectName);
+            clock.Start(projectTime.ProjectName);
         }
     }
 }
