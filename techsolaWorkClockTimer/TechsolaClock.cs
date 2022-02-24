@@ -71,7 +71,7 @@ namespace techsolaWorkClockTimer
             segments[^1].End = DateTime.Now;
             OnPropertyChanged(nameof(RunningSegment));
 
-            cancellationTokenSource.Cancel();
+            cancellationTokenSource!.Cancel();
 
             cancellationTokenSource = null;
         }
