@@ -49,5 +49,10 @@ namespace techsolaWorkClockTimer
                 ? TechsolaClock.DefaultProjectName
                 : projectTime.ProjectName);
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

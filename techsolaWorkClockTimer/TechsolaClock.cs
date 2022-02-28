@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace techsolaWorkClockTimer
 {
@@ -18,6 +20,13 @@ namespace techsolaWorkClockTimer
             set => Set(ref totalTime, value);
         }
 
+        private string? breakTimeLeft;
+        public string? BreakTimeLeft
+        {
+            get => breakTimeLeft;
+            set => Set(ref breakTimeLeft, value);
+        }
+        
         public const string DefaultProjectName = "Techsola Internal";
 
         public ObservableCollection<ProjectTime> Times { get; } = new()
@@ -38,6 +47,12 @@ namespace techsolaWorkClockTimer
 
         public void Start(string project)
         {
+            var breakTime = (new TimeSpan(16, 0, 0) - DateTime.Now.TimeOfDay) -
+                                (new TimeSpan(0, 8, 0, 0) - GetCurrentTime(project: null));
+            BreakTimeLeft = breakTime.Ticks < 0 ? $@"-{breakTime:hh\:mm\:ss}" : $@"{breakTime:hh\:mm\:ss}";
+            // TODO: Non-hard code workday end time
+            // TODO: Wire up combobox dropdown for end of day selections
+            
             if (RunningSegment is not null)
                 throw new InvalidOperationException("Multiple segments must not run at the same time.");
 
@@ -53,10 +68,8 @@ namespace techsolaWorkClockTimer
                     while (true)
                     {
                         TotalTime = $@"{GetCurrentTime(project: null):hh\:mm\:ss}";
-
                         foreach (var projectTime in Times)
                             projectTime.TotalTime = $@"{GetCurrentTime(projectTime.ProjectName):hh\:mm\:ss}";
-
                         await Task.Delay(250, cancellationTokenSource.Token);
                     }
                 }

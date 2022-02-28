@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:techsolaWorkClockTimer"
         d:DataContext="{d:DesignInstance Type=local:TechsolaClock}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="450">
     <TabControl>
         <TabItem Header="Work Clock">
             <Grid>
@@ -32,7 +32,7 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="10" />
-                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="300" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
@@ -86,8 +86,7 @@
                 <ItemsControl ItemsSource="{Binding Times}"
                               Grid.Column="1"
                               Grid.ColumnSpan="10"
-                              Grid.Row="5"
-                              Grid.RowSpan="4">
+                              Grid.Row="5">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -116,6 +115,42 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+                <TextBlock
+                    Grid.Column="1"
+                    Grid.ColumnSpan="5"
+                    Grid.Row="6"
+                    FontSize="20"
+                    FontWeight="SemiBold"
+                    Foreground="Black"
+                    HorizontalAlignment="Center" FontFamily="Sans Serif"
+                    VerticalAlignment="Center">
+                Breaktime Left:
+                </TextBlock>
+                <TextBlock
+                    Grid.Column="6"
+                    Grid.ColumnSpan="5"
+                    Grid.Row="6"
+                    Text="{Binding BreakTimeLeft}"
+                    FontSize="20"
+                    FontWeight="SemiBold"
+                    Foreground="Black"
+                    HorizontalAlignment="Center" FontFamily="Sans Serif"
+                    VerticalAlignment="Center">
+                </TextBlock>
+                <ComboBox
+                    Grid.Column="1"
+                    Grid.ColumnSpan="5"
+                    Grid.Row="7" 
+                    SelectionChanged="ComboBox_SelectionChanged"
+                    SelectedValuePath="Content">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="4 P" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </Grid>
         </TabItem>
     </TabControl>
