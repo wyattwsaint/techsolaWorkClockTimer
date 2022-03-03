@@ -137,20 +137,6 @@
                     HorizontalAlignment="Center" FontFamily="Sans Serif"
                     VerticalAlignment="Center">
                 </TextBlock>
-                <ComboBox
-                    Grid.Column="1"
-                    Grid.ColumnSpan="5"
-                    Grid.Row="7" 
-                    SelectionChanged="ComboBox_SelectionChanged"
-                    SelectedValuePath="Content">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="4 P" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
             </Grid>
         </TabItem>
     </TabControl>

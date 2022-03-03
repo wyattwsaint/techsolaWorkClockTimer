@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
+using Microsoft.Win32;
 
 namespace techsolaWorkClockTimer
 {
@@ -14,7 +12,8 @@ namespace techsolaWorkClockTimer
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new TechsolaClock();
+            DataContext = App.Clock;
+            SystemEvents.SessionSwitch += new SessionSwitchEventHandler(SystemEvents_SessionSwitch);
         }
 
         private void StartPauseClock_Click(object sender, RoutedEventArgs e)
@@ -41,18 +40,34 @@ namespace techsolaWorkClockTimer
             var projectTime = (ProjectTime)((Button)sender).DataContext;
 
             var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
-            
+
             if (clock.RunningSegment is not null)
                 clock.Stop();
 
-            clock.Start(wasSameProjectRunning 
+            clock.Start(wasSameProjectRunning
                 ? TechsolaClock.DefaultProjectName
                 : projectTime.ProjectName);
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
         {
+            var clock = (TechsolaClock)DataContext;
+            switch (e.Reason)
+            {
+                case SessionSwitchReason.SessionLock:
+                    if (clock.RunningSegment is null)
+                        clock.Start(TechsolaClock.DefaultProjectName);
+                    else
+                        clock.Stop();
+                    break;
 
+                case SessionSwitchReason.SessionUnlock:
+                    if (clock.RunningSegment is null)
+                        clock.Start(TechsolaClock.DefaultProjectName);
+                    else
+                        clock.Stop();
+                    break;
+            }
         }
     }
 }
