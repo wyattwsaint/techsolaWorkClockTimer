@@ -18,6 +18,11 @@ namespace techsolaWorkClockTimer
 
         private void App_OnExit(object sender, ExitEventArgs e)
         {
+            if (Clock.Segments[^1].End == null)
+            {
+                Clock.Segments[^1].End = DateTime.Now;
+            }
+
             var cnn = new SqlConnection(@"Server=localhost; Database=techsolaclock; Integrated Security=True;");
             cnn.Open();
 
@@ -26,7 +31,7 @@ namespace techsolaWorkClockTimer
             foreach (var segment in Clock.Segments)
             {
                 var command = new SqlCommand(
-                    "Insert into segments (TimeSegmentStart, TimeSegmentEnd, Project) values(@start, @end, @project)", 
+                    "Insert into segments (TimeSegmentStart, TimeSegmentEnd, Project) values(@start, @end, @project)",
                     cnn);
 
                 var start = new SqlParameter("@start", SqlDbType.DateTime) { Value = segment.Start };
@@ -39,7 +44,7 @@ namespace techsolaWorkClockTimer
                 adapter.InsertCommand.ExecuteNonQuery();
                 command.Dispose();
             }
-            
+
 
             cnn.Close();
         }
