@@ -15,8 +15,7 @@ namespace techsolaWorkClockTimer
             DataContext = App.Clock;
             SystemEvents.SessionSwitch += new SessionSwitchEventHandler(SystemEvents_SessionSwitch);
             RefreshSegmentsTable refreshDb = new();
-            if (refreshDb.DoesDbHaveData())
-                refreshDb.RefreshTable();
+            refreshDb.RefreshTable();
         }
 
         private void StartPauseClock_Click(object sender, RoutedEventArgs e)

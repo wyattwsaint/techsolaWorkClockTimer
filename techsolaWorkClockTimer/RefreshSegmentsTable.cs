@@ -4,24 +4,6 @@ namespace techsolaWorkClockTimer
 {
     public class RefreshSegmentsTable
     {
-        public bool DoesDbHaveData()
-        {
-            var cnn = new SqlConnection(@"Server=localhost; Database=techsolaclock; Integrated Security=True;");
-            cnn.Open();
-
-            var adapter = new SqlDataAdapter();
-
-            var dropCommand = new SqlCommand(
-                "select count(*) from segments",
-                cnn);
-            var count = dropCommand.Parameters.Count;
-
-            adapter.InsertCommand = dropCommand;
-            adapter.InsertCommand.ExecuteNonQuery();
-            dropCommand.Dispose();
-            cnn.Close();
-            return count != 0;
-        }
 
         public void RefreshTable()
         {
