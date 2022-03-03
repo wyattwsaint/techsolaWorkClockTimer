@@ -13,9 +13,11 @@ namespace techsolaWorkClockTimer
         {
             InitializeComponent();
             DataContext = App.Clock;
-            SystemEvents.SessionSwitch += new SessionSwitchEventHandler(SystemEvents_SessionSwitch);
-            RefreshSegmentsTable refreshDb = new();
-            refreshDb.RefreshTable();
+            SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
+            
+            RefreshSegmentsTable refresh = new();
+            if (refresh.IsDataFromPriorDay())
+                refresh.RefreshTable();
         }
 
         private void StartPauseClock_Click(object sender, RoutedEventArgs e)
