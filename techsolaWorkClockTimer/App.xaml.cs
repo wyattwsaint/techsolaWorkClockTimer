@@ -18,7 +18,8 @@ namespace techsolaWorkClockTimer
 
         private void App_OnExit(object sender, ExitEventArgs e)
         {
-            Clock.Segments[^1].End ??= DateTime.Now;
+            if (Clock.Segments.Count > 0)
+                Clock.Segments[^1].End ??= DateTime.Now;
 
             var cnn = new SqlConnection(@"Server=localhost; Database=techsolaclock; Integrated Security=True;");
             cnn.Open();
