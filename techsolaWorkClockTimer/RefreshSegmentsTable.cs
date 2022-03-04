@@ -9,11 +9,10 @@ namespace techsolaWorkClockTimer
         {
             var cnn = new SqlConnection(@"Server=localhost; Database=techsolaclock; Integrated Security=True;");
             cnn.Open();
-            var adapter = new SqlDataAdapter();
             var getLatestTimeStampCommand = new SqlCommand(
                 "select top 1 TimeSegmentEnd from segments order by TimeSegmentEnd desc",
                 cnn);
-            var latestDbDateTime = DateTime.Parse(getLatestTimeStampCommand.ExecuteScalar().ToString());
+            var latestDbDateTime = DateTime.Parse(getLatestTimeStampCommand.ExecuteScalar().ToString()!);
             getLatestTimeStampCommand.Dispose();
             cnn.Close();
 
@@ -43,6 +42,23 @@ namespace techsolaWorkClockTimer
             createTableCommand.Dispose();
 
             cnn.Close();
+        }
+
+        public bool DoesTableContainData()
+        {
+            var cnn = new SqlConnection(@"Server=localhost; Database=techsolaclock; Integrated Security=True;");
+            cnn.Open();
+
+            var adapter = new SqlDataAdapter();
+
+            var dropCommand = new SqlCommand(
+                "select count(*) from segments",
+                cnn);
+            if ((int)dropCommand.ExecuteScalar() == 0) return false;
+            
+            dropCommand.Dispose();
+            
+            return true;
         }
     }
 }

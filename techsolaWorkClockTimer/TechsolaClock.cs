@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,6 +9,28 @@ namespace techsolaWorkClockTimer
 {
     public class TechsolaClock : ObservableObject
     {
+        public TechsolaClock()
+        {
+            var cnn = new SqlConnection(@"Server=localhost; Database=techsolaclock; Integrated Security=True;");
+            cnn.Open();
+            var retrieveSegments = new SqlCommand(
+                "select * from segments",
+                cnn);
+            var reader = retrieveSegments.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    var newSegment = new TimeSegment(reader.GetDateTime(0), reader.GetString(2))
+                        { End = reader.GetDateTime(1) };
+                    segments.Add(newSegment);
+                }
+            }
+            retrieveSegments.Dispose();
+            RefreshSegmentsTable refresh = new();
+            refresh.RefreshTable();
+        }
+
         private CancellationTokenSource? cancellationTokenSource;
 
         private string? totalTime;
@@ -47,8 +70,6 @@ namespace techsolaWorkClockTimer
             var breakTime = (new TimeSpan(16, 0, 0) - DateTime.Now.TimeOfDay) -
                                 (new TimeSpan(0, 8, 0, 0) - GetCurrentTime(project: null));
             BreakTimeLeft = breakTime.Ticks < 0 ? $@"-{breakTime:hh\:mm\:ss}" : $@"{breakTime:hh\:mm\:ss}";
-            // TODO: Non-hard code workday end time
-            // TODO: Wire up combobox dropdown for end of day selections
             
             if (RunningSegment is not null)
                 throw new InvalidOperationException("Multiple segments must not run at the same time.");

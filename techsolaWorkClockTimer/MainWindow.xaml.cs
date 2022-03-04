@@ -16,7 +16,7 @@ namespace techsolaWorkClockTimer
             SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
             
             RefreshSegmentsTable refresh = new();
-            if (refresh.IsDataFromPriorDay())
+            if (refresh.DoesTableContainData() && refresh.IsDataFromPriorDay())
                 refresh.RefreshTable();
         }
 
