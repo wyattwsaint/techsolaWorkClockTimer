@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Dapper;
 
 namespace techsolaWorkClockTimer
 {
@@ -12,23 +13,12 @@ namespace techsolaWorkClockTimer
         public TechsolaClock()
         {
             var cnn = new SqlConnection(@"Server=localhost; Database=techsolaclock; Integrated Security=True;");
-            cnn.Open();
-            var retrieveSegments = new SqlCommand(
-                "select * from segments",
-                cnn);
-            var reader = retrieveSegments.ExecuteReader();
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    var newSegment = new TimeSegment(reader.GetDateTime(0), reader.GetString(2))
-                        { End = reader.GetDateTime(1) };
-                    segments.Add(newSegment);
-                }
-            }
-            retrieveSegments.Dispose();
-            RefreshSegmentsTable refresh = new();
-            refresh.RefreshTable();
+
+            var timeSegments = cnn.Query<TimeSegment>("select TimeSegmentStart, TimeSegmentEnd, Project from segments;");
+
+            foreach (var timeSegment in timeSegments) segments.Add(timeSegment);
+
+            RefreshSegmentsTable.RefreshTable();
         }
 
         private CancellationTokenSource? cancellationTokenSource;

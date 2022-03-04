@@ -12,12 +12,12 @@ namespace techsolaWorkClockTimer
         public MainWindow()
         {
             InitializeComponent();
+            if (RefreshSegmentsTable.DoesTableContainData() && RefreshSegmentsTable.IsDataFromPriorDay())
+                RefreshSegmentsTable.RefreshTable();
             DataContext = App.Clock;
             SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
             
-            RefreshSegmentsTable refresh = new();
-            if (refresh.DoesTableContainData() && refresh.IsDataFromPriorDay())
-                refresh.RefreshTable();
+            
         }
 
         private void StartPauseClock_Click(object sender, RoutedEventArgs e)

@@ -1,10 +1,20 @@
 ﻿using System;
 
-namespace techsolaWorkClockTimer
+namespace techsolaWorkClockTimer;
+
+public sealed record TimeSegment(DateTime Start, string Project) : ObservableRecord
 {
-    public sealed record TimeSegment(DateTime Start, string Project) : ObservableRecord
+    // Used by dapper
+    public TimeSegment(DateTime timeSegmentStart, DateTime timeSegmentEnd, string project) : this(timeSegmentStart, project)
     {
-        private DateTime? end;
-        public DateTime? End { get => end; set => Set(ref end, value); }
+        End = timeSegmentEnd;
+    }
+
+    private DateTime? end;
+
+    public DateTime? End
+    {
+        get => end;
+        set => Set(ref end, value);
     }
 }
