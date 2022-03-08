@@ -6,9 +6,11 @@ namespace techsolaWorkClockTimer
 {
     public static class DataBase
     {
-
+#if DEBUG
+        public static SqlConnection Connection = new SqlConnection(@"Server=localhost; Database=techsolaclockdev; Integrated Security=True;");
+#else
         public static SqlConnection Connection = new SqlConnection(@"Server=localhost; Database=techsolaclock; Integrated Security=True;");
-
+#endif
         public static bool IsDataFromPriorDay()
         {
             var latestDbDateTime = Connection.QuerySingle<DateTime>("select top 1 TimeSegmentEnd from segments order by TimeSegmentEnd desc");
