@@ -12,12 +12,10 @@ namespace techsolaWorkClockTimer
         public MainWindow()
         {
             InitializeComponent();
-            if (RefreshSegmentsTable.DoesTableContainData() && RefreshSegmentsTable.IsDataFromPriorDay())
-                RefreshSegmentsTable.RefreshTable();
+            if (DataBase.DoesTableContainData() && DataBase.IsDataFromPriorDay())
+                DataBase.RefreshTable();
             DataContext = App.Clock;
             SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
-            
-            
         }
 
         private void StartPauseClock_Click(object sender, RoutedEventArgs e)
@@ -36,6 +34,8 @@ namespace techsolaWorkClockTimer
 
             if (clock.RunningSegment is not null)
                 clock.Stop();
+
+            clock.SetEndOfDayWindowVisibilityToVisible();
         }
 
         private void ProjectButton_Click(object sender, RoutedEventArgs e)

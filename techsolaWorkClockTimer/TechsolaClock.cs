@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using Dapper;
 
 namespace techsolaWorkClockTimer
@@ -12,13 +13,11 @@ namespace techsolaWorkClockTimer
     {
         public TechsolaClock()
         {
-            var cnn = new SqlConnection(@"Server=localhost; Database=techsolaclock; Integrated Security=True;");
-
-            var timeSegments = cnn.Query<TimeSegment>("select TimeSegmentStart, TimeSegmentEnd, Project from segments;");
+            var timeSegments = DataBase.Connection.Query<TimeSegment>("select TimeSegmentStart, TimeSegmentEnd, Project from segments;");
 
             foreach (var timeSegment in timeSegments) segments.Add(timeSegment);
 
-            RefreshSegmentsTable.RefreshTable();
+            DataBase.RefreshTable();
         }
 
         private CancellationTokenSource? cancellationTokenSource;
@@ -102,6 +101,12 @@ namespace techsolaWorkClockTimer
             return segments
                 .Where(segment => project is null || segment.Project == project)
                 .Sum(s => (s.End ?? DateTime.Now) - s.Start);
+        }
+
+        public void SetEndOfDayWindowVisibilityToVisible()
+        {
+            WorkdayComplete endOfDayPopUp = new();
+            endOfDayPopUp.Visibility = Visibility.Visible;
         }
     }
 }
