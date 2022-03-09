@@ -10,13 +10,23 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="780" />
             <ColumnDefinition Width="10" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="10" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="500" />
             <RowDefinition Height="10" />
         </Grid.RowDefinitions>
+        <Image 
+            Width="400"
+            Grid.Column="1"
+            Grid.Row="1">
+            <Image.Source>
+                <BitmapImage 
+                    DecodePixelWidth="400"
+                    UriSource="images/my_fam.jpg"/>
+            </Image.Source>
+        </Image>
     </Grid>
 </Window>
