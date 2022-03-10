@@ -83,7 +83,7 @@
                     Foreground="Black"
                     FontSize="40"
                     FontStyle="Normal" Click="EndOfDay_Click">
-                    End Of Day
+                    End of Day
                 </Button>
                 <ItemsControl ItemsSource="{Binding Times}"
                               Grid.Column="1"
