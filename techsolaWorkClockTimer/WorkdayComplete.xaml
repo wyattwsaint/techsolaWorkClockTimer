@@ -4,18 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:techsolaWorkClockTimer"
-        WindowStartupLocation="CenterScreen" 
+        WindowStartupLocation="Manual" 
+        Left="1350" Top="50" 
+        d:DataContext="{d:DesignInstance Type=local:TechsolaClock}"
         mc:Ignorable="d"
-        Title="WorkdayComplete" Height="800" Width="800">
+        Title="End of Day" Height="800" Width="510">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="780" />
+            <ColumnDefinition Width="480" />
             <ColumnDefinition Width="10" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="10" />
-            <RowDefinition Height="500" />
+            <RowDefinition Height="400" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="10" />
         </Grid.RowDefinitions>
         <Image 
@@ -28,5 +32,44 @@
                     UriSource="images/my_fam.jpg"/>
             </Image.Source>
         </Image>
+        <TextBlock Text ="&quot;Time to come home, daddy!&quot;"
+                   Grid.Column="1"
+                   Grid.Row="2"
+                   HorizontalAlignment="Center"
+                   FontSize="35"
+                   FontFamily="Comic Sans"
+                   Margin="0,0,0,50"/>
+        <ItemsControl 
+            HorizontalAlignment="Center"
+            ItemsSource="{Binding Times}"
+            Grid.Column="1" 
+            Grid.Row="3">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderThickness=".7"
+                                BorderBrush="Black">
+
+                            <DockPanel Height="27"
+                                       Background="{Binding Color}"/>
+
+                        </Border>
+                        <TextBlock Grid.Column="0" 
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding ProjectName}"
+                                   FontSize="20"/>
+                        <TextBlock Grid.Column="1" 
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding TotalTime}"
+                                   FontSize="20"/>
+                        
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Window>

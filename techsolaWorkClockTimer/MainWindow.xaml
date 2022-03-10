@@ -8,7 +8,7 @@
         Left="1498" Top="0"
         d:DataContext="{d:DesignInstance Type=local:TechsolaClock}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1047" Width="429">
+        Title="Techsola Time" Height="1047" Width="429">
     <TabControl>
         <TabItem Header="Work Clock">
             <Grid>
