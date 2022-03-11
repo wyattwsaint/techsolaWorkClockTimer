@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
 
@@ -23,7 +24,7 @@ namespace techsolaWorkClockTimer
             var clock = (TechsolaClock)DataContext;
 
             if (clock.RunningSegment is null)
-                clock.Start(TechsolaClock.DefaultProjectName);
+                clock.Start(clock.Segments.LastOrDefault().Project);
             else
                 clock.Stop();
         }

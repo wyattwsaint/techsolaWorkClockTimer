@@ -113,7 +113,7 @@ namespace techsolaWorkClockTimer
         public void CreateEndOfDayWindow()
         {
             WorkdayComplete endOfDayPopUp = new();
-            // Might not need this.
+
             endOfDayPopUp.Visibility = Visibility.Visible;
         }
     }

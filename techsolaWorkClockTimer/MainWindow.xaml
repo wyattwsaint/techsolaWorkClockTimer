@@ -8,7 +8,7 @@
         Left="1498" Top="0"
         d:DataContext="{d:DesignInstance Type=local:TechsolaClock}"
         mc:Ignorable="d"
-        Height="1047" Width="429">
+        Height="1047" Width="320">
     <TabControl>
         <TabItem Header="Techsola Time">
             <Grid>
@@ -47,7 +47,7 @@
                     x:Name="panel"
                     Background="PowderBlue"
                     Height="70"
-                    Width="400">
+                    Width="279">
                     <TextBlock
                         x:Name="timeElapsed"
                         Text="{Binding DisplayTime}"
@@ -63,7 +63,7 @@
                     Grid.ColumnSpan="10"
                     Grid.Row="2"
                     x:Name="startStopClock"
-                    Width="400"
+                    Width="279"
                     Height="70"
                     Background="Green"
                     Foreground="Black"
@@ -77,7 +77,7 @@
                     Grid.ColumnSpan="10"
                     Grid.Row="3"
                     x:Name="endOfDay"
-                    Width="400"
+                    Width="279"
                     Height="70"
                     Background="Gray"
                     Foreground="Black"
@@ -86,6 +86,7 @@
                     End of Day
                 </Button>
                 <ItemsControl ItemsSource="{Binding Times}"
+                              Width="auto"
                               Grid.Column="1"
                               Grid.ColumnSpan="10"
                               Grid.Row="5">
@@ -93,7 +94,7 @@
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="160"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Button
@@ -121,6 +122,7 @@
                     Grid.Column="1"
                     Grid.ColumnSpan="5"
                     Grid.Row="6"
+                    Width="auto"
                     FontSize="20"
                     FontWeight="SemiBold"
                     Foreground="Black"
@@ -133,6 +135,7 @@
                     Grid.Column="6"
                     Grid.ColumnSpan="5"
                     Grid.Row="6"
+                    Width="auto"
                     Text="{Binding BreakTimeLeft}"
                     FontSize="20"
                     FontWeight="SemiBold"
