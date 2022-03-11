@@ -16,6 +16,8 @@ namespace techsolaWorkClockTimer
             SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
         }
 
+        private bool PauseOnLockoutBoxChecked { get; set; }
+
         private void StartPauseClock_Click(object sender, RoutedEventArgs e)
         {
             var clock = (TechsolaClock)DataContext;
@@ -53,28 +55,35 @@ namespace techsolaWorkClockTimer
 
         void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
         {
-            var clock = (TechsolaClock)DataContext;
-            switch (e.Reason)
+            if (PauseOnLockoutBoxChecked)
             {
-                case SessionSwitchReason.SessionLock:
-                    if (clock.RunningSegment is null)
-                        clock.Start(TechsolaClock.DefaultProjectName);
-                    else
-                        clock.Stop();
-                    break;
+                var clock = (TechsolaClock)DataContext;
+                switch (e.Reason)
+                {
+                    case SessionSwitchReason.SessionLock:
+                        if (clock.RunningSegment is null)
+                            clock.Start(TechsolaClock.DefaultProjectName);
+                        else
+                            clock.Stop();
+                        break;
 
-                case SessionSwitchReason.SessionUnlock:
-                    if (clock.RunningSegment is null)
-                        clock.Start(TechsolaClock.DefaultProjectName);
-                    else
-                        clock.Stop();
-                    break;
+                    case SessionSwitchReason.SessionUnlock:
+                        if (clock.RunningSegment is null)
+                            clock.Start(TechsolaClock.DefaultProjectName);
+                        else
+                            clock.Stop();
+                        break;
+                }
             }
         }
 
         private void Pause_On_Lockout_CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            
+            PauseOnLockoutBoxChecked = true;
+        }
+        private void HandleUnchecked(object sender, RoutedEventArgs e)
+        {
+            PauseOnLockoutBoxChecked = false;
         }
     }
 }

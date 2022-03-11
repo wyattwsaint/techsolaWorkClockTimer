@@ -146,18 +146,20 @@
         <TabItem Header="Settings">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="20"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="20"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
                 <CheckBox Content="Pause timer on sign-off/lockout"
                           Grid.Column="1"
-                          Grid.Row="1" Checked="Pause_On_Lockout_CheckBox_Checked"/>
+                          Grid.Row="1" Checked="Pause_On_Lockout_CheckBox_Checked"
+                          Unchecked="HandleUnchecked"
+                          BorderThickness="2"/>
             </Grid>
         </TabItem>
     </TabControl>
