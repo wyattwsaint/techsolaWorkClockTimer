@@ -19,7 +19,7 @@
 	<Company>Technology Solutions Associates</Company>
 	<Copyright>Copyright © 2019–2022 Technology Solutions Associates</Copyright>
 	<AssemblyTitle>TRAVERSE Workstation Manager</AssemblyTitle>
-	<ApplicationIcon>techsolawindowicon.ico</ApplicationIcon>
+	<ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="techsolawindowicon.ico" />
+    <Content Include="favicon.ico" />
   </ItemGroup>
 
   <ItemGroup>
