@@ -24,7 +24,11 @@ namespace techsolaWorkClockTimer
             var clock = (TechsolaClock)DataContext;
 
             if (clock.RunningSegment is null)
-                clock.Start(clock.Segments.LastOrDefault().Project);
+            {
+                clock.Start(clock.Segments.Count != 0
+                    ? clock.Segments.LastOrDefault()!.Project
+                    : TechsolaClock.DefaultProjectName);
+            }
             else
                 clock.Stop();
         }
@@ -80,6 +84,7 @@ namespace techsolaWorkClockTimer
         {
             PauseOnLockoutBoxChecked = true;
         }
+
         private void HandleUnchecked(object sender, RoutedEventArgs e)
         {
             PauseOnLockoutBoxChecked = false;
