@@ -41,6 +41,14 @@ namespace techsolaWorkClockTimer
             new("Heritage", "PaleVioletRed"),
             new("Exactis", "PaleTurquoise"),
             new("Capri Cork", "PaleGoldenrod"),
+            new("Zeager", "Peru"),
+            new("JanTrak", "CadetBlue"),
+            new("Traverse-Sales", "RosyBrown"),
+            new("Traverse-Enhance", "YellowGreen"),
+            new("WRA Database", "DarkGoldenrod"),
+            new("DSB", "Turquoise"),
+            new("General", "Thistle"),
+            new("Custom", "Tomato"),
         };
         
         private readonly ObservableCollection<TimeSegment> segments = new();
