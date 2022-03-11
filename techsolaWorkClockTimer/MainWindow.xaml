@@ -8,9 +8,9 @@
         Left="1498" Top="0"
         d:DataContext="{d:DesignInstance Type=local:TechsolaClock}"
         mc:Ignorable="d"
-        Title="Techsola Time" Height="1047" Width="429">
+        Height="1047" Width="429">
     <TabControl>
-        <TabItem Header="Work Clock">
+        <TabItem Header="Techsola Time">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10" />
@@ -50,7 +50,7 @@
                     Width="400">
                     <TextBlock
                         x:Name="timeElapsed"
-                        Text="{Binding TotalTime}"
+                        Text="{Binding DisplayTime}"
                         FontSize="50"
                         FontWeight="SemiBold"
                         Foreground="Black"
@@ -107,7 +107,7 @@
                                     FontStyle="Normal" Click="ProjectButton_Click"/>
                                 <TextBlock
                                     Grid.Column="1"
-                                    Text="{Binding TotalTime}"
+                                    Text="{Binding DisplayTime}"
                                     FontSize="20"
                                     FontWeight="SemiBold"
                                     Foreground="Black"
@@ -141,6 +141,23 @@
                     HorizontalAlignment="Center" FontFamily="Sans Serif"
                     VerticalAlignment="Center">
                 </TextBlock>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Settings">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <CheckBox Content="Pause timer on sign-off/lockout"
+                          Grid.Column="1"
+                          Grid.Row="1" Checked="Pause_On_Lockout_CheckBox_Checked"/>
             </Grid>
         </TabItem>
     </TabControl>

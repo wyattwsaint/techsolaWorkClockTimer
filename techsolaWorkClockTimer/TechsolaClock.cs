@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.ObjectModel;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using Dapper;
 
 namespace techsolaWorkClockTimer
 {
@@ -13,21 +12,19 @@ namespace techsolaWorkClockTimer
     {
         public TechsolaClock()
         {
+            if (DataBase.DoesTableContainData() && DataBase.IsDataFromPriorDay())
+                DataBase.RefreshTable();
+
             var timeSegments = DataBase.Connection.Query<TimeSegment>("select TimeSegmentStart, TimeSegmentEnd, Project from segments;");
 
             foreach (var timeSegment in timeSegments) segments.Add(timeSegment);
-
-            DataBase.RefreshTable();
         }
 
         private CancellationTokenSource? cancellationTokenSource;
 
-        private string? totalTime;
-        public string? TotalTime
-        {
-            get => totalTime;
-            set => Set(ref totalTime, value);
-        }
+        private TimeSpan? totalTime;
+        public string? DisplayTime => totalTime is not null ? $@"{totalTime:hh\:mm\:ss}" : null;
+        public string? DecimalDisplayTime => totalTime is not null ? $@"{totalTime.Value.TotalHours:0.00}" : null;
 
         private string? breakTimeLeft;
         public string? BreakTimeLeft
@@ -74,9 +71,11 @@ namespace techsolaWorkClockTimer
                 {
                     while (true)
                     {
-                        TotalTime = $@"{GetCurrentTime(project: null):hh\:mm\:ss}";
+                        totalTime = GetCurrentTime(project: null);
+                        OnPropertyChanged(nameof(DisplayTime));
+                        OnPropertyChanged(nameof(DecimalDisplayTime));
                         foreach (var projectTime in Times)
-                            projectTime.TotalTime = $@"{GetCurrentTime(projectTime.ProjectName):hh\:mm\:ss}";
+                            projectTime.Time = GetCurrentTime(projectTime.ProjectName);
                         await Task.Delay(250, cancellationTokenSource.Token);
                     }
                 }
@@ -103,9 +102,10 @@ namespace techsolaWorkClockTimer
                 .Sum(s => (s.End ?? DateTime.Now) - s.Start);
         }
 
-        public void SetEndOfDayWindowVisibilityToVisible()
+        public void CreateEndOfDayWindow()
         {
             WorkdayComplete endOfDayPopUp = new();
+            // Might not need this.
             endOfDayPopUp.Visibility = Visibility.Visible;
         }
     }

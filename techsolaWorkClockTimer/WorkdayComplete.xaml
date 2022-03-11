@@ -8,7 +8,7 @@
         Left="1350" Top="50" 
         d:DataContext="{d:DesignInstance Type=local:TechsolaClock}"
         mc:Ignorable="d"
-        Title="End of Day" Height="800" Width="510">
+        Height="800" Width="510">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
@@ -64,7 +64,7 @@
                                    FontSize="20"/>
                         <TextBlock Grid.Column="1" 
                                    HorizontalAlignment="Center"
-                                   Text="{Binding TotalTime}"
+                                   Text="{Binding DecimalDisplayTime}"
                                    FontSize="20"/>
                         
                     </Grid>

@@ -20,7 +20,7 @@ namespace techsolaWorkClockTimer
         }
         public static void RefreshTable()
         {
-            var refreshSegmentsTable = Connection.Execute("delete from segments;");
+            Connection.Execute("delete from segments;");
 
             Connection.Close();
         }

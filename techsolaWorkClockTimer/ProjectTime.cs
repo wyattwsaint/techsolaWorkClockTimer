@@ -1,4 +1,7 @@
-﻿namespace techsolaWorkClockTimer
+﻿using System;
+using System.Windows.Automation;
+
+namespace techsolaWorkClockTimer
 {
     public sealed class ProjectTime : ObservableObject
     {
@@ -11,7 +14,21 @@
         public string ProjectName { get; }
         public string Color { get; }
 
-        private string? totalTime;
-        public string? TotalTime { get => totalTime; set => Set(ref totalTime, value); }
+        private TimeSpan? time;
+        public TimeSpan? Time
+        {
+            get => time;
+            set
+            {
+                if (value == time) return;
+                Set(ref time, value);
+                OnPropertyChanged(nameof(DisplayTime));
+                OnPropertyChanged(nameof(DecimalDisplayTime));
+            }
+        }
+
+        public string? DisplayTime => Time is not null ? $@"{Time:hh\:mm\:ss}" : null;
+        public string? DecimalDisplayTime => Time is not null ? $@"{Time.Value.TotalHours:0.00}" : null;
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
+using Dapper;
 
 namespace techsolaWorkClockTimer
 {
@@ -17,29 +18,12 @@ namespace techsolaWorkClockTimer
             if (Clock.Segments.Count > 0)
                 Clock.Segments[^1].End ??= DateTime.Now;
 
-            DataBase.Connection.Open();
-
-            var adapter = new SqlDataAdapter();
-
             foreach (var segment in Clock.Segments)
             {
-                var command = new SqlCommand(
-                    "Insert into segments (TimeSegmentStart, TimeSegmentEnd, Project) values(@start, @end, @project)",
-                    DataBase.Connection);
-
-                var start = new SqlParameter("@start", SqlDbType.DateTime) { Value = segment.Start };
-                var end = new SqlParameter("@end", SqlDbType.DateTime) { Value = segment.End };
-                var project = new SqlParameter("@project", SqlDbType.VarChar) { Value = segment.Project };
-
-                command.Parameters.AddRange(new[] { start, end, project });
-
-                adapter.InsertCommand = command;
-                adapter.InsertCommand.ExecuteNonQuery();
-                command.Dispose();
+                DataBase.Connection.Execute(
+                    "Insert into segments (TimeSegmentStart, TimeSegmentEnd, Project) values(@Start, @End, @Project)",
+                    new { segment.Start, segment.End, segment.Project });
             }
-
-
-            DataBase.Connection.Close();
         }
     }
 }
