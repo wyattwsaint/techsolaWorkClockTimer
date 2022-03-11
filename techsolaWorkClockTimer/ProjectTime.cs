@@ -21,6 +21,7 @@ namespace techsolaWorkClockTimer
             set
             {
                 if (value == time) return;
+                if (value == new TimeSpan(0,0,0,0)) return;
                 Set(ref time, value);
                 OnPropertyChanged(nameof(DisplayTime));
                 OnPropertyChanged(nameof(DecimalDisplayTime));

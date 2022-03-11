@@ -55,25 +55,23 @@ namespace techsolaWorkClockTimer
 
         void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
         {
-            if (PauseOnLockoutBoxChecked)
+            if (!PauseOnLockoutBoxChecked) return;
+            var clock = (TechsolaClock)DataContext;
+            switch (e.Reason)
             {
-                var clock = (TechsolaClock)DataContext;
-                switch (e.Reason)
-                {
-                    case SessionSwitchReason.SessionLock:
-                        if (clock.RunningSegment is null)
-                            clock.Start(TechsolaClock.DefaultProjectName);
-                        else
-                            clock.Stop();
-                        break;
+                case SessionSwitchReason.SessionLock:
+                    if (clock.RunningSegment is null)
+                        clock.Start(TechsolaClock.DefaultProjectName);
+                    else
+                        clock.Stop();
+                    break;
 
-                    case SessionSwitchReason.SessionUnlock:
-                        if (clock.RunningSegment is null)
-                            clock.Start(TechsolaClock.DefaultProjectName);
-                        else
-                            clock.Stop();
-                        break;
-                }
+                case SessionSwitchReason.SessionUnlock:
+                    if (clock.RunningSegment is null)
+                        clock.Start(TechsolaClock.DefaultProjectName);
+                    else
+                        clock.Stop();
+                    break;
             }
         }
 
