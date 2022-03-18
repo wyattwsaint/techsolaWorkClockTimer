@@ -21,7 +21,6 @@ namespace techsolaWorkClockTimer
         }
 
         private CancellationTokenSource? cancellationTokenSource;
-
         private TimeSpan? totalTime;
         public string? DisplayTime => totalTime is not null ? $@"{totalTime:hh\:mm\:ss}" : null;
         public string? DecimalDisplayTime => totalTime is not null ? $@"{totalTime.Value.TotalHours:0.00}" : null;
@@ -61,12 +60,10 @@ namespace techsolaWorkClockTimer
 
         public void Start(string project)
         {
-            var breakTime = (new TimeSpan(16, 0, 0) - DateTime.Now.TimeOfDay) -
-                                (new TimeSpan(0, 8, 0, 0) - GetCurrentTime(project: null));
-            BreakTimeLeft = breakTime.Ticks < 0 ? $@"-{breakTime:hh\:mm\:ss}" : $@"{breakTime:hh\:mm\:ss}";
-            
             if (RunningSegment is not null)
                 throw new InvalidOperationException("Multiple segments must not run at the same time.");
+
+            UpdateBreaktimeLeft(endOfDayTargetTime, workDayHours);
 
             segments.Add(new TimeSegment(DateTime.Now, project));
             OnPropertyChanged(nameof(RunningSegment));
@@ -116,5 +113,37 @@ namespace techsolaWorkClockTimer
 
             endOfDayPopUp.Visibility = Visibility.Visible;
         }
+
+        private TimeSpan? endOfDayTargetTime;
+
+        public void ConvertTimeIntArrayToTimeSpan(int[] targetTimeInt)
+        {
+            if (targetTimeInt.Length == 1)
+            {
+                endOfDayTargetTime = new TimeSpan(0, targetTimeInt[0] + 12, 0, 0);
+            }
+            if (targetTimeInt.Length == 2)
+            {
+                endOfDayTargetTime = new TimeSpan(0, targetTimeInt[0] + 12, targetTimeInt[1], 0);
+            }
+            UpdateBreaktimeLeft(endOfDayTargetTime, workDayHours);
+        }
+
+        private TimeSpan? workDayHours;
+
+        public void GetWorkdayHoursFromComboBox(int targetHours)
+        {
+            workDayHours = new TimeSpan(0, targetHours, 0, 0);
+            UpdateBreaktimeLeft(endOfDayTargetTime, workDayHours);
+        }
+
+        public void UpdateBreaktimeLeft(TimeSpan? endOfDay, TimeSpan? workHours)
+        {
+            if(endOfDayTargetTime == null && workDayHours == null) return;
+            var breakTime = (endOfDay - DateTime.Now.TimeOfDay) -
+                                        (workHours - GetCurrentTime(project: null));
+            BreakTimeLeft = breakTime?.Ticks < 0 ? $@"-{breakTime:hh\:mm\:ss}" : $@"{breakTime:hh\:mm\:ss}";
+        }
+
     }
 }

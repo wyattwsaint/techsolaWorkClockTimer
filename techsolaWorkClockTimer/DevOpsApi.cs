@@ -26,7 +26,7 @@ public static class DevOpsApi
                         string.Format("{0}:{1}", "", personalaccesstoken))));
 
             using (HttpResponseMessage response = await client.GetAsync(
-                       "http://azuredevops/Techsola/HeritagePMS/_apis/wit/queries/7dc9cd9d-87f7-4b24-9a75-b03e2508ef15?api-version=6.0"))
+                       "http://azuredevops/Techsola/HeritagePMS/_apis/wit/queries/?api-version=6.0"))
             {
                 response.EnsureSuccessStatusCode();
                 ResponseBody = await response.Content.ReadAsStringAsync();

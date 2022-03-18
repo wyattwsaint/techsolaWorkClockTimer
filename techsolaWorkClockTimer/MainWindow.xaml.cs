@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
@@ -22,6 +23,7 @@ namespace techsolaWorkClockTimer
         private void StartPauseClock_Click(object sender, RoutedEventArgs e)
         {
             var clock = (TechsolaClock)DataContext;
+            
 
             if (clock.RunningSegment is null)
             {
@@ -90,5 +92,26 @@ namespace techsolaWorkClockTimer
         {
             PauseOnLockoutBoxChecked = false;
         }
+
+        private void EndOfWorkDay_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var clock = (TechsolaClock)DataContext;
+            var targetTimeString = ((ComboBoxItem)daysEndTargetTime.SelectedItem).Content.ToString().TrimEnd('P', 'M')
+                .Split(':');
+            var targetTimeInt = Array.ConvertAll(targetTimeString, s => int.Parse(s));
+            clock.ConvertTimeIntArrayToTimeSpan(targetTimeInt);
+        }
+
+        private void WorkDayLength_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var clock = (TechsolaClock)DataContext;
+
+            var comboBoxString = ((ComboBoxItem)workDayLength.SelectedItem).Content.ToString().TrimEnd(' ', 'H', 'R', 'S');
+            var targetHours = Convert.ToInt32(comboBoxString);
+            clock.GetWorkdayHoursFromComboBox(targetHours);
+
+        }
+
+        
     }
 }
