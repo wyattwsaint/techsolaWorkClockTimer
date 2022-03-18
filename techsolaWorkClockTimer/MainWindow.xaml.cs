@@ -56,6 +56,7 @@ namespace techsolaWorkClockTimer
             clock.Start(wasSameProjectRunning
                 ? TechsolaClock.DefaultProjectName
                 : projectTime.ProjectName);
+            DevOpsApi.GetProjects();
         }
 
         void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
