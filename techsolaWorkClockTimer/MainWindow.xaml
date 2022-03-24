@@ -173,7 +173,8 @@
                     Height="20"
                     Width="70"
                     HorizontalAlignment="Center"
-                    HorizontalContentAlignment="Center">
+                    HorizontalContentAlignment="Center"
+                    ItemsSource="{Binding EndOfDayTargetTime}">
                     <ComboBoxItem>12:00PM</ComboBoxItem>
                     <ComboBoxItem>12:30PM</ComboBoxItem>
                     <ComboBoxItem>1:00PM</ComboBoxItem>
