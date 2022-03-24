@@ -63,7 +63,7 @@ namespace techsolaWorkClockTimer
             if (RunningSegment is not null)
                 throw new InvalidOperationException("Multiple segments must not run at the same time.");
 
-            UpdateBreaktimeLeft(endOfDayTargetTime, workDayHours);
+            UpdateBreaktimeLeft(EndOfDayTargetTime, WorkDayHours);
 
             segments.Add(new TimeSegment(DateTime.Now, project));
             OnPropertyChanged(nameof(RunningSegment));
@@ -115,26 +115,36 @@ namespace techsolaWorkClockTimer
         }
 
         private TimeSpan? endOfDayTargetTime;
+        public TimeSpan? EndOfDayTargetTime
+        {
+            get => endOfDayTargetTime;
+            set => Set(ref endOfDayTargetTime, value);
+        }
 
         public void ConvertTimeIntArrayToTimeSpan(int[] targetTimeInt)
         {
             if (targetTimeInt.Length == 1)
             {
-                endOfDayTargetTime = new TimeSpan(0, targetTimeInt[0] + 12, 0, 0);
+                EndOfDayTargetTime = new TimeSpan(0, targetTimeInt[0] + 12, 0, 0);
             }
             if (targetTimeInt.Length == 2)
             {
-                endOfDayTargetTime = new TimeSpan(0, targetTimeInt[0] + 12, targetTimeInt[1], 0);
+                EndOfDayTargetTime = new TimeSpan(0, targetTimeInt[0] + 12, targetTimeInt[1], 0);
             }
-            UpdateBreaktimeLeft(endOfDayTargetTime, workDayHours);
+            UpdateBreaktimeLeft(EndOfDayTargetTime, WorkDayHours);
         }
 
         private TimeSpan? workDayHours;
 
+        public TimeSpan? WorkDayHours
+        {
+            get => workDayHours;
+            set => Set(ref workDayHours, value);
+        }
         public void GetWorkdayHoursFromComboBox(int targetHours)
         {
-            workDayHours = new TimeSpan(0, targetHours, 0, 0);
-            UpdateBreaktimeLeft(endOfDayTargetTime, workDayHours);
+            WorkDayHours = new TimeSpan(0, targetHours, 0, 0);
+            UpdateBreaktimeLeft(EndOfDayTargetTime, WorkDayHours);
         }
 
         public void UpdateBreaktimeLeft(TimeSpan? endOfDay, TimeSpan? workHours)
