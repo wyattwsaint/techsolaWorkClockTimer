@@ -29,7 +29,7 @@ namespace techsolaWorkClockTimer
         }
 
         public string? DisplayTime => Time is not null ? $@"{Time:hh\:mm\:ss}" : null;
-        public string? DecimalDisplayTime => Time is not null ? $@"{Time.Value.TotalHours:0.00}" : null;
+        public string? DecimalDisplayTime => Time is not null ? $@"{Math.Round(Time.Value.TotalHours * 4, MidpointRounding.ToEven) / 4:0.00}" : null;
 
     }
 }
