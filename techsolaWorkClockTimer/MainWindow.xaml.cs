@@ -58,7 +58,7 @@ namespace techsolaWorkClockTimer
             clock.Start(wasSameProjectRunning
                 ? TechsolaClock.DefaultProjectName
                 : projectTime.ProjectName);
-            DevOpsApi.GetProjects();
+            //DevOpsApi.GetProjects();
         }
 
         void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
@@ -96,7 +96,7 @@ namespace techsolaWorkClockTimer
         private void EndOfWorkDay_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var clock = (TechsolaClock)DataContext;
-            var targetTimeString = ((ComboBoxItem)daysEndTargetTime.SelectedItem).Content.ToString().TrimEnd('P', 'M')
+            var targetTimeString = ((ComboBoxItem)daysEndTargetTime.SelectedItem).Content.ToString()!.TrimEnd('P', 'M')
                 .Split(':');
             var targetTimeInt = Array.ConvertAll(targetTimeString, s => int.Parse(s));
             clock.ConvertTimeIntArrayToTimeSpan(targetTimeInt);
@@ -106,7 +106,7 @@ namespace techsolaWorkClockTimer
         {
             var clock = (TechsolaClock)DataContext;
 
-            var comboBoxString = ((ComboBoxItem)workDayLength.SelectedItem).Content.ToString().TrimEnd(' ', 'H', 'R', 'S');
+            var comboBoxString = ((ComboBoxItem)workDayLength.SelectedItem).Content.ToString()!.TrimEnd(' ', 'H', 'R', 'S');
             var targetHours = Convert.ToInt32(comboBoxString);
             clock.GetWorkdayHoursFromComboBox(targetHours);
 
