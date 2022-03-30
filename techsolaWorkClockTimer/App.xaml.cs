@@ -1,8 +1,6 @@
-﻿using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using Dapper;
+using System;
 using System.Windows;
-using Dapper;
 
 namespace techsolaWorkClockTimer
 {
@@ -17,7 +15,7 @@ namespace techsolaWorkClockTimer
         {
             if (Clock.Segments.Count > 0)
                 Clock.Segments[^1].End ??= DateTime.Now;
-
+            DataBase.RefreshTable();
             foreach (var segment in Clock.Segments)
             {
                 DataBase.Connection.Execute(
