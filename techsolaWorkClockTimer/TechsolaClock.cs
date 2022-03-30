@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using Accessibility;
 
 namespace techsolaWorkClockTimer
 {
@@ -135,7 +136,6 @@ namespace techsolaWorkClockTimer
         }
 
         private TimeSpan? workDayHours;
-
         public TimeSpan? WorkDayHours
         {
             get => workDayHours;
@@ -147,13 +147,61 @@ namespace techsolaWorkClockTimer
             UpdateBreaktimeLeft(EndOfDayTargetTime, WorkDayHours);
         }
 
-        public void UpdateBreaktimeLeft(TimeSpan? endOfDay, TimeSpan? workHours)
+        public string UpdateBreaktimeLeft(TimeSpan? endOfDay, TimeSpan? workHours)
         {
-            if(endOfDayTargetTime == null && workDayHours == null) return;
+            if(endOfDayTargetTime == null && workDayHours == null) return "";
             var breakTime = (endOfDay - DateTime.Now.TimeOfDay) -
                                         (workHours - GetCurrentTime(project: null));
-            BreakTimeLeft = breakTime?.Ticks < 0 ? $@"-{breakTime:hh\:mm\:ss}" : $@"{breakTime:hh\:mm\:ss}";
+            return BreakTimeLeft = breakTime?.Ticks < 0 ? $@"-{breakTime:hh\:mm\:ss}" : $@"{breakTime:hh\:mm\:ss}";
         }
 
+        private string? getEndOfDayTargetTime;
+        public string? GetEndOfDayTargetTime
+        {
+            get => getEndOfDayTargetTime;
+            set => Set(ref getEndOfDayTargetTime, value);
+        }
+        private string? getWorkDayHours;
+
+        public string? GetWorkDayHours
+        {
+            get => getWorkDayHours;
+            set => Set(ref getWorkDayHours, value);
+        }
+
+        private string ConvertTimeSpansToStringsForComboboxTwoWayBinding(TimeSpan time, bool addPm)
+        {
+            if (addPm)
+            {
+                var endOfDayTime = Convert.ToInt32(time.ToString().Substring(0, 2));
+                if (endOfDayTime > 12) return (endOfDayTime - 12) + "PM";
+                return endOfDayTime + "PM";
+            }
+            var workDayTime = Convert.ToInt32(time.ToString().Substring(0,2));
+            if (workDayTime > 12) return (workDayTime - 12) + " HRS";
+            return workDayTime.ToString();
+        }
+
+        public void GetSettings()
+        {
+            WorkDayHours = Properties.Settings.Default.workDayHours;
+            EndOfDayTargetTime = Properties.Settings.Default.endOfDayTargetTime;
+
+            getWorkDayHours =
+                ConvertTimeSpansToStringsForComboboxTwoWayBinding(Properties.Settings.Default.workDayHours, addPm: false);
+            OnPropertyChanged(nameof(GetWorkDayHours));
+
+            getEndOfDayTargetTime =
+                ConvertTimeSpansToStringsForComboboxTwoWayBinding(Properties.Settings.Default.endOfDayTargetTime, addPm: true);
+            OnPropertyChanged(nameof(GetEndOfDayTargetTime));
+
+            UpdateBreaktimeLeft(EndOfDayTargetTime, WorkDayHours);
+        }
+        public void SetSettings()
+        {
+            Properties.Settings.Default.endOfDayTargetTime = EndOfDayTargetTime!.Value;
+            Properties.Settings.Default.workDayHours = WorkDayHours!.Value;
+            Properties.Settings.Default.Save();
+        }
     }
 }

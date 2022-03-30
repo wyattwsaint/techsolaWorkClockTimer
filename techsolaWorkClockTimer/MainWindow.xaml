@@ -132,14 +132,18 @@
                     Workday length:
                 </TextBlock>
                 <ComboBox
+                    IsEditable="True"
                     Name="workDayLength"
                     Grid.Column="6"
                     Grid.ColumnSpan="5"
                     Grid.Row="6" 
                     Height="20"
                     Width="70"
-                    HorizontalAlignment="Center" SelectionChanged="WorkDayLength_SelectionChanged"
-                    HorizontalContentAlignment="Center">
+                    HorizontalAlignment="Center" 
+                    SelectionChanged="WorkDayLength_SelectionChanged"
+                    HorizontalContentAlignment="Center"
+                    Text="{Binding GetWorkDayHours, Mode=TwoWay}"
+                   >
                     <ComboBoxItem>1 HRS</ComboBoxItem>
                     <ComboBoxItem>2 HRS</ComboBoxItem>
                     <ComboBoxItem>3 HRS</ComboBoxItem>
@@ -165,6 +169,7 @@
                     Workday end:
                 </TextBlock>
                 <ComboBox
+                    IsEditable="True"
                     Name="daysEndTargetTime"
                     Grid.Column="6"
                     Grid.ColumnSpan="5"
@@ -174,27 +179,18 @@
                     Width="70"
                     HorizontalAlignment="Center"
                     HorizontalContentAlignment="Center"
-                    ItemsSource="{Binding EndOfDayTargetTime}">
+                    Text="{Binding GetEndOfDayTargetTime, Mode=TwoWay}"
+                    >
                     <ComboBoxItem>12:00PM</ComboBoxItem>
-                    <ComboBoxItem>12:30PM</ComboBoxItem>
                     <ComboBoxItem>1:00PM</ComboBoxItem>
-                    <ComboBoxItem>1:30PM</ComboBoxItem>
                     <ComboBoxItem>2:00PM</ComboBoxItem>
-                    <ComboBoxItem>2:30PM</ComboBoxItem>
                     <ComboBoxItem>3:00PM</ComboBoxItem>
-                    <ComboBoxItem>3:30PM</ComboBoxItem>
                     <ComboBoxItem>4:00PM</ComboBoxItem>
-                    <ComboBoxItem>4:30PM</ComboBoxItem>
                     <ComboBoxItem>5:00PM</ComboBoxItem>
-                    <ComboBoxItem>5:30PM</ComboBoxItem>
                     <ComboBoxItem>6:00PM</ComboBoxItem>
-                    <ComboBoxItem>6:30PM</ComboBoxItem>
                     <ComboBoxItem>7:00PM</ComboBoxItem>
-                    <ComboBoxItem>7:30PM</ComboBoxItem>
                     <ComboBoxItem>8:00PM</ComboBoxItem>
-                    <ComboBoxItem>8:30PM</ComboBoxItem>
                     <ComboBoxItem>9:00PM</ComboBoxItem>
-                    <ComboBoxItem>9:30PM</ComboBoxItem>
                     <ComboBoxItem>10:00PM</ComboBoxItem>
                 </ComboBox>
                 

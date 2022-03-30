@@ -111,7 +111,5 @@ namespace techsolaWorkClockTimer
             clock.GetWorkdayHoursFromComboBox(targetHours);
 
         }
-
-        
     }
 }

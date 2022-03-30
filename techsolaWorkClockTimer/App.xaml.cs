@@ -24,6 +24,19 @@ namespace techsolaWorkClockTimer
                     "Insert into segments (TimeSegmentStart, TimeSegmentEnd, Project) values(@Start, @End, @Project)",
                     new { segment.Start, segment.End, segment.Project });
             }
+            
+            // ---- Save/Set Settings ----
+
+            Clock.SetSettings();
+
+        }
+
+        private void App_OnStartup(object sender, StartupEventArgs e)
+        {
+            //---- Get Settings ----
+
+            Clock.GetSettings();
+
         }
     }
 }
