@@ -61,7 +61,7 @@
                 <Button
                     Grid.Column="1"
                     Grid.ColumnSpan="10"
-                    Grid.Row="2"
+                    Grid.Row="3"
                     x:Name="startStopClock"
                     Width="279"
                     Height="70"
@@ -227,18 +227,74 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="20"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
+
+
                 <CheckBox Content="Pause timer on sign-off/lockout"
                           Grid.Column="1"
+                          Grid.ColumnSpan="5"
                           Grid.Row="1" Checked="Pause_On_Lockout_CheckBox_Checked"
                           Unchecked="HandleUnchecked"
                           BorderThickness="2"/>
+
+
+                <Label Content="WI #1"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="3"
+                       Grid.Row="3"
+                       Foreground="Black"
+                       Name="workItem1Label"
+                       Height="25"/>
+                <TextBox Name="workItem1TextEdit"
+                         Grid.Column="2"
+                         Grid.ColumnSpan="6"
+                         Grid.Row="3"
+                         Width="180"
+                         Height="25"/>
+                <Label Content="WI #2"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="3"
+                       Grid.Row="4"
+                       Foreground="Black"
+                       Name="workItem2Label"
+                       Height="25"/>
+                <TextBox Name="workItem2TextEdit"
+                         Grid.Column="2"
+                         Grid.ColumnSpan="6"
+                         Grid.Row="4"
+                         Width="180"
+                         Height="25"/>
+                <Label Content="WI #3"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="3"
+                       Grid.Row="5"
+                       Foreground="Black"
+                       Name="workItem3Label"
+                       Height="25"/>
+                <TextBox Name="workItem3TextEdit"
+                         Grid.Column="2"
+                         Grid.ColumnSpan="6"
+                         Grid.Row="5"
+                         Width="180"
+                         Height="25"/>
             </Grid>
         </TabItem>
     </TabControl>
