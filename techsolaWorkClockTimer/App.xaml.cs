@@ -19,8 +19,8 @@ namespace techsolaWorkClockTimer
             foreach (var segment in Clock.Segments)
             {
                 DataBase.Connection.Execute(
-                    "Insert into segments (TimeSegmentStart, TimeSegmentEnd, Project) values(@Start, @End, @Project)",
-                    new { segment.Start, segment.End, segment.Project });
+                    "Insert into segments (TimeSegmentStart, TimeSegmentEnd, Project, WorkItem) values(@Start, @End, @Project, @WorkItem)",
+                    new { segment.Start, segment.End, segment.Project, segment.WorkItem });
             }
             
             // ---- Save/Set Settings ----

@@ -33,6 +33,7 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                     <RowDefinition Height="10" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
@@ -75,7 +76,7 @@
                 <Button
                     Grid.Column="1"
                     Grid.ColumnSpan="10"
-                    Grid.Row="3"
+                    Grid.Row="4"
                     x:Name="endOfDay"
                     Width="279"
                     Height="70"
@@ -89,7 +90,7 @@
                               Width="auto"
                               Grid.Column="1"
                               Grid.ColumnSpan="10"
-                              Grid.Row="5">
+                              Grid.Row="6">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -105,7 +106,15 @@
                                     Background="{Binding Color}"
                                     Foreground="Black"
                                     FontSize="20"
-                                    FontStyle="Normal" Click="ProjectButton_Click"/>
+                                    FontStyle="Normal" Click="ProjectButton_Click">
+                                    <Button.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="WI #1" Click="WorkItemOne_Click"/>
+                                            <MenuItem Header="WI #2" Click="WorkItemTwo_Click"/>
+                                            <MenuItem Header="WI #3" Click="WorkItemThree_Click"/>
+                                        </ContextMenu>
+                                    </Button.ContextMenu>
+                                </Button>
                                 <TextBlock
                                     Grid.Column="1"
                                     Text="{Binding DisplayTime}"
@@ -121,7 +130,7 @@
                 <TextBlock
                     Grid.Column="1"
                     Grid.ColumnSpan="5"
-                    Grid.Row="6"
+                    Grid.Row="7"
                     Width="auto"
                     FontSize="20"
                     FontWeight="SemiBold"
@@ -136,7 +145,7 @@
                     Name="workDayLength"
                     Grid.Column="6"
                     Grid.ColumnSpan="5"
-                    Grid.Row="6" 
+                    Grid.Row="7" 
                     Height="20"
                     Width="70"
                     HorizontalAlignment="Center" 
@@ -158,7 +167,7 @@
                 <TextBlock
                     Grid.Column="1"
                     Grid.ColumnSpan="5"
-                    Grid.Row="7"
+                    Grid.Row="8"
                     Width="auto"
                     FontSize="20"
                     FontWeight="SemiBold"
@@ -173,7 +182,7 @@
                     Name="daysEndTargetTime"
                     Grid.Column="6"
                     Grid.ColumnSpan="5"
-                    Grid.Row="7" 
+                    Grid.Row="8" 
                     SelectionChanged="EndOfWorkDay_SelectionChanged"
                     Height="20"
                     Width="70"
@@ -197,7 +206,7 @@
                 <TextBlock
                     Grid.Column="1"
                     Grid.ColumnSpan="5"
-                    Grid.Row="8"
+                    Grid.Row="9"
                     Width="auto"
                     FontSize="20"
                     FontWeight="SemiBold"
@@ -210,7 +219,7 @@
                 <TextBlock
                     Grid.Column="6"
                     Grid.ColumnSpan="5"
-                    Grid.Row="8"
+                    Grid.Row="9"
                     Width="auto"
                     Text="{Binding BreakTimeLeft}"
                     FontSize="20"

@@ -16,7 +16,7 @@ namespace techsolaWorkClockTimer
             if (DataBase.DoesTableContainData() && DataBase.IsDataFromPriorDay())
                 DataBase.RefreshTable();
 
-            var timeSegments = DataBase.Connection.Query<TimeSegment>("select TimeSegmentStart, TimeSegmentEnd, Project from segments;");
+            var timeSegments = DataBase.Connection.Query<TimeSegment>("select TimeSegmentStart, TimeSegmentEnd, Project, WorkItem from segments;");
 
             foreach (var timeSegment in timeSegments) segments.Add(timeSegment);
         }
@@ -55,18 +55,31 @@ namespace techsolaWorkClockTimer
 
         public ReadOnlyObservableCollection<TimeSegment> Segments => new(segments);
 
+        //-----WorkItemProperties-----
+
+        private string? workItemOne;
+        public string? WorkItemOne { get => workItemOne; set => Set(ref workItemOne, value); }
+
+        private string? workItemTwo;
+        public string? WorkItemTwo { get => workItemTwo; set => Set(ref workItemTwo, value); }
+
+        private string? workItemThree;
+        public string? WorkItemThree { get => workItemThree; set => Set(ref workItemThree, value); }
+
+        //-----WorkItemProperties-----End
+
         public TimeSegment? RunningSegment => segments.LastOrDefault() is { End: null } runningSegment
             ? runningSegment
             : null;
 
-        public void Start(string project)
+        public void Start(string project, string? workItem)
         {
             if (RunningSegment is not null)
                 throw new InvalidOperationException("Multiple segments must not run at the same time.");
 
             UpdateBreaktimeLeft(EndOfDayTargetTime, WorkDayHours);
 
-            segments.Add(new TimeSegment(DateTime.Now, project));
+            segments.Add(new TimeSegment(DateTime.Now, project, workItem));
             OnPropertyChanged(nameof(RunningSegment));
 
             cancellationTokenSource = new();

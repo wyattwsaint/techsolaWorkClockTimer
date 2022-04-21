@@ -29,7 +29,7 @@ namespace techsolaWorkClockTimer
             {
                 clock.Start(clock.Segments.Count != 0
                     ? clock.Segments.LastOrDefault()!.Project
-                    : TechsolaClock.DefaultProjectName);
+                    : TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem);
             }
             else
                 clock.Stop();
@@ -57,7 +57,7 @@ namespace techsolaWorkClockTimer
 
             clock.Start(wasSameProjectRunning
                 ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName);
+                : projectTime.ProjectName, null);
             //DevOpsApi.GetProjects();
         }
 
@@ -69,14 +69,14 @@ namespace techsolaWorkClockTimer
             {
                 case SessionSwitchReason.SessionLock:
                     if (clock.RunningSegment is null)
-                        clock.Start(TechsolaClock.DefaultProjectName);
+                        clock.Start(TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem);
                     else
                         clock.Stop();
                     break;
 
                 case SessionSwitchReason.SessionUnlock:
                     if (clock.RunningSegment is null)
-                        clock.Start(TechsolaClock.DefaultProjectName);
+                        clock.Start(TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem);
                     else
                         clock.Stop();
                     break;
@@ -110,6 +110,32 @@ namespace techsolaWorkClockTimer
             var targetHours = Convert.ToInt32(comboBoxString);
             clock.GetWorkdayHoursFromComboBox(targetHours);
 
+        }
+
+        private void WorkItemOne_Click(object sender, RoutedEventArgs e)
+        {
+            var clock = (TechsolaClock)DataContext;
+            var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
+
+            var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
+            clock.WorkItemOne = workItem1TextEdit.Text;
+            
+            if (clock.RunningSegment is not null)
+                clock.Stop();
+
+            clock.Start(wasSameProjectRunning
+                ? TechsolaClock.DefaultProjectName
+                : projectTime.ProjectName, clock.WorkItemOne);
+        }
+
+        private void WorkItemTwo_Click(object sender, RoutedEventArgs e)
+        {
+            var clock = (TechsolaClock)DataContext;
+        }
+
+        private void WorkItemThree_Click(object sender, RoutedEventArgs e)
+        {
+            var clock = (TechsolaClock)DataContext;
         }
     }
 }
