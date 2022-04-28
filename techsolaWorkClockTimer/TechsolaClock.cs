@@ -37,18 +37,18 @@ namespace techsolaWorkClockTimer
 
         public ObservableCollection<ProjectTime> Times { get; } = new()
         {
-            new(DefaultProjectName, "White"),
-            new("Heritage", "PaleVioletRed"),
-            new("Exactis", "PaleTurquoise"),
-            new("Capri Cork", "PaleGoldenrod"),
-            new("Zeager", "Peru"),
-            new("JanTrak", "CadetBlue"),
-            new("Traverse-Sales", "RosyBrown"),
-            new("Traverse-Enhance", "YellowGreen"),
-            new("WRA Database", "DarkGoldenrod"),
-            new("DSB", "Turquoise"),
-            new("General", "Thistle"),
-            new("Custom", "Tomato"),
+            new(DefaultProjectName, "White", null),
+            new("Heritage", "PaleVioletRed", null),
+            new("Exactis", "PaleTurquoise", null),
+            new("Capri Cork", "PaleGoldenrod", null),
+            new("Zeager", "Peru", null),
+            new("JanTrak", "CadetBlue", null),
+            new("Traverse-Sales", "RosyBrown", null),
+            new("Traverse-Enhance", "YellowGreen", null),
+            new("WRA Database", "DarkGoldenrod", null),
+            new("DSB", "Turquoise", null),
+            new("General", "Thistle", null),
+            new("Custom", "Tomato", null),
         };
         
         private readonly ObservableCollection<TimeSegment> segments = new();
@@ -57,15 +57,11 @@ namespace techsolaWorkClockTimer
 
         //-----WorkItemProperties-----
 
-        private string? workItemOne;
-        public string? WorkItemOne { get => workItemOne; set => Set(ref workItemOne, value); }
+        
 
-        private string? workItemTwo;
-        public string? WorkItemTwo { get => workItemTwo; set => Set(ref workItemTwo, value); }
-
-        private string? workItemThree;
-        public string? WorkItemThree { get => workItemThree; set => Set(ref workItemThree, value); }
-
+        
+        
+        
         //-----WorkItemProperties-----End
 
         public TimeSegment? RunningSegment => segments.LastOrDefault() is { End: null } runningSegment
@@ -174,8 +170,8 @@ namespace techsolaWorkClockTimer
             get => getEndOfDayTargetTime;
             set => Set(ref getEndOfDayTargetTime, value);
         }
+        
         private string? getWorkDayHours;
-
         public string? GetWorkDayHours
         {
             get => getWorkDayHours;

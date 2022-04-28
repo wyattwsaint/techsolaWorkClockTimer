@@ -106,12 +106,13 @@
                                     Background="{Binding Color}"
                                     Foreground="Black"
                                     FontSize="20"
-                                    FontStyle="Normal" Click="ProjectButton_Click">
+                                    FontStyle="Normal" Click="ProjectButton_Click" 
+                                    MouseRightButtonDown="Button_MouseRightButtonDown">
                                     <Button.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="WI #1" Click="WorkItemOne_Click"/>
-                                            <MenuItem Header="WI #2" Click="WorkItemTwo_Click"/>
-                                            <MenuItem Header="WI #3" Click="WorkItemThree_Click"/>
+                                            <MenuItem Header="{Binding WorkItemOne}" Click="WorkItemOne_Click"/>
+                                            <MenuItem Header="{Binding WorkItemTwo}" Click="WorkItemTwo_Click"/>
+                                            <MenuItem Header="{Binding WorkItemThree}" Click="WorkItemThree_Click"/>
                                         </ContextMenu>
                                     </Button.ContextMenu>
                                 </Button>

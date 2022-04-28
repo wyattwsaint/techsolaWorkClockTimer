@@ -5,14 +5,36 @@ namespace techsolaWorkClockTimer
 {
     public sealed class ProjectTime : ObservableObject
     {
-        public ProjectTime(string projectName, string color)
+        public ProjectTime(string projectName, string color, string? workItemOne)
         {
             ProjectName = projectName;
             Color = color;
+            WorkItemOne = workItemOne;
         }
 
         public string ProjectName { get; }
         public string Color { get; }
+
+        private string? workItemOne;
+        public string? WorkItemOne
+        {
+            get => workItemOne;
+            set => Set(ref workItemOne, value);
+        }
+
+        private string? workItemTwo;
+        public string? WorkItemTwo
+        {
+            get => workItemTwo;
+            set => Set(ref workItemTwo, value);
+        }
+
+        private string? workItemThree;
+        public string? WorkItemThree
+        {
+            get => workItemThree;
+            set => Set(ref workItemThree, value);
+        }
 
         private TimeSpan? time;
         public TimeSpan? Time

@@ -118,24 +118,51 @@ namespace techsolaWorkClockTimer
             var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
 
             var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
-            clock.WorkItemOne = workItem1TextEdit.Text;
             
             if (clock.RunningSegment is not null)
                 clock.Stop();
 
             clock.Start(wasSameProjectRunning
                 ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, clock.WorkItemOne);
+                : projectTime.ProjectName, projectTime.WorkItemOne);
         }
 
         private void WorkItemTwo_Click(object sender, RoutedEventArgs e)
         {
             var clock = (TechsolaClock)DataContext;
+            var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
+
+            var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
+
+            if (clock.RunningSegment is not null)
+                clock.Stop();
+
+            clock.Start(wasSameProjectRunning
+                ? TechsolaClock.DefaultProjectName
+                : projectTime.ProjectName, projectTime.WorkItemTwo);
         }
 
         private void WorkItemThree_Click(object sender, RoutedEventArgs e)
         {
             var clock = (TechsolaClock)DataContext;
+            var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
+
+            var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
+
+            if (clock.RunningSegment is not null)
+                clock.Stop();
+
+            clock.Start(wasSameProjectRunning
+                ? TechsolaClock.DefaultProjectName
+                : projectTime.ProjectName, projectTime.WorkItemThree);
+        }
+
+        private void Button_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var projectTime = (ProjectTime)((Button)sender).DataContext;
+            projectTime.WorkItemOne = workItem1TextEdit.Text;
+            projectTime.WorkItemTwo = workItem2TextEdit.Text;
+            projectTime.WorkItemThree = workItem3TextEdit.Text;
         }
     }
 }
