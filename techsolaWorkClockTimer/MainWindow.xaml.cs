@@ -124,7 +124,7 @@ namespace techsolaWorkClockTimer
 
             clock.Start(wasSameProjectRunning
                 ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, projectTime.WorkItemOne);
+                : projectTime.ProjectName, clock.WorkItemOneTechsolaClock);
         }
 
         private void WorkItemTwo_Click(object sender, RoutedEventArgs e)
@@ -139,7 +139,7 @@ namespace techsolaWorkClockTimer
 
             clock.Start(wasSameProjectRunning
                 ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, projectTime.WorkItemTwo);
+                : projectTime.ProjectName, clock.WorkItemTwoTechsolaClock);
         }
 
         private void WorkItemThree_Click(object sender, RoutedEventArgs e)
@@ -154,7 +154,7 @@ namespace techsolaWorkClockTimer
 
             clock.Start(wasSameProjectRunning
                 ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, projectTime.WorkItemThree);
+                : projectTime.ProjectName, clock.WorkItemThreeTechsolaClock);
         }
         private void WorkItemFour_Click(object sender, RoutedEventArgs e)
         {
@@ -168,7 +168,7 @@ namespace techsolaWorkClockTimer
 
             clock.Start(wasSameProjectRunning
                 ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, projectTime.WorkItemFour);
+                : projectTime.ProjectName, clock.WorkItemFourTechsolaClock);
         }
 
         private void WorkItemFive_Click(object sender, RoutedEventArgs e)
@@ -183,7 +183,7 @@ namespace techsolaWorkClockTimer
 
             clock.Start(wasSameProjectRunning
                 ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, projectTime.WorkItemFive);
+                : projectTime.ProjectName, clock.WorkItemFiveTechsolaClock);
         }
 
         private void WorkItemSix_Click(object sender, RoutedEventArgs e)
@@ -198,15 +198,12 @@ namespace techsolaWorkClockTimer
 
             clock.Start(wasSameProjectRunning
                 ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, projectTime.WorkItemSix);
+                : projectTime.ProjectName, clock.WorkItemSixTechsolaClock);
         }
 
         private void Button_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var projectTime = (ProjectTime)((Button)sender).DataContext;
-            projectTime.WorkItemOne = WorkItem1TextEdit.Text;
-            projectTime.WorkItemTwo = WorkItem2TextEdit.Text;
-            projectTime.WorkItemThree = WorkItem3TextEdit.Text;
+            // TODO: remove
         }
     }
 }

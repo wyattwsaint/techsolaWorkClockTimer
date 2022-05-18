@@ -15,46 +15,7 @@ namespace techsolaWorkClockTimer
         public string ProjectName { get; }
         public string Color { get; }
         public string? WorkItem { get; }
-
-        private string? workItemOne;
-        public string? WorkItemOne
-        {
-            get => workItemOne;
-            set => Set(ref workItemOne, value);
-        }
-
-        private string? workItemTwo;
-        public string? WorkItemTwo
-        {
-            get => workItemTwo;
-            set => Set(ref workItemTwo, value);
-        }
-        private string? workItemThree;
-        public string? WorkItemThree
-        {
-            get => workItemThree;
-            set => Set(ref workItemThree, value);
-        }
-        private string? workItemFour;
-        public string? WorkItemFour
-        {
-            get => workItemFour;
-            set => Set(ref workItemFour, value);
-        }
-        private string? workItemFive;
-        public string? WorkItemFive
-        {
-            get => workItemFive;
-            set => Set(ref workItemFive, value);
-        }
-        private string? workItemSix;
-        public string? WorkItemSix
-        {
-            get => workItemSix;
-            set => Set(ref workItemSix, value);
-        }
         
-
         private TimeSpan? time;
         public TimeSpan? Time
         {

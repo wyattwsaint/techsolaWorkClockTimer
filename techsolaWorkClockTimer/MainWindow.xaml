@@ -9,6 +9,16 @@
         d:DataContext="{d:DesignInstance Type=local:TechsolaClock}"
         mc:Ignorable="d"
         Height="1047" Width="320">
+    <Window.Resources>
+        <ContextMenu x:Key="WorkItemContextMenu">
+            <MenuItem Header="{Binding DataContext.WorkItemOneTechsolaClock, RelativeSource={RelativeSource AncestorType=Window}}" Click="WorkItemOne_Click"/>
+            <MenuItem Header="{Binding DataContext.WorkItemTwoTechsolaClock, RelativeSource={RelativeSource AncestorType=Window}}" Click="WorkItemTwo_Click"/>
+            <MenuItem Header="{Binding DataContext.WorkItemThreeTechsolaClock, RelativeSource={RelativeSource AncestorType=Window}}" Click="WorkItemThree_Click"/>
+            <MenuItem Header="{Binding DataContext.WorkItemFourTechsolaClock, RelativeSource={RelativeSource AncestorType=Window}}" Click="WorkItemFour_Click"/>
+            <MenuItem Header="{Binding DataContext.WorkItemFiveTechsolaClock, RelativeSource={RelativeSource AncestorType=Window}}" Click="WorkItemFive_Click"/>
+            <MenuItem Header="{Binding DataContext.WorkItemSixTechsolaClock, RelativeSource={RelativeSource AncestorType=Window}}" Click="WorkItemSix_Click"/>
+        </ContextMenu>
+    </Window.Resources>
     <TabControl>
         <TabItem Header="Techsola Time">
             <Grid>
@@ -107,18 +117,8 @@
                                     Foreground="Black"
                                     FontSize="20"
                                     FontStyle="Normal" Click="ProjectButton_Click" 
-                                    MouseRightButtonDown="Button_MouseRightButtonDown">
-                                    <Button.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="{Binding WorkItemOne}" Click="WorkItemOne_Click"/>
-                                            <MenuItem Header="{Binding WorkItemTwo}" Click="WorkItemTwo_Click"/>
-                                            <MenuItem Header="{Binding WorkItemThree}" Click="WorkItemThree_Click"/>
-                                            <MenuItem Header="{Binding WorkItemFour}" Click="WorkItemFour_Click"/>
-                                            <MenuItem Header="{Binding WorkItemFive}" Click="WorkItemFive_Click"/>
-                                            <MenuItem Header="{Binding WorkItemSix}" Click="WorkItemSix_Click"/>
-                                        </ContextMenu>
-                                    </Button.ContextMenu>
-                                </Button>
+                                    MouseRightButtonDown="Button_MouseRightButtonDown"
+                                    ContextMenu="{DynamicResource WorkItemContextMenu}"/>
                                 <TextBlock
                                     Grid.Column="1"
                                     Text="{Binding DisplayTime}"
@@ -335,7 +335,7 @@
                        Foreground="Black"
                        Name="WorkItem5Label"
                        Height="25"/>
-                <TextBox Name="workItem5TextEdit"
+                <TextBox Name="WorkItem5TextEdit"
                          Text="{Binding WorkItemFiveTechsolaClock}"
                          Grid.Column="2"
                          Grid.ColumnSpan="6"

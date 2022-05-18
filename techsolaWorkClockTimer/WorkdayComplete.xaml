@@ -12,6 +12,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="480" />
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="10" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -70,5 +71,25 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+
+        <DataGrid 
+            Grid.Column="2"
+            Grid.Row="1"
+            ItemsSource="{Binding Times}"
+            AutoGenerateColumns="False">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Day"/>
+                <DataGridTextColumn Header="Employee"/>
+                <DataGridTextColumn Header="Date"/>
+                <DataGridTextColumn Header="Project - Feature"/>
+                <DataGridTextColumn Header="Phase"/>
+                <DataGridTextColumn 
+                    Header="Description of Work Performed"
+                    Binding="{Binding WorkItemOne}"/>
+                <DataGridTextColumn Header="Hours"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>

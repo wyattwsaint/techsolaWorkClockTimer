@@ -66,14 +66,6 @@ namespace techsolaWorkClockTimer
             get => workItemOneTechsolaClock;
             set
             {
-                foreach (var t in Times)
-                {
-                    if (t.WorkItemOne != null)
-                    {
-                        Set(ref workItemOneTechsolaClock, t.WorkItemOne);
-                    }
-                }
-
                 Set(ref workItemOneTechsolaClock, value);
             }
         }
@@ -83,14 +75,6 @@ namespace techsolaWorkClockTimer
             get => workItemTwoTechsolaClock;
             set
             {
-                foreach (var t in Times)
-                {
-                    if (t.WorkItemTwo != null)
-                    {
-                        Set(ref workItemTwoTechsolaClock, t.WorkItemTwo);
-                    }
-                }
-
                 Set(ref workItemTwoTechsolaClock, value);
             }
         }
@@ -100,14 +84,6 @@ namespace techsolaWorkClockTimer
             get => workItemThreeTechsolaClock;
             set
             {
-                foreach (var t in Times)
-                {
-                    if (t.WorkItemThree != null)
-                    {
-                        Set(ref workItemThreeTechsolaClock, t.WorkItemThree);
-                    }
-                }
-
                 Set(ref workItemThreeTechsolaClock, value);
             }
         }
@@ -117,14 +93,6 @@ namespace techsolaWorkClockTimer
             get => workItemFourTechsolaClock;
             set
             {
-                foreach (var t in Times)
-                {
-                    if (t.WorkItemFour != null)
-                    {
-                        Set(ref workItemFourTechsolaClock, t.WorkItemFour);
-                    }
-                }
-
                 Set(ref workItemFourTechsolaClock, value);
             }
         }
@@ -134,14 +102,6 @@ namespace techsolaWorkClockTimer
             get => workItemFiveTechsolaClock;
             set
             {
-                foreach (var t in Times)
-                {
-                    if (t.WorkItemFive != null)
-                    {
-                        Set(ref workItemFiveTechsolaClock, t.WorkItemFive);
-                    }
-                }
-
                 Set(ref workItemFiveTechsolaClock, value);
             }
         }
@@ -151,14 +111,6 @@ namespace techsolaWorkClockTimer
             get => workItemSixTechsolaClock;
             set
             {
-                foreach (var t in Times)
-                {
-                    if (t.WorkItemSix != null)
-                    {
-                        Set(ref workItemSixTechsolaClock, t.WorkItemSix);
-                    }
-                }
-
                 Set(ref workItemSixTechsolaClock, value);
             }
         }
