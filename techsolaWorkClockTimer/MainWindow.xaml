@@ -113,6 +113,9 @@
                                             <MenuItem Header="{Binding WorkItemOne}" Click="WorkItemOne_Click"/>
                                             <MenuItem Header="{Binding WorkItemTwo}" Click="WorkItemTwo_Click"/>
                                             <MenuItem Header="{Binding WorkItemThree}" Click="WorkItemThree_Click"/>
+                                            <MenuItem Header="{Binding WorkItemFour}" Click="WorkItemFour_Click"/>
+                                            <MenuItem Header="{Binding WorkItemFive}" Click="WorkItemFive_Click"/>
+                                            <MenuItem Header="{Binding WorkItemSix}" Click="WorkItemSix_Click"/>
                                         </ContextMenu>
                                     </Button.ContextMenu>
                                 </Button>
@@ -254,6 +257,9 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
 
@@ -271,9 +277,9 @@
                        Grid.ColumnSpan="3"
                        Grid.Row="3"
                        Foreground="Black"
-                       Name="workItem1Label"
+                       Name="WorkItem1Label"
                        Height="25"/>
-                <TextBox Name="workItem1TextEdit"
+                <TextBox Name="WorkItem1TextEdit"
                          Text="{Binding WorkItemOneTechsolaClock}"
                          Grid.Column="2"
                          Grid.ColumnSpan="6"
@@ -285,9 +291,9 @@
                        Grid.ColumnSpan="3"
                        Grid.Row="4"
                        Foreground="Black"
-                       Name="workItem2Label"
+                       Name="WorkItem2Label"
                        Height="25"/>
-                <TextBox Name="workItem2TextEdit"
+                <TextBox Name="WorkItem2TextEdit"
                          Text="{Binding WorkItemTwoTechsolaClock}"
                          Grid.Column="2"
                          Grid.ColumnSpan="6"
@@ -299,13 +305,55 @@
                        Grid.ColumnSpan="3"
                        Grid.Row="5"
                        Foreground="Black"
-                       Name="workItem3Label"
+                       Name="WorkItem3Label"
                        Height="25"/>
-                <TextBox Name="workItem3TextEdit"
+                <TextBox Name="WorkItem3TextEdit"
                          Text="{Binding WorkItemThreeTechsolaClock}"
                          Grid.Column="2"
                          Grid.ColumnSpan="6"
                          Grid.Row="5"
+                         Width="180"
+                         Height="25"/>
+                <Label Content="WI #4"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="3"
+                       Grid.Row="6"
+                       Foreground="Black"
+                       Name="WorkItem4Label"
+                       Height="25"/>
+                <TextBox Name="WorkItem4TextEdit"
+                         Text="{Binding WorkItemFourTechsolaClock}"
+                         Grid.Column="2"
+                         Grid.ColumnSpan="6"
+                         Grid.Row="6"
+                         Width="180"
+                         Height="25"/>
+                <Label Content="WI #5"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="3"
+                       Grid.Row="7"
+                       Foreground="Black"
+                       Name="WorkItem5Label"
+                       Height="25"/>
+                <TextBox Name="workItem5TextEdit"
+                         Text="{Binding WorkItemFiveTechsolaClock}"
+                         Grid.Column="2"
+                         Grid.ColumnSpan="6"
+                         Grid.Row="7"
+                         Width="180"
+                         Height="25"/>
+                <Label Content="WI #6"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="3"
+                       Grid.Row="8"
+                       Foreground="Black"
+                       Name="WorkItem6Label"
+                       Height="25"/>
+                <TextBox Name="WorkItem6TextEdit"
+                         Text="{Binding WorkItemSixTechsolaClock}"
+                         Grid.Column="2"
+                         Grid.ColumnSpan="6"
+                         Grid.Row="8"
                          Width="180"
                          Height="25"/>
             </Grid>

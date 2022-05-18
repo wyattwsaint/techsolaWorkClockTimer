@@ -58,7 +58,8 @@ namespace techsolaWorkClockTimer
 
         public ReadOnlyObservableCollection<TimeSegment> Segments => new(segments);
 
-        //-----WorkItemProperties-----
+        //-----WorkItemProperties-----Begin
+
         private string? workItemOneTechsolaClock;
         public string? WorkItemOneTechsolaClock
         {
@@ -110,6 +111,58 @@ namespace techsolaWorkClockTimer
                 Set(ref workItemThreeTechsolaClock, value);
             }
         }
+        private string? workItemFourTechsolaClock;
+        public string? WorkItemFourTechsolaClock
+        {
+            get => workItemFourTechsolaClock;
+            set
+            {
+                foreach (var t in Times)
+                {
+                    if (t.WorkItemFour != null)
+                    {
+                        Set(ref workItemFourTechsolaClock, t.WorkItemFour);
+                    }
+                }
+
+                Set(ref workItemFourTechsolaClock, value);
+            }
+        }
+        private string? workItemFiveTechsolaClock;
+        public string? WorkItemFiveTechsolaClock
+        {
+            get => workItemFiveTechsolaClock;
+            set
+            {
+                foreach (var t in Times)
+                {
+                    if (t.WorkItemFive != null)
+                    {
+                        Set(ref workItemFiveTechsolaClock, t.WorkItemFive);
+                    }
+                }
+
+                Set(ref workItemFiveTechsolaClock, value);
+            }
+        }
+        private string? workItemSixTechsolaClock;
+        public string? WorkItemSixTechsolaClock
+        {
+            get => workItemSixTechsolaClock;
+            set
+            {
+                foreach (var t in Times)
+                {
+                    if (t.WorkItemSix != null)
+                    {
+                        Set(ref workItemSixTechsolaClock, t.WorkItemSix);
+                    }
+                }
+
+                Set(ref workItemSixTechsolaClock, value);
+            }
+        }
+
         //-----WorkItemProperties-----End
 
         public TimeSegment? RunningSegment => segments.LastOrDefault() is { End: null } runningSegment
@@ -265,6 +318,9 @@ namespace techsolaWorkClockTimer
             WorkItemOneTechsolaClock = Properties.Settings.Default.workItemOne;
             WorkItemTwoTechsolaClock = Properties.Settings.Default.workItemTwo;
             WorkItemThreeTechsolaClock = Properties.Settings.Default.workItemThree;
+            WorkItemFourTechsolaClock = Properties.Settings.Default.workItemFour;
+            WorkItemFiveTechsolaClock = Properties.Settings.Default.workItemFive;
+            WorkItemSixTechsolaClock = Properties.Settings.Default.workItemSix;
         }
 
         public void SetSettings()
@@ -275,6 +331,9 @@ namespace techsolaWorkClockTimer
             Properties.Settings.Default.workItemOne = workItemOneTechsolaClock;
             Properties.Settings.Default.workItemTwo = workItemTwoTechsolaClock;
             Properties.Settings.Default.workItemThree = workItemThreeTechsolaClock;
+            Properties.Settings.Default.workItemFour = workItemFourTechsolaClock;
+            Properties.Settings.Default.workItemFive = workItemFiveTechsolaClock;
+            Properties.Settings.Default.workItemSix = workItemSixTechsolaClock;
 
             Properties.Settings.Default.Save();
         }

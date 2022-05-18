@@ -156,13 +156,57 @@ namespace techsolaWorkClockTimer
                 ? TechsolaClock.DefaultProjectName
                 : projectTime.ProjectName, projectTime.WorkItemThree);
         }
+        private void WorkItemFour_Click(object sender, RoutedEventArgs e)
+        {
+            var clock = (TechsolaClock)DataContext;
+            var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
+
+            var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
+
+            if (clock.RunningSegment is not null)
+                clock.Stop();
+
+            clock.Start(wasSameProjectRunning
+                ? TechsolaClock.DefaultProjectName
+                : projectTime.ProjectName, projectTime.WorkItemFour);
+        }
+
+        private void WorkItemFive_Click(object sender, RoutedEventArgs e)
+        {
+            var clock = (TechsolaClock)DataContext;
+            var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
+
+            var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
+
+            if (clock.RunningSegment is not null)
+                clock.Stop();
+
+            clock.Start(wasSameProjectRunning
+                ? TechsolaClock.DefaultProjectName
+                : projectTime.ProjectName, projectTime.WorkItemFive);
+        }
+
+        private void WorkItemSix_Click(object sender, RoutedEventArgs e)
+        {
+            var clock = (TechsolaClock)DataContext;
+            var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
+
+            var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
+
+            if (clock.RunningSegment is not null)
+                clock.Stop();
+
+            clock.Start(wasSameProjectRunning
+                ? TechsolaClock.DefaultProjectName
+                : projectTime.ProjectName, projectTime.WorkItemSix);
+        }
 
         private void Button_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var projectTime = (ProjectTime)((Button)sender).DataContext;
-            projectTime.WorkItemOne = workItem1TextEdit.Text;
-            projectTime.WorkItemTwo = workItem2TextEdit.Text;
-            projectTime.WorkItemThree = workItem3TextEdit.Text;
+            projectTime.WorkItemOne = WorkItem1TextEdit.Text;
+            projectTime.WorkItemTwo = WorkItem2TextEdit.Text;
+            projectTime.WorkItemThree = WorkItem3TextEdit.Text;
         }
     }
 }

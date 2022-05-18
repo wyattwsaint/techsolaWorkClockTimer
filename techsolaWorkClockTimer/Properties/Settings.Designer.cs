@@ -82,5 +82,41 @@ namespace techsolaWorkClockTimer.Properties {
                 this["workItemThree"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemFour {
+            get {
+                return ((string)(this["workItemFour"]));
+            }
+            set {
+                this["workItemFour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemFive {
+            get {
+                return ((string)(this["workItemFive"]));
+            }
+            set {
+                this["workItemFive"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemSix {
+            get {
+                return ((string)(this["workItemSix"]));
+            }
+            set {
+                this["workItemSix"] = value;
+            }
+        }
     }
 }
