@@ -4,206 +4,201 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
 
-namespace techsolaWorkClockTimer
+namespace techsolaWorkClockTimer;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
+        InitializeComponent();
+        DataContext = App.Clock;
+        SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
+    }
+
+    private bool PauseOnLockoutBoxChecked { get; set; }
+
+    private void StartPauseClock_Click(object sender, RoutedEventArgs e)
+    {
+        var clock = (TechsolaClock)DataContext;
+
+
+        if (clock.RunningSegment is null)
         {
-            InitializeComponent();
-            DataContext = App.Clock;
-            SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
+            clock.Start(clock.Segments.Count != 0
+                ? clock.Segments.LastOrDefault()!.Project
+                : TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem);
         }
+        else
+            clock.Stop();
+    }
 
-        private bool PauseOnLockoutBoxChecked { get; set; }
+    private void EndOfDay_Click(object sender, RoutedEventArgs e)
+    {
+        var clock = (TechsolaClock)DataContext;
 
-        private void StartPauseClock_Click(object sender, RoutedEventArgs e)
+        if (clock.RunningSegment is not null)
+            clock.Stop();
+
+        clock.CreateEndOfDayWindow();
+    }
+
+    private void ProjectButton_Click(object sender, RoutedEventArgs e)
+    {
+        var clock = (TechsolaClock)DataContext;
+        var projectTime = (ProjectTime)((Button)sender).DataContext;
+
+        var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
+
+        if (clock.RunningSegment is not null)
+            clock.Stop();
+
+        clock.Start(wasSameProjectRunning
+            ? TechsolaClock.DefaultProjectName
+            : projectTime.ProjectName, null);
+        //DevOpsApi.GetProjects();
+    }
+
+    void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
+    {
+        if (!PauseOnLockoutBoxChecked) return;
+        var clock = (TechsolaClock)DataContext;
+        switch (e.Reason)
         {
-            var clock = (TechsolaClock)DataContext;
-            
+            case SessionSwitchReason.SessionLock:
+                if (clock.RunningSegment is null)
+                    clock.Start(TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem);
+                else
+                    clock.Stop();
+                break;
 
-            if (clock.RunningSegment is null)
-            {
-                clock.Start(clock.Segments.Count != 0
-                    ? clock.Segments.LastOrDefault()!.Project
-                    : TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem);
-            }
-            else
-                clock.Stop();
+            case SessionSwitchReason.SessionUnlock:
+                if (clock.RunningSegment is null)
+                    clock.Start(TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem);
+                else
+                    clock.Stop();
+                break;
         }
+    }
 
-        private void EndOfDay_Click(object sender, RoutedEventArgs e)
-        {
-            var clock = (TechsolaClock)DataContext;
+    private void Pause_On_Lockout_CheckBox_Checked(object sender, RoutedEventArgs e)
+    {
+        PauseOnLockoutBoxChecked = true;
+    }
 
-            if (clock.RunningSegment is not null)
-                clock.Stop();
+    private void HandleUnchecked(object sender, RoutedEventArgs e)
+    {
+        PauseOnLockoutBoxChecked = false;
+    }
 
-            clock.CreateEndOfDayWindow();
-        }
+    private void EndOfWorkDay_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var clock = (TechsolaClock)DataContext;
+        var targetTimeString = ((ComboBoxItem)daysEndTargetTime.SelectedItem).Content.ToString()!.TrimEnd('P', 'M')
+            .Split(':');
+        var targetTimeInt = Array.ConvertAll(targetTimeString, s => int.Parse(s));
+        clock.ConvertTimeIntArrayToTimeSpan(targetTimeInt);
+    }
 
-        private void ProjectButton_Click(object sender, RoutedEventArgs e)
-        {
-            var clock = (TechsolaClock)DataContext;
-            var projectTime = (ProjectTime)((Button)sender).DataContext;
+    private void WorkDayLength_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var clock = (TechsolaClock)DataContext;
 
-            var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
+        var comboBoxString =
+            ((ComboBoxItem)workDayLength.SelectedItem).Content.ToString()!.TrimEnd(' ', 'H', 'R', 'S');
+        var targetHours = Convert.ToInt32(comboBoxString);
+        clock.GetWorkdayHoursFromComboBox(targetHours);
+    }
 
-            if (clock.RunningSegment is not null)
-                clock.Stop();
+    private void WorkItemOne_Click(object sender, RoutedEventArgs e)
+    {
+        var clock = (TechsolaClock)DataContext;
+        var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
 
-            clock.Start(wasSameProjectRunning
-                ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, null);
-            //DevOpsApi.GetProjects();
-        }
+        var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
 
-        void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
-        {
-            if (!PauseOnLockoutBoxChecked) return;
-            var clock = (TechsolaClock)DataContext;
-            switch (e.Reason)
-            {
-                case SessionSwitchReason.SessionLock:
-                    if (clock.RunningSegment is null)
-                        clock.Start(TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem);
-                    else
-                        clock.Stop();
-                    break;
+        if (clock.RunningSegment is not null)
+            clock.Stop();
 
-                case SessionSwitchReason.SessionUnlock:
-                    if (clock.RunningSegment is null)
-                        clock.Start(TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem);
-                    else
-                        clock.Stop();
-                    break;
-            }
-        }
+        clock.Start(wasSameProjectRunning
+            ? TechsolaClock.DefaultProjectName
+            : projectTime.ProjectName, clock.WorkItemOneTechsolaClock);
+    }
 
-        private void Pause_On_Lockout_CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            PauseOnLockoutBoxChecked = true;
-        }
+    private void WorkItemTwo_Click(object sender, RoutedEventArgs e)
+    {
+        var clock = (TechsolaClock)DataContext;
+        var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
 
-        private void HandleUnchecked(object sender, RoutedEventArgs e)
-        {
-            PauseOnLockoutBoxChecked = false;
-        }
+        var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
 
-        private void EndOfWorkDay_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var clock = (TechsolaClock)DataContext;
-            var targetTimeString = ((ComboBoxItem)daysEndTargetTime.SelectedItem).Content.ToString()!.TrimEnd('P', 'M')
-                .Split(':');
-            var targetTimeInt = Array.ConvertAll(targetTimeString, s => int.Parse(s));
-            clock.ConvertTimeIntArrayToTimeSpan(targetTimeInt);
-        }
+        if (clock.RunningSegment is not null)
+            clock.Stop();
 
-        private void WorkDayLength_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var clock = (TechsolaClock)DataContext;
+        clock.Start(wasSameProjectRunning
+            ? TechsolaClock.DefaultProjectName
+            : projectTime.ProjectName, clock.WorkItemTwoTechsolaClock);
+    }
 
-            var comboBoxString = ((ComboBoxItem)workDayLength.SelectedItem).Content.ToString()!.TrimEnd(' ', 'H', 'R', 'S');
-            var targetHours = Convert.ToInt32(comboBoxString);
-            clock.GetWorkdayHoursFromComboBox(targetHours);
+    private void WorkItemThree_Click(object sender, RoutedEventArgs e)
+    {
+        var clock = (TechsolaClock)DataContext;
+        var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
 
-        }
+        var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
 
-        private void WorkItemOne_Click(object sender, RoutedEventArgs e)
-        {
-            var clock = (TechsolaClock)DataContext;
-            var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
+        if (clock.RunningSegment is not null)
+            clock.Stop();
 
-            var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
-            
-            if (clock.RunningSegment is not null)
-                clock.Stop();
+        clock.Start(wasSameProjectRunning
+            ? TechsolaClock.DefaultProjectName
+            : projectTime.ProjectName, clock.WorkItemThreeTechsolaClock);
+    }
 
-            clock.Start(wasSameProjectRunning
-                ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, clock.WorkItemOneTechsolaClock);
-        }
+    private void WorkItemFour_Click(object sender, RoutedEventArgs e)
+    {
+        var clock = (TechsolaClock)DataContext;
+        var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
 
-        private void WorkItemTwo_Click(object sender, RoutedEventArgs e)
-        {
-            var clock = (TechsolaClock)DataContext;
-            var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
+        var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
 
-            var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
+        if (clock.RunningSegment is not null)
+            clock.Stop();
 
-            if (clock.RunningSegment is not null)
-                clock.Stop();
+        clock.Start(wasSameProjectRunning
+            ? TechsolaClock.DefaultProjectName
+            : projectTime.ProjectName, clock.WorkItemFourTechsolaClock);
+    }
 
-            clock.Start(wasSameProjectRunning
-                ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, clock.WorkItemTwoTechsolaClock);
-        }
+    private void WorkItemFive_Click(object sender, RoutedEventArgs e)
+    {
+        var clock = (TechsolaClock)DataContext;
+        var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
 
-        private void WorkItemThree_Click(object sender, RoutedEventArgs e)
-        {
-            var clock = (TechsolaClock)DataContext;
-            var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
+        var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
 
-            var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
+        if (clock.RunningSegment is not null)
+            clock.Stop();
 
-            if (clock.RunningSegment is not null)
-                clock.Stop();
+        clock.Start(wasSameProjectRunning
+            ? TechsolaClock.DefaultProjectName
+            : projectTime.ProjectName, clock.WorkItemFiveTechsolaClock);
+    }
 
-            clock.Start(wasSameProjectRunning
-                ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, clock.WorkItemThreeTechsolaClock);
-        }
-        private void WorkItemFour_Click(object sender, RoutedEventArgs e)
-        {
-            var clock = (TechsolaClock)DataContext;
-            var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
+    private void WorkItemSix_Click(object sender, RoutedEventArgs e)
+    {
+        var clock = (TechsolaClock)DataContext;
+        var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
 
-            var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
+        var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
 
-            if (clock.RunningSegment is not null)
-                clock.Stop();
+        if (clock.RunningSegment is not null)
+            clock.Stop();
 
-            clock.Start(wasSameProjectRunning
-                ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, clock.WorkItemFourTechsolaClock);
-        }
-
-        private void WorkItemFive_Click(object sender, RoutedEventArgs e)
-        {
-            var clock = (TechsolaClock)DataContext;
-            var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
-
-            var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
-
-            if (clock.RunningSegment is not null)
-                clock.Stop();
-
-            clock.Start(wasSameProjectRunning
-                ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, clock.WorkItemFiveTechsolaClock);
-        }
-
-        private void WorkItemSix_Click(object sender, RoutedEventArgs e)
-        {
-            var clock = (TechsolaClock)DataContext;
-            var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
-
-            var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
-
-            if (clock.RunningSegment is not null)
-                clock.Stop();
-
-            clock.Start(wasSameProjectRunning
-                ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, clock.WorkItemSixTechsolaClock);
-        }
-
-        private void Button_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            // TODO: remove
-        }
+        clock.Start(wasSameProjectRunning
+            ? TechsolaClock.DefaultProjectName
+            : projectTime.ProjectName, clock.WorkItemSixTechsolaClock);
     }
 }

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:techsolaWorkClockTimer"
-        WindowStartupLocation="CenterScreen" 
+        WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance Type=local:TechsolaClock}"
         mc:Ignorable="d"
         Height="950" Width="1510">
@@ -12,82 +12,82 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="480" />
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="10" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="10" />
             <RowDefinition Height="400" />
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="10" />
         </Grid.RowDefinitions>
-        <Image 
+        <Image
             Width="400"
             Grid.Column="1"
             Grid.Row="1">
             <Image.Source>
-                <BitmapImage 
+                <BitmapImage
                     DecodePixelWidth="400"
-                    UriSource="images/my_fam.jpg"/>
+                    UriSource="images/my_fam.jpg" />
             </Image.Source>
         </Image>
-        <TextBlock Text ="&quot;Time to come home, daddy!&quot;"
+        <TextBlock Text="&quot;Time to come home, daddy!&quot;"
                    Grid.Column="1"
                    Grid.Row="2"
                    HorizontalAlignment="Center"
                    FontSize="35"
                    FontFamily="Comic Sans"
-                   Margin="0,0,0,50"/>
-        <ItemsControl 
+                   Margin="0,0,0,50" />
+        <ItemsControl
             HorizontalAlignment="Center"
             ItemsSource="{Binding Times}"
-            Grid.Column="1" 
+            Grid.Column="1"
             Grid.Row="3">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150"/>
-                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="150" />
                         </Grid.ColumnDefinitions>
                         <Border BorderThickness=".7"
                                 BorderBrush="Black">
 
                             <DockPanel Height="27"
-                                       Background="{Binding Color}"/>
+                                       Background="{Binding Color}" />
 
                         </Border>
-                        <TextBlock Grid.Column="0" 
+                        <TextBlock Grid.Column="0"
                                    HorizontalAlignment="Center"
                                    Text="{Binding ProjectName}"
-                                   FontSize="20"/>
-                        <TextBlock Grid.Column="1" 
+                                   FontSize="20" />
+                        <TextBlock Grid.Column="1"
                                    HorizontalAlignment="Center"
                                    Text="{Binding DecimalDisplayTime}"
-                                   FontSize="20"/>
-                        
+                                   FontSize="20" />
+
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <DataGrid 
+        <DataGrid
             Grid.Column="2"
             Grid.Row="1"
             ItemsSource="{Binding Times}"
             AutoGenerateColumns="False">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Day"/>
-                <DataGridTextColumn Header="Employee"/>
-                <DataGridTextColumn Header="Date"/>
-                <DataGridTextColumn Header="Project - Feature"/>
-                <DataGridTextColumn Header="Phase"/>
-                <DataGridTextColumn 
+                <DataGridTextColumn Header="Day" />
+                <DataGridTextColumn Header="Employee" />
+                <DataGridTextColumn Header="Date" />
+                <DataGridTextColumn Header="Project - Feature" />
+                <DataGridTextColumn Header="Phase" />
+                <DataGridTextColumn
                     Header="Description of Work Performed"
-                    Binding="{Binding WorkItemOne}"/>
-                <DataGridTextColumn Header="Hours"/>
+                    Binding="{Binding WorkItemOne}" />
+                <DataGridTextColumn Header="Hours" />
             </DataGrid.Columns>
         </DataGrid>
 

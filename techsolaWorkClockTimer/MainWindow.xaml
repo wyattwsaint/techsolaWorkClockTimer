@@ -117,7 +117,6 @@
                                     Foreground="Black"
                                     FontSize="20"
                                     FontStyle="Normal" Click="ProjectButton_Click" 
-                                    MouseRightButtonDown="Button_MouseRightButtonDown"
                                     ContextMenu="{DynamicResource WorkItemContextMenu}"/>
                                 <TextBlock
                                     Grid.Column="1"
