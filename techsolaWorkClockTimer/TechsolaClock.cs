@@ -16,7 +16,9 @@ namespace techsolaWorkClockTimer
             if (DataBase.DoesTableContainData() && DataBase.IsDataFromPriorDay())
                 DataBase.RefreshTable();
 
-            var timeSegments = DataBase.Connection.Query<TimeSegment>("select TimeSegmentStart, TimeSegmentEnd, Project, WorkItem from segments;");
+            var timeSegments =
+                DataBase.Connection.Query<TimeSegment>(
+                    "select TimeSegmentStart, TimeSegmentEnd, Project, WorkItem from segments;");
 
             foreach (var timeSegment in timeSegments) segments.Add(timeSegment);
         }
@@ -27,12 +29,13 @@ namespace techsolaWorkClockTimer
         public string? DecimalDisplayTime => totalTime is not null ? $@"{totalTime.Value.TotalHours:0.00}" : null;
 
         private string? breakTimeLeft;
+
         public string? BreakTimeLeft
         {
             get => breakTimeLeft;
             set => Set(ref breakTimeLeft, value);
         }
-        
+
         public const string DefaultProjectName = "Techsola Internal";
 
         public ObservableCollection<ProjectTime> Times { get; } = new()
@@ -50,18 +53,63 @@ namespace techsolaWorkClockTimer
             new("General", "Thistle", null),
             new("Custom", "Tomato", null),
         };
-        
+
         private readonly ObservableCollection<TimeSegment> segments = new();
 
         public ReadOnlyObservableCollection<TimeSegment> Segments => new(segments);
 
         //-----WorkItemProperties-----
+        private string? workItemOneTechsolaClock;
+        public string? WorkItemOneTechsolaClock
+        {
+            get => workItemOneTechsolaClock;
+            set
+            {
+                foreach (var t in Times)
+                {
+                    if (t.WorkItemOne != null)
+                    {
+                        Set(ref workItemOneTechsolaClock, t.WorkItemOne);
+                    }
+                }
 
-        
+                Set(ref workItemOneTechsolaClock, value);
+            }
+        }
+        private string? workItemTwoTechsolaClock;
+        public string? WorkItemTwoTechsolaClock
+        {
+            get => workItemTwoTechsolaClock;
+            set
+            {
+                foreach (var t in Times)
+                {
+                    if (t.WorkItemTwo != null)
+                    {
+                        Set(ref workItemTwoTechsolaClock, t.WorkItemTwo);
+                    }
+                }
 
-        
-        
-        
+                Set(ref workItemTwoTechsolaClock, value);
+            }
+        }
+        private string? workItemThreeTechsolaClock;
+        public string? WorkItemThreeTechsolaClock
+        {
+            get => workItemThreeTechsolaClock;
+            set
+            {
+                foreach (var t in Times)
+                {
+                    if (t.WorkItemThree != null)
+                    {
+                        Set(ref workItemThreeTechsolaClock, t.WorkItemThree);
+                    }
+                }
+
+                Set(ref workItemThreeTechsolaClock, value);
+            }
+        }
         //-----WorkItemProperties-----End
 
         public TimeSegment? RunningSegment => segments.LastOrDefault() is { End: null } runningSegment
@@ -125,6 +173,7 @@ namespace techsolaWorkClockTimer
         }
 
         private TimeSpan? endOfDayTargetTime;
+
         public TimeSpan? EndOfDayTargetTime
         {
             get => endOfDayTargetTime;
@@ -137,19 +186,23 @@ namespace techsolaWorkClockTimer
             {
                 EndOfDayTargetTime = new TimeSpan(0, targetTimeInt[0] + 12, 0, 0);
             }
+
             if (targetTimeInt.Length == 2)
             {
                 EndOfDayTargetTime = new TimeSpan(0, targetTimeInt[0] + 12, targetTimeInt[1], 0);
             }
+
             UpdateBreaktimeLeft(EndOfDayTargetTime, WorkDayHours);
         }
 
         private TimeSpan? workDayHours;
+
         public TimeSpan? WorkDayHours
         {
             get => workDayHours;
             set => Set(ref workDayHours, value);
         }
+
         public void GetWorkdayHoursFromComboBox(int targetHours)
         {
             WorkDayHours = new TimeSpan(0, targetHours, 0, 0);
@@ -158,20 +211,22 @@ namespace techsolaWorkClockTimer
 
         public string UpdateBreaktimeLeft(TimeSpan? endOfDay, TimeSpan? workHours)
         {
-            if(endOfDayTargetTime == null && workDayHours == null) return "";
+            if (endOfDayTargetTime == null && workDayHours == null) return "";
             var breakTime = (endOfDay - DateTime.Now.TimeOfDay) -
-                                        (workHours - GetCurrentTime(project: null));
+                            (workHours - GetCurrentTime(project: null));
             return BreakTimeLeft = breakTime?.Ticks < 0 ? $@"-{breakTime:hh\:mm\:ss}" : $@"{breakTime:hh\:mm\:ss}";
         }
 
         private string? getEndOfDayTargetTime;
+
         public string? GetEndOfDayTargetTime
         {
             get => getEndOfDayTargetTime;
             set => Set(ref getEndOfDayTargetTime, value);
         }
-        
+
         private string? getWorkDayHours;
+
         public string? GetWorkDayHours
         {
             get => getWorkDayHours;
@@ -186,7 +241,8 @@ namespace techsolaWorkClockTimer
                 if (endOfDayTime > 12) return (endOfDayTime - 12) + "PM";
                 return endOfDayTime + "PM";
             }
-            var workDayTime = Convert.ToInt32(time.ToString().Substring(0,2));
+
+            var workDayTime = Convert.ToInt32(time.ToString().Substring(0, 2));
             if (workDayTime > 12) return (workDayTime - 12) + " HRS";
             return workDayTime.ToString();
         }
@@ -197,19 +253,29 @@ namespace techsolaWorkClockTimer
             EndOfDayTargetTime = Properties.Settings.Default.endOfDayTargetTime;
 
             getWorkDayHours =
-                ConvertTimeSpansToStringsForComboboxTwoWayBinding(Properties.Settings.Default.workDayHours, addPm: false);
+                ConvertTimeSpansToStringsForComboboxTwoWayBinding(Properties.Settings.Default.workDayHours,
+                    addPm: false);
             OnPropertyChanged(nameof(GetWorkDayHours));
-
             getEndOfDayTargetTime =
-                ConvertTimeSpansToStringsForComboboxTwoWayBinding(Properties.Settings.Default.endOfDayTargetTime, addPm: true);
+                ConvertTimeSpansToStringsForComboboxTwoWayBinding(Properties.Settings.Default.endOfDayTargetTime,
+                    addPm: true);
             OnPropertyChanged(nameof(GetEndOfDayTargetTime));
-
             UpdateBreaktimeLeft(EndOfDayTargetTime, WorkDayHours);
+
+            WorkItemOneTechsolaClock = Properties.Settings.Default.workItemOne;
+            WorkItemTwoTechsolaClock = Properties.Settings.Default.workItemTwo;
+            WorkItemThreeTechsolaClock = Properties.Settings.Default.workItemThree;
         }
+
         public void SetSettings()
         {
             Properties.Settings.Default.endOfDayTargetTime = EndOfDayTargetTime!.Value;
             Properties.Settings.Default.workDayHours = WorkDayHours!.Value;
+
+            Properties.Settings.Default.workItemOne = workItemOneTechsolaClock;
+            Properties.Settings.Default.workItemTwo = workItemTwoTechsolaClock;
+            Properties.Settings.Default.workItemThree = workItemThreeTechsolaClock;
+
             Properties.Settings.Default.Save();
         }
     }
