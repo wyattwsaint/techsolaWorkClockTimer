@@ -75,7 +75,7 @@
         <DataGrid
             Grid.Column="2"
             Grid.Row="1"
-            ItemsSource="{Binding Times}"
+            ItemsSource="{Binding Segments}"
             AutoGenerateColumns="False">
 
             <DataGrid.Columns>
@@ -86,7 +86,7 @@
                 <DataGridTextColumn Header="Phase" />
                 <DataGridTextColumn
                     Header="Description of Work Performed"
-                    Binding="{Binding WorkItemOne}" />
+                    Binding="{Binding WorkItem}" />
                 <DataGridTextColumn Header="Hours" />
             </DataGrid.Columns>
         </DataGrid>
