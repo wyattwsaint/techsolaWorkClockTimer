@@ -19,11 +19,11 @@ namespace techsolaWorkClockTimer
             foreach (var segment in Clock.Segments)
             {
                 DataBase.Connection.Execute(
-                    "Insert into segments (TimeSegmentStart, TimeSegmentEnd, Project, WorkItem) values(@Start, @End, @Project, @WorkItem)",
-                    new { segment.Start, segment.End, segment.Project, segment.WorkItem });
+                    "Insert into segments (TimeSegmentStart, TimeSegmentEnd, Project, WorkItem, EmployeeNumber) values(@Start, @End, @Project, @WorkItem, @EmployeeNumber)",
+                    new { segment.Start, segment.End, segment.Project, segment.WorkItem, segment.EmployeeNumber });
             }
             
-            // ---- Save/Set Settings ----
+            // ---- Save(Set) Settings ----
 
             Clock.SetSettings();
 

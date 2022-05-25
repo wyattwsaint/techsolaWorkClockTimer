@@ -79,8 +79,12 @@
             AutoGenerateColumns="False">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Day" />
-                <DataGridTextColumn Header="Employee" />
+                <DataGridTextColumn 
+                    Header="Day"
+                    Binding="{Binding End}"/>
+                <DataGridTextColumn 
+                    Header="Employee"
+                    Binding="{Binding EmployeeNumber}"/>
                 <DataGridTextColumn Header="Date" />
                 <DataGridTextColumn Header="Project - Feature" />
                 <DataGridTextColumn Header="Phase" />

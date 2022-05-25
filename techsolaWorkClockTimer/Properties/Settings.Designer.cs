@@ -118,5 +118,17 @@ namespace techsolaWorkClockTimer.Properties {
                 this["workItemSix"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string employeeNumber {
+            get {
+                return ((string)(this["employeeNumber"]));
+            }
+            set {
+                this["employeeNumber"] = value;
+            }
+        }
     }
 }

@@ -29,7 +29,7 @@ public partial class MainWindow : Window
         {
             clock.Start(clock.Segments.Count != 0
                 ? clock.Segments.LastOrDefault()!.Project
-                : TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem);
+                : TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem, clock.EmployeeNumberTechClock);
         }
         else
             clock.Stop();
@@ -57,7 +57,7 @@ public partial class MainWindow : Window
 
         clock.Start(wasSameProjectRunning
             ? TechsolaClock.DefaultProjectName
-            : projectTime.ProjectName, null);
+            : projectTime.ProjectName, null, clock.EmployeeNumberTechClock);
         //DevOpsApi.GetProjects();
     }
 
@@ -69,14 +69,14 @@ public partial class MainWindow : Window
         {
             case SessionSwitchReason.SessionLock:
                 if (clock.RunningSegment is null)
-                    clock.Start(TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem);
+                    clock.Start(TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem, clock.EmployeeNumberTechClock);
                 else
                     clock.Stop();
                 break;
 
             case SessionSwitchReason.SessionUnlock:
                 if (clock.RunningSegment is null)
-                    clock.Start(TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem);
+                    clock.Start(TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem, clock.EmployeeNumberTechClock);
                 else
                     clock.Stop();
                 break;
@@ -124,7 +124,7 @@ public partial class MainWindow : Window
 
         clock.Start(wasSameProjectRunning
             ? TechsolaClock.DefaultProjectName
-            : projectTime.ProjectName, clock.WorkItemOneTechsolaClock);
+            : projectTime.ProjectName, clock.WorkItemOneTechsolaClock, clock.EmployeeNumberTechClock);
     }
 
     private void WorkItemTwo_Click(object sender, RoutedEventArgs e)
@@ -139,7 +139,7 @@ public partial class MainWindow : Window
 
         clock.Start(wasSameProjectRunning
             ? TechsolaClock.DefaultProjectName
-            : projectTime.ProjectName, clock.WorkItemTwoTechsolaClock);
+            : projectTime.ProjectName, clock.WorkItemTwoTechsolaClock, clock.EmployeeNumberTechClock);
     }
 
     private void WorkItemThree_Click(object sender, RoutedEventArgs e)
@@ -154,7 +154,7 @@ public partial class MainWindow : Window
 
         clock.Start(wasSameProjectRunning
             ? TechsolaClock.DefaultProjectName
-            : projectTime.ProjectName, clock.WorkItemThreeTechsolaClock);
+            : projectTime.ProjectName, clock.WorkItemThreeTechsolaClock, clock.EmployeeNumberTechClock);
     }
 
     private void WorkItemFour_Click(object sender, RoutedEventArgs e)
@@ -169,7 +169,7 @@ public partial class MainWindow : Window
 
         clock.Start(wasSameProjectRunning
             ? TechsolaClock.DefaultProjectName
-            : projectTime.ProjectName, clock.WorkItemFourTechsolaClock);
+            : projectTime.ProjectName, clock.WorkItemFourTechsolaClock, clock.EmployeeNumberTechClock);
     }
 
     private void WorkItemFive_Click(object sender, RoutedEventArgs e)
@@ -184,7 +184,7 @@ public partial class MainWindow : Window
 
         clock.Start(wasSameProjectRunning
             ? TechsolaClock.DefaultProjectName
-            : projectTime.ProjectName, clock.WorkItemFiveTechsolaClock);
+            : projectTime.ProjectName, clock.WorkItemFiveTechsolaClock, clock.EmployeeNumberTechClock);
     }
 
     private void WorkItemSix_Click(object sender, RoutedEventArgs e)
@@ -199,6 +199,6 @@ public partial class MainWindow : Window
 
         clock.Start(wasSameProjectRunning
             ? TechsolaClock.DefaultProjectName
-            : projectTime.ProjectName, clock.WorkItemSixTechsolaClock);
+            : projectTime.ProjectName, clock.WorkItemSixTechsolaClock, clock.EmployeeNumberTechClock);
     }
 }

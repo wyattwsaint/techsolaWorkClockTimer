@@ -258,6 +258,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="20"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
@@ -355,6 +356,21 @@
                          Grid.Row="8"
                          Width="180"
                          Height="25"/>
+                <Label Content="Employee #"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="3"
+                       Grid.Row="10"
+                       Foreground="Black"
+                       Name="EmployeeNumberLabel"
+                       Height="25"/>
+                <TextBox Name="EmployeeNumberTextEdit"
+                         Text="{Binding EmployeeNumberTechClock}"
+                         Grid.Column="2"
+                         Grid.ColumnSpan="6"
+                         Grid.Row="10"
+                         Width="155"
+                         Height="25"
+                         HorizontalAlignment="Right"/>
             </Grid>
         </TabItem>
     </TabControl>

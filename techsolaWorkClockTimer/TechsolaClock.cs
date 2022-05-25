@@ -18,7 +18,7 @@ namespace techsolaWorkClockTimer
 
             var timeSegments =
                 DataBase.Connection.Query<TimeSegment>(
-                    "select TimeSegmentStart, TimeSegmentEnd, Project, WorkItem from segments;");
+                    "select TimeSegmentStart, TimeSegmentEnd, Project, WorkItem, EmployeeNumber from segments;");
 
             foreach (var timeSegment in timeSegments) segments.Add(timeSegment);
         }
@@ -40,23 +40,33 @@ namespace techsolaWorkClockTimer
 
         public ObservableCollection<ProjectTime> Times { get; } = new()
         {
-            new(DefaultProjectName, "White", null),
-            new("Heritage", "PaleVioletRed", null),
-            new("Exactis", "PaleTurquoise", null),
-            new("Capri Cork", "PaleGoldenrod", null),
-            new("Zeager", "Peru", null),
-            new("JanTrak", "CadetBlue", null),
-            new("Traverse-Sales", "RosyBrown", null),
-            new("Traverse-Enhance", "YellowGreen", null),
-            new("WRA Database", "DarkGoldenrod", null),
-            new("DSB", "Turquoise", null),
-            new("General", "Thistle", null),
-            new("Custom", "Tomato", null),
+            new(DefaultProjectName, "White", workItem: null, employeeNumber: null),
+            new("Heritage", "PaleVioletRed", workItem: null, employeeNumber: null),
+            new("Exactis", "PaleTurquoise", workItem: null, employeeNumber: null),
+            new("Capri Cork", "PaleGoldenrod", workItem: null, employeeNumber: null),
+            new("Zeager", "Peru", workItem: null, employeeNumber: null),
+            new("JanTrak", "CadetBlue", workItem: null, employeeNumber: null),
+            new("Traverse-Sales", "RosyBrown", workItem: null, employeeNumber: null),
+            new("Traverse-Enhance", "YellowGreen", workItem: null, employeeNumber: null),
+            new("WRA Database", "DarkGoldenrod", workItem: null, employeeNumber: null),
+            new("DSB", "Turquoise", workItem: null, employeeNumber: null),
+            new("General", "Thistle", workItem: null, employeeNumber: null),
+            new("Custom", "Tomato", workItem: null, employeeNumber: null),
         };
 
         private readonly ObservableCollection<TimeSegment> segments = new();
 
         public ReadOnlyObservableCollection<TimeSegment> Segments => new(segments);
+
+        private string? employeeNumberTechClock;
+        public string? EmployeeNumberTechClock
+        {
+            get => employeeNumberTechClock;
+            set
+            {
+                Set(ref employeeNumberTechClock, value);
+            }
+        }
 
         //-----WorkItemProperties-----Begin
 
@@ -121,14 +131,14 @@ namespace techsolaWorkClockTimer
             ? runningSegment
             : null;
 
-        public void Start(string project, string? workItem)
+        public void Start(string project, string? workItem, string? employeeNumber)
         {
             if (RunningSegment is not null)
                 throw new InvalidOperationException("Multiple segments must not run at the same time.");
 
             UpdateBreaktimeLeft(EndOfDayTargetTime, WorkDayHours);
 
-            segments.Add(new TimeSegment(DateTime.Now, project, workItem));
+            segments.Add(new TimeSegment(DateTime.Now, project, workItem, employeeNumber));
             OnPropertyChanged(nameof(RunningSegment));
 
             cancellationTokenSource = new();
@@ -221,6 +231,9 @@ namespace techsolaWorkClockTimer
                             (workHours - GetCurrentTime(project: null));
             return BreakTimeLeft = breakTime?.Ticks < 0 ? $@"-{breakTime:hh\:mm\:ss}" : $@"{breakTime:hh\:mm\:ss}";
         }
+        
+
+        //-----------End of day display stuff-----------
 
         private string? getEndOfDayTargetTime;
 
@@ -252,6 +265,8 @@ namespace techsolaWorkClockTimer
             return workDayTime.ToString();
         }
 
+        //----------Persistence----------
+
         public void GetSettings()
         {
             WorkDayHours = Properties.Settings.Default.workDayHours;
@@ -273,6 +288,8 @@ namespace techsolaWorkClockTimer
             WorkItemFourTechsolaClock = Properties.Settings.Default.workItemFour;
             WorkItemFiveTechsolaClock = Properties.Settings.Default.workItemFive;
             WorkItemSixTechsolaClock = Properties.Settings.Default.workItemSix;
+
+            EmployeeNumberTechClock = Properties.Settings.Default.employeeNumber;
         }
 
         public void SetSettings()
@@ -286,6 +303,8 @@ namespace techsolaWorkClockTimer
             Properties.Settings.Default.workItemFour = workItemFourTechsolaClock;
             Properties.Settings.Default.workItemFive = workItemFiveTechsolaClock;
             Properties.Settings.Default.workItemSix = workItemSixTechsolaClock;
+
+            Properties.Settings.Default.employeeNumber = EmployeeNumberTechClock;
 
             Properties.Settings.Default.Save();
         }

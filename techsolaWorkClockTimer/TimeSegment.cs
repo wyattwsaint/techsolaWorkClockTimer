@@ -2,10 +2,10 @@
 
 namespace techsolaWorkClockTimer;
 
-public sealed record TimeSegment(DateTime Start, string Project, string? WorkItem) : ObservableRecord
+public sealed record TimeSegment(DateTime Start, string Project, string? WorkItem, string? EmployeeNumber) : ObservableRecord
 {
     // Used by dapper
-    public TimeSegment(DateTime timeSegmentStart, DateTime timeSegmentEnd, string project, string? workItem) : this(timeSegmentStart, project, workItem)
+    public TimeSegment(DateTime timeSegmentStart, DateTime timeSegmentEnd, string project, string? workItem, string? employeeNumber) : this(timeSegmentStart, project, workItem, employeeNumber)
     {
         End = timeSegmentEnd;
     }
