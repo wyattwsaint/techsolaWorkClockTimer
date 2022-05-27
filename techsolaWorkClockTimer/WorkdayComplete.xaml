@@ -81,11 +81,13 @@
             <DataGrid.Columns>
                 <DataGridTextColumn 
                     Header="Day"
-                    Binding="{Binding End}"/>
+                    Binding="{Binding Day}"/>
                 <DataGridTextColumn 
                     Header="Employee"
                     Binding="{Binding EmployeeNumber}"/>
-                <DataGridTextColumn Header="Date" />
+                <DataGridTextColumn 
+                    Header="Date" 
+                    Binding="{Binding Date}"/>
                 <DataGridTextColumn Header="Project - Feature" />
                 <DataGridTextColumn Header="Phase" />
                 <DataGridTextColumn

@@ -130,5 +130,77 @@ namespace techsolaWorkClockTimer.Properties {
                 this["employeeNumber"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemOneProjectFeature {
+            get {
+                return ((string)(this["workItemOneProjectFeature"]));
+            }
+            set {
+                this["workItemOneProjectFeature"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemTwoProjectFeature {
+            get {
+                return ((string)(this["workItemTwoProjectFeature"]));
+            }
+            set {
+                this["workItemTwoProjectFeature"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemThreeProjectFeature {
+            get {
+                return ((string)(this["workItemThreeProjectFeature"]));
+            }
+            set {
+                this["workItemThreeProjectFeature"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemFourProjectFeature {
+            get {
+                return ((string)(this["workItemFourProjectFeature"]));
+            }
+            set {
+                this["workItemFourProjectFeature"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemFiveProjectFeature {
+            get {
+                return ((string)(this["workItemFiveProjectFeature"]));
+            }
+            set {
+                this["workItemFiveProjectFeature"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemSixProjectFeature {
+            get {
+                return ((string)(this["workItemSixProjectFeature"]));
+            }
+            set {
+                this["workItemSixProjectFeature"] = value;
+            }
+        }
     }
 }
