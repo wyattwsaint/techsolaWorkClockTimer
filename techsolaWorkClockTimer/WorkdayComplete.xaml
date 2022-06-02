@@ -88,7 +88,9 @@
                 <DataGridTextColumn 
                     Header="Date" 
                     Binding="{Binding Date}"/>
-                <DataGridTextColumn Header="Project - Feature" />
+                <DataGridTextColumn 
+                    Header="Project - Feature" 
+                    Binding="{Binding ProjectFeature}"/>
                 <DataGridTextColumn Header="Phase" />
                 <DataGridTextColumn
                     Header="Description of Work Performed"

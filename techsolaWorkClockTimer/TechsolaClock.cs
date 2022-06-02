@@ -217,58 +217,6 @@ namespace techsolaWorkClockTimer
 
         //-----WorkItemProperties-----End
 
-        //-----ProjectFeatureProperties-----Start
-
-        private string? workItemOneProjectFeature;
-
-        public string? WorkItemOneProjectFeature
-        {
-            get => workItemOneProjectFeature;
-            set { Set(ref workItemOneProjectFeature, value); }
-        }
-
-        private string? workItemTwoProjectFeature;
-
-        public string? WorkItemTwoProjectFeature
-        {
-            get => workItemTwoProjectFeature;
-            set { Set(ref workItemTwoProjectFeature, value); }
-        }
-
-        private string? workItemThreeProjectFeature;
-
-        public string? WorkItemThreeProjectFeature
-        {
-            get => workItemThreeProjectFeature;
-            set { Set(ref workItemThreeProjectFeature, value); }
-        }
-
-        private string? workItemFourProjectFeature;
-
-        public string? WorkItemFourProjectFeature
-        {
-            get => workItemFourProjectFeature;
-            set { Set(ref workItemFourProjectFeature, value); }
-        }
-
-        private string? workItemFiveProjectFeature;
-
-        public string? WorkItemFiveProjectFeature
-        {
-            get => workItemFiveProjectFeature;
-            set { Set(ref workItemFiveProjectFeature, value); }
-        }
-
-        private string? workItemSixProjectFeature;
-
-        public string? WorkItemSixProjectFeature
-        {
-            get => workItemSixProjectFeature;
-            set { Set(ref workItemSixProjectFeature, value); }
-        }
-
-        //-----ProjectFeatureProperties-----End
-
         public TimeSegment? RunningSegment => segments.LastOrDefault() is { End: null } runningSegment
             ? runningSegment
             : null;
@@ -436,12 +384,12 @@ namespace techsolaWorkClockTimer
             WorkItemFiveTechsolaClock = Properties.Settings.Default.workItemFive;
             WorkItemSixTechsolaClock = Properties.Settings.Default.workItemSix;
 
-            WorkItemOneProjectFeature = Properties.Settings.Default.workItemOneProjectFeature;
-            WorkItemTwoProjectFeature = Properties.Settings.Default.workItemTwoProjectFeature;
-            WorkItemThreeProjectFeature = Properties.Settings.Default.workItemThreeProjectFeature;
-            WorkItemFourProjectFeature = Properties.Settings.Default.workItemFourProjectFeature;
-            WorkItemFiveProjectFeature = Properties.Settings.Default.workItemFiveProjectFeature;
-            WorkItemSixProjectFeature = Properties.Settings.Default.workItemSixProjectFeature;
+            //WorkItemOneProjectFeature = Properties.Settings.Default.workItemOneProjectFeature;
+            //WorkItemTwoProjectFeature = Properties.Settings.Default.workItemTwoProjectFeature;
+            //WorkItemThreeProjectFeature = Properties.Settings.Default.workItemThreeProjectFeature;
+            //WorkItemFourProjectFeature = Properties.Settings.Default.workItemFourProjectFeature;
+            //WorkItemFiveProjectFeature = Properties.Settings.Default.workItemFiveProjectFeature;
+            //WorkItemSixProjectFeature = Properties.Settings.Default.workItemSixProjectFeature;
 
             EmployeeNumberTechClock = Properties.Settings.Default.employeeNumber;
         }
@@ -458,12 +406,12 @@ namespace techsolaWorkClockTimer
             Properties.Settings.Default.workItemFive = workItemFiveTechsolaClock;
             Properties.Settings.Default.workItemSix = workItemSixTechsolaClock;
 
-            Properties.Settings.Default.workItemOneProjectFeature = workItemOneProjectFeature;
-            Properties.Settings.Default.workItemTwoProjectFeature = workItemTwoProjectFeature;
-            Properties.Settings.Default.workItemThreeProjectFeature = workItemThreeProjectFeature;
-            Properties.Settings.Default.workItemFourProjectFeature = workItemFourProjectFeature;
-            Properties.Settings.Default.workItemFiveProjectFeature = workItemFiveProjectFeature;
-            Properties.Settings.Default.workItemSixProjectFeature = workItemSixProjectFeature;
+            //Properties.Settings.Default.workItemOneProjectFeature = workItemOneProjectFeature;
+            //Properties.Settings.Default.workItemTwoProjectFeature = workItemTwoProjectFeature;
+            //Properties.Settings.Default.workItemThreeProjectFeature = workItemThreeProjectFeature;
+            //Properties.Settings.Default.workItemFourProjectFeature = workItemFourProjectFeature;
+            //Properties.Settings.Default.workItemFiveProjectFeature = workItemFiveProjectFeature;
+            //Properties.Settings.Default.workItemSixProjectFeature = workItemSixProjectFeature;
 
             Properties.Settings.Default.employeeNumber = EmployeeNumberTechClock;
 

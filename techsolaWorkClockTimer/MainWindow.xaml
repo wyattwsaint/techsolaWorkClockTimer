@@ -316,7 +316,7 @@
                                      Grid.Row="4"
                                      Width="180"
                                      Height="25"
-                                     HorizontalAlignment="Right" SelectionChanged="ProjectFeatureComboBox1_SelectionChanged"/>
+                                     HorizontalAlignment="Right" />
 
                 <Label Content="WI #2"
                        Grid.Column="1"
@@ -347,7 +347,7 @@
                                      Grid.Row="6"
                                      Width="180"
                                      Height="25"
-                                     HorizontalAlignment="Right" SelectionChanged="ProjectFeatureComboBox2_SelectionChanged"/>
+                                     HorizontalAlignment="Right"/>
 
                 <Label Content="WI #3"
                        Grid.Column="1"
@@ -378,7 +378,7 @@
                                      Grid.Row="8"
                                      Width="180"
                                      Height="25"
-                                     HorizontalAlignment="Right" SelectionChanged="ProjectFeatureComboBox3_SelectionChanged"/>
+                                     HorizontalAlignment="Right"/>
 
                 <Label Content="WI #4"
                        Grid.Column="1"
@@ -409,7 +409,7 @@
                                      Grid.Row="10"
                                      Width="180"
                                      Height="25"
-                                     HorizontalAlignment="Right" SelectionChanged="ProjectFeatureComboBox4_SelectionChanged"/>
+                                     HorizontalAlignment="Right"/>
 
                 <Label Content="WI #5"
                        Grid.Column="1"
@@ -440,7 +440,7 @@
                                      Grid.Row="12"
                                      Width="180"
                                      Height="25"
-                                     HorizontalAlignment="Right" SelectionChanged="ProjectFeatureComboBox5_SelectionChanged"/>
+                                     HorizontalAlignment="Right"/>
 
                 <Label Content="WI #6"
                        Grid.Column="1"
@@ -471,7 +471,7 @@
                                      Grid.Row="14"
                                      Width="180"
                                      Height="25"
-                                     HorizontalAlignment="Right" SelectionChanged="ProjectFeatureComboBox6_SelectionChanged"/>
+                                     HorizontalAlignment="Right"/>
 
                 <Label Content="Employee #"
                        Grid.Column="1"
