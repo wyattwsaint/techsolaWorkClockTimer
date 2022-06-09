@@ -202,5 +202,77 @@ namespace techsolaWorkClockTimer.Properties {
                 this["workItemSixProjectFeature"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemOnePhase {
+            get {
+                return ((string)(this["workItemOnePhase"]));
+            }
+            set {
+                this["workItemOnePhase"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemTwoPhase {
+            get {
+                return ((string)(this["workItemTwoPhase"]));
+            }
+            set {
+                this["workItemTwoPhase"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemThreePhase {
+            get {
+                return ((string)(this["workItemThreePhase"]));
+            }
+            set {
+                this["workItemThreePhase"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemFourPhase {
+            get {
+                return ((string)(this["workItemFourPhase"]));
+            }
+            set {
+                this["workItemFourPhase"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemFivePhase {
+            get {
+                return ((string)(this["workItemFivePhase"]));
+            }
+            set {
+                this["workItemFivePhase"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string workItemSixPhase {
+            get {
+                return ((string)(this["workItemSixPhase"]));
+            }
+            set {
+                this["workItemSixPhase"] = value;
+            }
+        }
     }
 }

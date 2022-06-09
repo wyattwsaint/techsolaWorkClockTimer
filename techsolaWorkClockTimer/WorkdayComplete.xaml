@@ -91,7 +91,9 @@
                 <DataGridTextColumn 
                     Header="Project - Feature" 
                     Binding="{Binding ProjectFeature}"/>
-                <DataGridTextColumn Header="Phase" />
+                <DataGridTextColumn 
+                    Header="Phase" 
+                    Binding="{Binding Phase}"/>
                 <DataGridTextColumn
                     Header="Description of Work Performed"
                     Binding="{Binding WorkItem}" />

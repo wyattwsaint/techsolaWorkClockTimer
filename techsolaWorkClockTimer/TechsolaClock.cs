@@ -18,7 +18,7 @@ namespace techsolaWorkClockTimer
 
             var timeSegments =
                 DataBase.Connection.Query<TimeSegment>(
-                    "select TimeSegmentStart, TimeSegmentEnd, Project, WorkItem, EmployeeNumber, ProjectFeature from segments;");
+                    "select TimeSegmentStart, TimeSegmentEnd, Project, WorkItem, EmployeeNumber, ProjectFeature, Phase from segments;");
 
             foreach (var timeSegment in timeSegments) segments.Add(timeSegment);
         }
@@ -55,102 +55,110 @@ namespace techsolaWorkClockTimer
         };
 
         public ObservableCollection<string>? ProjectFeature { get; } = new()
-    {
-        new("Capri Cork Traverse (Capri Cork LLC)"),
-        new("Capri Cork Traverse - Capri Cork - Development"),
-        new("Capri Cork Traverse - Capri Cork - Implementation"),
-        new("Capri Cork Traverse - Capri Cork - Materials"),
-        new("Capri Cork Traverse - Capri Cork - Non Billable"),
-        new("Capri Cork Traverse - MATERIALS"),
-        new("Capri Cork Traverse - NETWORK SUPPORT"),
-        new("Custom Program (FIXED FEE)"),
-        new("Custom Program - ACCOUNTING SUPPORT"),
-        new("Custom Program - G2 Tracker Software v 1.1.x"),
-        new("Custom Program - MATERIALS"),
-        new("Custom Program - NONBILLABLE TIME"),
-        new("Custom Program - SOFTWARE SUPPORT"),
-        new("DSB Scanner Integration (D S Burkholder Inc)"),
-        new("DSB Scanner Integration - Accounting Support"),
-        new("DSB Scanner Integration - General"),
-        new("DSB Scanner Integration - Materials"),
-        new("DSB Scanner Integration - Non-Billable"),
-        new("DSB Scanner Integration - Support"),
-        new("Exactis (TSA Internal)"),
-        new("Exactis - Exactis Hardware"),
-        new("Exactis - General"),
-        new("Exactis - Support"),
-        new("G2 Tracker Software v 1.1.x - G2 Tracker Software v 1.1.x"),
-        new("GENERAL (Alderfer's Poultry Farm) "),
-        new("GENERAL - MATERIALS"),
-        new("GENERAL - MATERIALS"),
-        new("GENERAL - NETWORK SUPPORT"),
-        new("GENERAL - NETWRK RECURR SRV"),
-        new("GENERAL - NONBILLABLE TIME"),
-        new("GENERAL - NONBILLABLE TIME"),
-        new("GENERAL - SOFTWARE DEVELOPMENT"),
-        new("GENERAL - SOFTWARE SUPPORT"),
-        new("GENERAL - SOFTWARE SUPPORT"),
-        new("General Project - NONBILLABLE TIME Software"),
-        new("Heritage Cloud Pete & Gerry's (Heritage Poultry Mgnt Services) "),
-        new("Heritage Cloud Pete & Gerry's - General"),
-        new("Heritage Cloud Pete & Gerry's - Materials"),
-        new("Heritage Cloud Pete & Gerry's - Non-Billable"),
-        new("Heritage Cloud Pete & Gerry's - Performance Bonus"),
-        new("Heritage Software (Heritage Poultry Mgnt Services)"),
-        new("Heritage Software - Accounting Support"),
-        new("Heritage Software - Contract Payments"),
-        new("Heritage Software - Flock Financial Projection"),
-        new("Heritage Software - General"),
-        new("Heritage Software - Lotus Sheet Conversion"),
-        new("Heritage Software - Materials"),
-        new("Heritage Software - Non-Billable"),
-        new("Heritage Software - Ownership Financial Statements"),
-        new("Heritage Software - Performance Bonus"),
-        new("Heritage Software - Pullet Financial Configuration"),
-        new("Heritage Software - Support"),
-        new("INTERNAL TSA (TSA Internal)"),
-        new("INTERNAL TSA - ADMINISTRATION"),
-        new("INTERNAL TSA - PAID TIME OFF"),
-        new("JanTrak Version 2.0 (JAN Packaging)"),
-        new("JanTrak Version 2.0 - MATERIALS"),
-        new("JanTrak Version 2.0 - NONBILLABLE TIME"),
-        new("JanTrak Version 2.0 - PERFORMANCE BONUS"),
-        new("JanTrak Version 2.0 - SOFTWARE DEVELOPMENT"),
-        new("TRAVERSE - Market Sales (S Clyde Weaver Inc)"),
-        new("TRAVERSE - Market Sales - Accounting Support"),
-        new("TRAVERSE - Market Sales - General"),
-        new("TRAVERSE - Market Sales - Materials"),
-        new("TRAVERSE - Market Sales - Non-Billable"),
-        new("TRAVERSE - Market Sales - Performance Bonus"),
-        new("TRAVERSE - Market Sales - Support"),
-        new("Traverse Enhancements (Weavers Store Inc.)"),
-        new("Traverse Enhancements - General"),
-        new("Traverse Enhancements - Item Batch Update"),
-        new("Traverse Enhancements - Item Batching"),
-        new("Traverse Enhancements - Materials"),
-        new("Traverse Enhancements - Non-Billable"),
-        new("Traverse Enhancements - Performance Bonus"),
-        new("Traverse Enhancements - PO Receiving"),
-        new("Traverse Enhancements - Quick Items"),
-        new("Traverse Enhancements - Support"),
-        new("Traverse Importer (TSA Internal)"),
-        new("Traverse Importer - General"),
-        new("Traverse Importer - Materials"),
-        new("WRA Database (Weinstein Realty Advisors)"),
-        new("WRA Database - General"),
-        new("WRA Database - Materials"),
-        new("WRA Database - Non-Billable"),
-        new("WRA Database - Performance Bonus"),
-        new("WRA Database - Support"),
-        new("Zeager Traverse eCom Design (Zeager Brothers Inc.)"),
-        new("Zeager Traverse eCom Design - General"),
-        new("Zeager Traverse eCom Design - Non-Billable"),
-        new("Zeager Traverse eCom Design - Support"),
-        new("Zeager Traverse Improve (ZT) (Zeager Brothers Inc.)"),
-        new("Zeager Traverse Improve (ZT) - General"),
-        new("Zeager Traverse Improve (ZT) - Non-Billable"),
-        new("Zeager Traverse Improve (ZT) - Support"),
-    };
+        {
+            new("Capri Cork Traverse (Capri Cork LLC)"),
+            new("Capri Cork Traverse - Capri Cork - Development"),
+            new("Capri Cork Traverse - Capri Cork - Implementation"),
+            new("Capri Cork Traverse - Capri Cork - Materials"),
+            new("Capri Cork Traverse - Capri Cork - Non Billable"),
+            new("Capri Cork Traverse - MATERIALS"),
+            new("Capri Cork Traverse - NETWORK SUPPORT"),
+            new("Custom Program (FIXED FEE)"),
+            new("Custom Program - ACCOUNTING SUPPORT"),
+            new("Custom Program - G2 Tracker Software v 1.1.x"),
+            new("Custom Program - MATERIALS"),
+            new("Custom Program - NONBILLABLE TIME"),
+            new("Custom Program - SOFTWARE SUPPORT"),
+            new("DSB Scanner Integration (D S Burkholder Inc)"),
+            new("DSB Scanner Integration - Accounting Support"),
+            new("DSB Scanner Integration - General"),
+            new("DSB Scanner Integration - Materials"),
+            new("DSB Scanner Integration - Non-Billable"),
+            new("DSB Scanner Integration - Support"),
+            new("Exactis (TSA Internal)"),
+            new("Exactis - Exactis Hardware"),
+            new("Exactis - General"),
+            new("Exactis - Support"),
+            new("G2 Tracker Software v 1.1.x - G2 Tracker Software v 1.1.x"),
+            new("GENERAL (Alderfer's Poultry Farm) "),
+            new("GENERAL - MATERIALS"),
+            new("GENERAL - MATERIALS"),
+            new("GENERAL - NETWORK SUPPORT"),
+            new("GENERAL - NETWRK RECURR SRV"),
+            new("GENERAL - NONBILLABLE TIME"),
+            new("GENERAL - NONBILLABLE TIME"),
+            new("GENERAL - SOFTWARE DEVELOPMENT"),
+            new("GENERAL - SOFTWARE SUPPORT"),
+            new("GENERAL - SOFTWARE SUPPORT"),
+            new("General Project - NONBILLABLE TIME Software"),
+            new("Heritage Cloud Pete & Gerry's (Heritage Poultry Mgnt Services) "),
+            new("Heritage Cloud Pete & Gerry's - General"),
+            new("Heritage Cloud Pete & Gerry's - Materials"),
+            new("Heritage Cloud Pete & Gerry's - Non-Billable"),
+            new("Heritage Cloud Pete & Gerry's - Performance Bonus"),
+            new("Heritage Software (Heritage Poultry Mgnt Services)"),
+            new("Heritage Software - Accounting Support"),
+            new("Heritage Software - Contract Payments"),
+            new("Heritage Software - Flock Financial Projection"),
+            new("Heritage Software - General"),
+            new("Heritage Software - Lotus Sheet Conversion"),
+            new("Heritage Software - Materials"),
+            new("Heritage Software - Non-Billable"),
+            new("Heritage Software - Ownership Financial Statements"),
+            new("Heritage Software - Performance Bonus"),
+            new("Heritage Software - Pullet Financial Configuration"),
+            new("Heritage Software - Support"),
+            new("INTERNAL TSA (TSA Internal)"),
+            new("INTERNAL TSA - ADMINISTRATION"),
+            new("INTERNAL TSA - PAID TIME OFF"),
+            new("JanTrak Version 2.0 (JAN Packaging)"),
+            new("JanTrak Version 2.0 - MATERIALS"),
+            new("JanTrak Version 2.0 - NONBILLABLE TIME"),
+            new("JanTrak Version 2.0 - PERFORMANCE BONUS"),
+            new("JanTrak Version 2.0 - SOFTWARE DEVELOPMENT"),
+            new("TRAVERSE - Market Sales (S Clyde Weaver Inc)"),
+            new("TRAVERSE - Market Sales - Accounting Support"),
+            new("TRAVERSE - Market Sales - General"),
+            new("TRAVERSE - Market Sales - Materials"),
+            new("TRAVERSE - Market Sales - Non-Billable"),
+            new("TRAVERSE - Market Sales - Performance Bonus"),
+            new("TRAVERSE - Market Sales - Support"),
+            new("Traverse Enhancements (Weavers Store Inc.)"),
+            new("Traverse Enhancements - General"),
+            new("Traverse Enhancements - Item Batch Update"),
+            new("Traverse Enhancements - Item Batching"),
+            new("Traverse Enhancements - Materials"),
+            new("Traverse Enhancements - Non-Billable"),
+            new("Traverse Enhancements - Performance Bonus"),
+            new("Traverse Enhancements - PO Receiving"),
+            new("Traverse Enhancements - Quick Items"),
+            new("Traverse Enhancements - Support"),
+            new("Traverse Importer (TSA Internal)"),
+            new("Traverse Importer - General"),
+            new("Traverse Importer - Materials"),
+            new("WRA Database (Weinstein Realty Advisors)"),
+            new("WRA Database - General"),
+            new("WRA Database - Materials"),
+            new("WRA Database - Non-Billable"),
+            new("WRA Database - Performance Bonus"),
+            new("WRA Database - Support"),
+            new("Zeager Traverse eCom Design (Zeager Brothers Inc.)"),
+            new("Zeager Traverse eCom Design - General"),
+            new("Zeager Traverse eCom Design - Non-Billable"),
+            new("Zeager Traverse eCom Design - Support"),
+            new("Zeager Traverse Improve (ZT) (Zeager Brothers Inc.)"),
+            new("Zeager Traverse Improve (ZT) - General"),
+            new("Zeager Traverse Improve (ZT) - Non-Billable"),
+            new("Zeager Traverse Improve (ZT) - Support"),
+        };
+
+        public ObservableCollection<string> Phases { get; } = new()
+        {
+            new("Research"),
+            new("Development"),
+            new("Code Review"),
+            new("Testing"),
+        };
 
         private readonly ObservableCollection<TimeSegment> segments = new();
 
@@ -198,7 +206,7 @@ namespace techsolaWorkClockTimer
             get => workItemFourTechsolaClock;
             set { Set(ref workItemFourTechsolaClock, value); }
         }
-
+         
         private string? workItemFiveTechsolaClock;
 
         public string? WorkItemFiveTechsolaClock
@@ -217,11 +225,115 @@ namespace techsolaWorkClockTimer
 
         //-----WorkItemProperties-----End
 
+        //-----ProjectFeatureProperties-----Start
+
+        private string? workItemOneProjectFeature;
+
+        public string? WorkItemOneProjectFeature
+        {
+            get => workItemOneProjectFeature;
+            set { Set(ref workItemOneProjectFeature, value); }
+        }
+
+        private string? workItemTwoProjectFeature;
+
+        public string? WorkItemTwoProjectFeature
+        {
+            get => workItemTwoProjectFeature;
+            set { Set(ref workItemTwoProjectFeature, value); }
+        }
+
+        private string? workItemThreeProjectFeature;
+
+        public string? WorkItemThreeProjectFeature
+        {
+            get => workItemThreeProjectFeature;
+            set { Set(ref workItemThreeProjectFeature, value); }
+        }
+
+        private string? workItemFourProjectFeature;
+
+        public string? WorkItemFourProjectFeature
+        {
+            get => workItemFourProjectFeature;
+            set { Set(ref workItemFourProjectFeature, value); }
+        }
+
+        private string? workItemFiveProjectFeature;
+
+        public string? WorkItemFiveProjectFeature
+        {
+            get => workItemFiveProjectFeature;
+            set { Set(ref workItemFiveProjectFeature, value); }
+        }
+
+        private string? workItemSixProjectFeature;
+
+        public string? WorkItemSixProjectFeature
+        {
+            get => workItemSixProjectFeature;
+            set { Set(ref workItemSixProjectFeature, value); }
+        }
+
+        //-----ProjectFeatureProperties-----End
+
+        //-----PhaseProperties-----Start
+
+        private string? workItemOnePhase;
+
+        public string? WorkItemOnePhase
+        {
+            get => workItemOnePhase;
+            set { Set(ref workItemOnePhase, value); }
+        }
+
+        private string? workItemTwoPhase;
+
+        public string? WorkItemTwoPhase
+        {
+            get => workItemTwoPhase;
+            set { Set(ref workItemTwoPhase, value); }
+        }
+
+        private string? workItemThreePhase;
+
+        public string? WorkItemThreePhase
+        {
+            get => workItemThreePhase;
+            set { Set(ref workItemThreePhase, value); }
+        }
+
+        private string? workItemFourPhase;
+
+        public string? WorkItemFourPhase
+        {
+            get => workItemFourPhase;
+            set { Set(ref workItemFourPhase, value); }
+        }
+
+        private string? workItemFivePhase;
+
+        public string? WorkItemFivePhase
+        {
+            get => workItemFivePhase;
+            set { Set(ref workItemFivePhase, value); }
+        }
+
+        private string? workItemSixPhase;
+
+        public string? WorkItemSixPhase
+        {
+            get => workItemSixPhase;
+            set { Set(ref workItemSixPhase, value); }
+        }
+
+        //-----PhaseProperties-----End
+
         public TimeSegment? RunningSegment => segments.LastOrDefault() is { End: null } runningSegment
             ? runningSegment
             : null;
 
-        public void Start(string project, string? workItem, string? employeeNumber, string? projectFeature)
+        public void Start(string project, string? workItem, string? employeeNumber, string? projectFeature, string? phase)
         {
             if (RunningSegment is not null)
                 throw new InvalidOperationException("Multiple segments must not run at the same time.");
@@ -233,7 +345,7 @@ namespace techsolaWorkClockTimer
 
             UpdateBreaktimeLeft(EndOfDayTargetTime, WorkDayHours);
 
-            segments.Add(new TimeSegment(DateTime.Now, project, workItem, employeeNumber, projectFeature));
+            segments.Add(new TimeSegment(DateTime.Now, project, workItem, employeeNumber, projectFeature, phase));
             OnPropertyChanged(nameof(RunningSegment));
 
             cancellationTokenSource = new();
@@ -384,12 +496,19 @@ namespace techsolaWorkClockTimer
             WorkItemFiveTechsolaClock = Properties.Settings.Default.workItemFive;
             WorkItemSixTechsolaClock = Properties.Settings.Default.workItemSix;
 
-            //WorkItemOneProjectFeature = Properties.Settings.Default.workItemOneProjectFeature;
-            //WorkItemTwoProjectFeature = Properties.Settings.Default.workItemTwoProjectFeature;
-            //WorkItemThreeProjectFeature = Properties.Settings.Default.workItemThreeProjectFeature;
-            //WorkItemFourProjectFeature = Properties.Settings.Default.workItemFourProjectFeature;
-            //WorkItemFiveProjectFeature = Properties.Settings.Default.workItemFiveProjectFeature;
-            //WorkItemSixProjectFeature = Properties.Settings.Default.workItemSixProjectFeature;
+            WorkItemOneProjectFeature = Properties.Settings.Default.workItemOneProjectFeature;
+            WorkItemTwoProjectFeature = Properties.Settings.Default.workItemTwoProjectFeature;
+            WorkItemThreeProjectFeature = Properties.Settings.Default.workItemThreeProjectFeature;
+            WorkItemFourProjectFeature = Properties.Settings.Default.workItemFourProjectFeature;
+            WorkItemFiveProjectFeature = Properties.Settings.Default.workItemFiveProjectFeature;
+            WorkItemSixProjectFeature = Properties.Settings.Default.workItemSixProjectFeature;
+
+            WorkItemOnePhase = Properties.Settings.Default.workItemOnePhase;
+            WorkItemTwoPhase = Properties.Settings.Default.workItemTwoPhase;
+            WorkItemThreePhase = Properties.Settings.Default.workItemThreePhase;
+            WorkItemFourPhase = Properties.Settings.Default.workItemFourPhase;
+            WorkItemFivePhase = Properties.Settings.Default.workItemFivePhase;
+            WorkItemSixPhase = Properties.Settings.Default.workItemSixPhase;
 
             EmployeeNumberTechClock = Properties.Settings.Default.employeeNumber;
         }
@@ -406,12 +525,19 @@ namespace techsolaWorkClockTimer
             Properties.Settings.Default.workItemFive = workItemFiveTechsolaClock;
             Properties.Settings.Default.workItemSix = workItemSixTechsolaClock;
 
-            //Properties.Settings.Default.workItemOneProjectFeature = workItemOneProjectFeature;
-            //Properties.Settings.Default.workItemTwoProjectFeature = workItemTwoProjectFeature;
-            //Properties.Settings.Default.workItemThreeProjectFeature = workItemThreeProjectFeature;
-            //Properties.Settings.Default.workItemFourProjectFeature = workItemFourProjectFeature;
-            //Properties.Settings.Default.workItemFiveProjectFeature = workItemFiveProjectFeature;
-            //Properties.Settings.Default.workItemSixProjectFeature = workItemSixProjectFeature;
+            Properties.Settings.Default.workItemOneProjectFeature = workItemOneProjectFeature;
+            Properties.Settings.Default.workItemTwoProjectFeature = workItemTwoProjectFeature;
+            Properties.Settings.Default.workItemThreeProjectFeature = workItemThreeProjectFeature;
+            Properties.Settings.Default.workItemFourProjectFeature = workItemFourProjectFeature;
+            Properties.Settings.Default.workItemFiveProjectFeature = workItemFiveProjectFeature;
+            Properties.Settings.Default.workItemSixProjectFeature = workItemSixProjectFeature;
+
+            Properties.Settings.Default.workItemOnePhase = workItemOnePhase;
+            Properties.Settings.Default.workItemTwoPhase = workItemTwoPhase;
+            Properties.Settings.Default.workItemThreePhase = workItemThreePhase;
+            Properties.Settings.Default.workItemFourPhase = workItemFourPhase;
+            Properties.Settings.Default.workItemFivePhase = workItemFivePhase;
+            Properties.Settings.Default.workItemSixPhase = workItemSixPhase;
 
             Properties.Settings.Default.employeeNumber = EmployeeNumberTechClock;
 

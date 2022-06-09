@@ -47,5 +47,23 @@
     <Setting Name="workItemSixProjectFeature" Type="System.String" Scope="User">
       <Value Profile="(Default)">-</Value>
     </Setting>
+    <Setting Name="workItemOnePhase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-</Value>
+    </Setting>
+    <Setting Name="workItemTwoPhase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-</Value>
+    </Setting>
+    <Setting Name="workItemThreePhase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-</Value>
+    </Setting>
+    <Setting Name="workItemFourPhase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-</Value>
+    </Setting>
+    <Setting Name="workItemFivePhase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-</Value>
+    </Setting>
+    <Setting Name="workItemSixPhase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

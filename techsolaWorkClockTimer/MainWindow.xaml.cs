@@ -27,10 +27,24 @@ public partial class MainWindow : Window
 
         if (clock.RunningSegment is null)
         {
-            clock.Start(clock.Segments.Count != 0
-                    ? clock.Segments.LastOrDefault()!.Project
-                    : TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem, clock.EmployeeNumberTechClock,
-                clock.ProjectFeature != null ? clock.ProjectFeature.ToString() : "test");
+            if (clock.Segments.LastOrDefault() is { } last)
+            {
+                clock.Start(
+                    last.Project,
+                    last.WorkItem,
+                    last.EmployeeNumber,
+                    last.ProjectFeature ?? "N/A",
+                    last.Phase);
+            }
+            else
+            {
+                clock.Start(
+                    TechsolaClock.DefaultProjectName,
+                    clock.RunningSegment?.WorkItem,
+                    clock.EmployeeNumberTechClock,
+                    clock.ProjectFeature != null ? clock.ProjectFeature.ToString() : "test",
+                    null);
+            }
         }
         else
             clock.Stop();
@@ -56,10 +70,11 @@ public partial class MainWindow : Window
         if (clock.RunningSegment is not null)
             clock.Stop();
 
-        clock.Start(wasSameProjectRunning
-                ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, workItem: null, clock.EmployeeNumberTechClock,
-            clock.ProjectFeature != null ? clock.ProjectFeature.ToString() : "test");
+        clock.Start(wasSameProjectRunning ? TechsolaClock.DefaultProjectName : projectTime.ProjectName, 
+            workItem: null,
+            clock.EmployeeNumberTechClock,
+            projectFeature: "",
+            phase: null);
         //DevOpsApi.GetProjects();
     }
 
@@ -71,18 +86,24 @@ public partial class MainWindow : Window
         {
             case SessionSwitchReason.SessionLock:
                 if (clock.RunningSegment is null)
-                    clock.Start(TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem,
+                    clock.Start(
+                        TechsolaClock.DefaultProjectName, 
+                        clock.RunningSegment?.WorkItem,
                         clock.EmployeeNumberTechClock,
-                        clock.ProjectFeature != null ? clock.ProjectFeature.ToString() : "test");
+                        clock.ProjectFeature != null ? clock.ProjectFeature.ToString() : "test",
+                        phase: null);
                 else
                     clock.Stop();
                 break;
 
             case SessionSwitchReason.SessionUnlock:
                 if (clock.RunningSegment is null)
-                    clock.Start(TechsolaClock.DefaultProjectName, clock.RunningSegment?.WorkItem,
+                    clock.Start(
+                        TechsolaClock.DefaultProjectName, 
+                        clock.RunningSegment?.WorkItem,
                         clock.EmployeeNumberTechClock,
-                        clock.ProjectFeature != null ? clock.ProjectFeature.ToString() : "test");
+                        clock.ProjectFeature != null ? clock.ProjectFeature.ToString() : "test",
+                        phase: null);
                 else
                     clock.Stop();
                 break;
@@ -122,95 +143,107 @@ public partial class MainWindow : Window
     {
         var clock = (TechsolaClock)DataContext;
         var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
-        var projectFeatureText = ProjectFeatureComboBox1.Text;
+        clock.WorkItemOneProjectFeature = ProjectFeatureComboBox1.Text;
 
         var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
 
         if (clock.RunningSegment is not null)
             clock.Stop();
 
-        clock.Start(wasSameProjectRunning
-                ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, clock.WorkItemOneTechsolaClock, clock.EmployeeNumberTechClock, projectFeatureText);
+        clock.Start(wasSameProjectRunning ? TechsolaClock.DefaultProjectName : projectTime.ProjectName,
+            clock.WorkItemOneTechsolaClock,
+            clock.EmployeeNumberTechClock,
+            clock.WorkItemOneProjectFeature,
+            clock.WorkItemOnePhase);
     }
 
     private void WorkItemTwo_Click(object sender, RoutedEventArgs e)
     {
         var clock = (TechsolaClock)DataContext;
         var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
-        var projectFeatureText = ProjectFeatureComboBox2.Text;
+        clock.WorkItemTwoProjectFeature = ProjectFeatureComboBox2.Text;
 
         var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
 
         if (clock.RunningSegment is not null)
             clock.Stop();
 
-        clock.Start(wasSameProjectRunning
-                ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, clock.WorkItemTwoTechsolaClock, clock.EmployeeNumberTechClock, projectFeatureText);
+        clock.Start(wasSameProjectRunning ? TechsolaClock.DefaultProjectName : projectTime.ProjectName,
+            clock.WorkItemTwoTechsolaClock,
+            clock.EmployeeNumberTechClock,
+            clock.WorkItemTwoProjectFeature,
+            clock.WorkItemTwoPhase);
     }
 
     private void WorkItemThree_Click(object sender, RoutedEventArgs e)
     {
         var clock = (TechsolaClock)DataContext;
         var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
-        var projectFeatureText = ProjectFeatureComboBox3.Text;
+        clock.WorkItemThreeProjectFeature = ProjectFeatureComboBox3.Text;
 
         var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
 
         if (clock.RunningSegment is not null)
             clock.Stop();
 
-        clock.Start(wasSameProjectRunning
-                ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, clock.WorkItemThreeTechsolaClock, clock.EmployeeNumberTechClock, projectFeatureText);
+        clock.Start(wasSameProjectRunning ? TechsolaClock.DefaultProjectName : projectTime.ProjectName,
+            clock.WorkItemThreeTechsolaClock,
+            clock.EmployeeNumberTechClock,
+            clock.WorkItemThreeProjectFeature,
+            clock.WorkItemThreePhase);
     }
 
     private void WorkItemFour_Click(object sender, RoutedEventArgs e)
     {
         var clock = (TechsolaClock)DataContext;
         var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
-        var projectFeatureText = ProjectFeatureComboBox4.Text;
+        clock.WorkItemFourProjectFeature = ProjectFeatureComboBox4.Text;
 
         var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
 
         if (clock.RunningSegment is not null)
             clock.Stop();
 
-        clock.Start(wasSameProjectRunning
-                ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, clock.WorkItemFourTechsolaClock, clock.EmployeeNumberTechClock, projectFeatureText);
+        clock.Start(wasSameProjectRunning ? TechsolaClock.DefaultProjectName : projectTime.ProjectName,
+            clock.WorkItemFourTechsolaClock,
+            clock.EmployeeNumberTechClock,
+            clock.WorkItemFourProjectFeature,
+            clock.WorkItemFourPhase);
     }
 
     private void WorkItemFive_Click(object sender, RoutedEventArgs e)
     {
         var clock = (TechsolaClock)DataContext;
         var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
-        var projectFeatureText = ProjectFeatureComboBox5.Text;
+        clock.WorkItemFiveProjectFeature = ProjectFeatureComboBox5.Text;
 
         var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
 
         if (clock.RunningSegment is not null)
             clock.Stop();
 
-        clock.Start(wasSameProjectRunning
-                ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, clock.WorkItemFiveTechsolaClock, clock.EmployeeNumberTechClock, projectFeatureText);
+        clock.Start(wasSameProjectRunning ? TechsolaClock.DefaultProjectName : projectTime.ProjectName,
+            clock.WorkItemFiveTechsolaClock,
+            clock.EmployeeNumberTechClock,
+            clock.WorkItemFiveProjectFeature,
+            clock.WorkItemFivePhase);
     }
 
     private void WorkItemSix_Click(object sender, RoutedEventArgs e)
     {
         var clock = (TechsolaClock)DataContext;
         var projectTime = (ProjectTime)((MenuItem)sender).DataContext;
-        var projectFeatureText = ProjectFeatureComboBox6.Text;
+        clock.WorkItemSixProjectFeature = ProjectFeatureComboBox6.Text;
 
         var wasSameProjectRunning = clock.RunningSegment?.Project == projectTime.ProjectName;
 
         if (clock.RunningSegment is not null)
             clock.Stop();
 
-        clock.Start(wasSameProjectRunning
-                ? TechsolaClock.DefaultProjectName
-                : projectTime.ProjectName, clock.WorkItemSixTechsolaClock, clock.EmployeeNumberTechClock, projectFeatureText);
+        clock.Start(wasSameProjectRunning ? TechsolaClock.DefaultProjectName : projectTime.ProjectName,
+            clock.WorkItemSixTechsolaClock,
+            clock.EmployeeNumberTechClock,
+            clock.WorkItemSixProjectFeature,
+            clock.WorkItemSixPhase);
     }
 }

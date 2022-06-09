@@ -10,7 +10,14 @@ namespace techsolaWorkClockTimer
     public partial class App : Application
     {
         public static TechsolaClock Clock = new();
+        
+        private void App_OnStartup(object sender, StartupEventArgs e)
+        {
+            //---- Get Settings ----
 
+            Clock.GetSettings();
+
+        }
         private void App_OnExit(object sender, ExitEventArgs e)
         {
             if (Clock.Segments.Count > 0)
@@ -19,21 +26,39 @@ namespace techsolaWorkClockTimer
             foreach (var segment in Clock.Segments)
             {
                 DataBase.Connection.Execute(
-                    "Insert into segments (TimeSegmentStart, TimeSegmentEnd, Project, WorkItem, EmployeeNumber, ProjectFeature) values(@Start, @End, @Project, @WorkItem, @EmployeeNumber, @ProjectFeature)",
-                    new { segment.Start, segment.End, segment.Project, segment.WorkItem, segment.EmployeeNumber, segment.ProjectFeature });
+                        @"Insert into segments (
+                                TimeSegmentStart, 
+                                TimeSegmentEnd, 
+                                Project, 
+                                WorkItem, 
+                                EmployeeNumber, 
+                                ProjectFeature,
+                                Phase
+                                ) 
+                                values(
+                                    @Start, 
+                                    @End, 
+                                    @Project, 
+                                    @WorkItem, 
+                                    @EmployeeNumber, 
+                                    @ProjectFeature, 
+                                    @Phase
+                                    )",
+                        new
+                        {
+                            segment.Start,
+                            segment.End,
+                            segment.Project,
+                            segment.WorkItem,
+                            segment.EmployeeNumber,
+                            segment.ProjectFeature,
+                            segment.Phase,
+                        });
             }
-            
+
             // ---- Save(Set) Settings ----
 
             Clock.SetSettings();
-
-        }
-
-        private void App_OnStartup(object sender, StartupEventArgs e)
-        {
-            //---- Get Settings ----
-
-            Clock.GetSettings();
 
         }
     }
