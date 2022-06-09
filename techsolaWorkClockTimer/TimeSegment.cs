@@ -3,11 +3,13 @@
 namespace techsolaWorkClockTimer;
 
 public sealed record TimeSegment
-    (DateTime Start, string Project, string? WorkItem, string? EmployeeNumber, string? ProjectFeature, string? Phase) : ObservableRecord
+(DateTime Start, string Project, string? WorkItem, string? EmployeeNumber, string? ProjectFeature,
+    string? Phase) : ObservableRecord
 {
     // Used by dapper
     public TimeSegment(DateTime timeSegmentStart, DateTime timeSegmentEnd, string project, string? workItem,
-        string? employeeNumber, string? projectFeature, string? phase) : this(timeSegmentStart, project, workItem, employeeNumber, projectFeature, phase)
+        string? employeeNumber, string? projectFeature, string? phase) : this(timeSegmentStart, project, workItem,
+        employeeNumber, projectFeature, phase)
     {
         End = timeSegmentEnd;
     }
@@ -26,18 +28,17 @@ public sealed record TimeSegment
     {
         get
         {
-            var testDay = day != null ? day[..3] : "";
-            return testDay;
+            var abbrevDay = day != null ? day[..3] : "";
+            return abbrevDay;
         }
         set => Set(ref day, value);
     }
 
-    private DateTime? date;
+    private string? date;
 
-    public DateTime? Date
+    public string? Date
     {
-        get => date?.Date.Date ?? DateTime.Today;
-
+        get => DateTime.Today.ToShortDateString();
         set => Set(ref date, value);
     }
 }
