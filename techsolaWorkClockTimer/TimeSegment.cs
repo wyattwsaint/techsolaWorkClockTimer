@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Linq;
 
 namespace techsolaWorkClockTimer;
 
 public sealed record TimeSegment
-(DateTime Start, string Project, string? WorkItem, string? EmployeeNumber, string? ProjectFeature,
+(DateTime Start, string Project, string? WorkItem, string? EmployeeNumber, string? ProjectFeature, string? WorkItemNumber,
     string? Phase) : ObservableRecord
 {
     // Used by dapper
     public TimeSegment(DateTime timeSegmentStart, DateTime timeSegmentEnd, string project, string? workItem,
-        string? employeeNumber, string? projectFeature, string? phase) : this(timeSegmentStart, project, workItem,
-        employeeNumber, projectFeature, phase)
+        string? employeeNumber, string? projectFeature, string? workItemNumber, string? phase) : this(timeSegmentStart, project, workItem,
+        employeeNumber, projectFeature, workItemNumber, phase)
     {
         End = timeSegmentEnd;
     }
@@ -40,5 +41,13 @@ public sealed record TimeSegment
     {
         get => DateTime.Today.ToShortDateString();
         set => Set(ref date, value);
+    }
+
+    private double? hours;
+
+    public double? Hours
+    {
+        get => Math.Round((End is not null ? End - Start : new TimeSpan(0, 0, 0, 0)).Value.TotalHours * 4, MidpointRounding.ToEven) / 4;
+        set => Set(ref hours, value);
     }
 }

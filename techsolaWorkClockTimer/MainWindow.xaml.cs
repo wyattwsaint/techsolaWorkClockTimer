@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,6 +35,7 @@ public partial class MainWindow : Window
                     last.WorkItem,
                     last.EmployeeNumber,
                     last.ProjectFeature ?? "N/A",
+                    last.WorkItemNumber,
                     last.Phase);
             }
             else
@@ -43,6 +45,7 @@ public partial class MainWindow : Window
                     clock.RunningSegment?.WorkItem,
                     clock.EmployeeNumberTechClock,
                     clock.ProjectFeature != null ? clock.ProjectFeature.ToString() : "test",
+                    clock.RunningSegment?.WorkItemNumber,
                     null);
             }
         }
@@ -74,6 +77,7 @@ public partial class MainWindow : Window
             workItem: null,
             clock.EmployeeNumberTechClock,
             projectFeature: "",
+            workItemNumber: null,
             phase: null);
         //DevOpsApi.GetProjects();
     }
@@ -90,8 +94,9 @@ public partial class MainWindow : Window
                         TechsolaClock.DefaultProjectName, 
                         clock.RunningSegment?.WorkItem,
                         clock.EmployeeNumberTechClock,
-                        clock.ProjectFeature != null ? clock.ProjectFeature.ToString() : "test",
-                        phase: null);
+                        clock.RunningSegment?.ProjectFeature,
+                        clock.RunningSegment?.WorkItemNumber,
+                        clock.RunningSegment?.Phase);
                 else
                     clock.Stop();
                 break;
@@ -99,11 +104,12 @@ public partial class MainWindow : Window
             case SessionSwitchReason.SessionUnlock:
                 if (clock.RunningSegment is null)
                     clock.Start(
-                        TechsolaClock.DefaultProjectName, 
+                        TechsolaClock.DefaultProjectName,
                         clock.RunningSegment?.WorkItem,
                         clock.EmployeeNumberTechClock,
-                        clock.ProjectFeature != null ? clock.ProjectFeature.ToString() : "test",
-                        phase: null);
+                        clock.RunningSegment?.ProjectFeature,
+                        clock.RunningSegment?.WorkItemNumber,
+                        clock.RunningSegment?.Phase);
                 else
                     clock.Stop();
                 break;
@@ -154,6 +160,7 @@ public partial class MainWindow : Window
             clock.WorkItemOneTechsolaClock,
             clock.EmployeeNumberTechClock,
             clock.WorkItemOneProjectFeature,
+            clock.WorkItemOneNumber,
             clock.WorkItemOnePhase);
     }
 
@@ -172,6 +179,7 @@ public partial class MainWindow : Window
             clock.WorkItemTwoTechsolaClock,
             clock.EmployeeNumberTechClock,
             clock.WorkItemTwoProjectFeature,
+            clock.WorkItemTwoNumber,
             clock.WorkItemTwoPhase);
     }
 
@@ -190,6 +198,7 @@ public partial class MainWindow : Window
             clock.WorkItemThreeTechsolaClock,
             clock.EmployeeNumberTechClock,
             clock.WorkItemThreeProjectFeature,
+            clock.WorkItemThreeNumber,
             clock.WorkItemThreePhase);
     }
 
@@ -208,6 +217,7 @@ public partial class MainWindow : Window
             clock.WorkItemFourTechsolaClock,
             clock.EmployeeNumberTechClock,
             clock.WorkItemFourProjectFeature,
+            clock.WorkItemFourNumber,
             clock.WorkItemFourPhase);
     }
 
@@ -226,6 +236,7 @@ public partial class MainWindow : Window
             clock.WorkItemFiveTechsolaClock,
             clock.EmployeeNumberTechClock,
             clock.WorkItemFiveProjectFeature,
+            clock.WorkItemFiveNumber,
             clock.WorkItemFivePhase);
     }
 
@@ -244,6 +255,7 @@ public partial class MainWindow : Window
             clock.WorkItemSixTechsolaClock,
             clock.EmployeeNumberTechClock,
             clock.WorkItemSixProjectFeature,
+            clock.WorkItemSixNumber,
             clock.WorkItemSixPhase);
     }
 }

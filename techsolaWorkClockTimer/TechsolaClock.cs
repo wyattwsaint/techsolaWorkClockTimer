@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
@@ -17,7 +18,7 @@ namespace techsolaWorkClockTimer
 
             var timeSegments =
                 DataBase.Connection.Query<TimeSegment>(
-                    "select TimeSegmentStart, TimeSegmentEnd, Project, WorkItem, EmployeeNumber, ProjectFeature, Phase from segments;");
+                    "select TimeSegmentStart, TimeSegmentEnd, Project, WorkItem, EmployeeNumber, ProjectFeature, WorkItemNumber, Phase from segments;");
 
             foreach (var timeSegment in timeSegments) segments.Add(timeSegment);
         }
@@ -163,6 +164,26 @@ namespace techsolaWorkClockTimer
 
         public ReadOnlyObservableCollection<TimeSegment> Segments => new(segments);
 
+        private List<TimeSegment> endOfDaySegments = new();
+
+        public List<TimeSegment> EndOfDaySegments
+        {
+            get
+            {
+                return Segments.GroupBy(s => s.WorkItem).Select(cs => new TimeSegment(DateTime.Now, "test", null, null, null, null, null)
+                {
+                    Day = cs.First().Day,
+                    EmployeeNumber = cs.First().EmployeeNumber,
+                    Date = cs.First().Date,
+                    ProjectFeature = cs.First().ProjectFeature,
+                    Phase = cs.First().Phase,
+                    WorkItem = cs.First().WorkItem,
+                    WorkItemNumber = cs.First().WorkItemNumber,
+                    Hours = cs.Sum(c => c.Hours),
+                }).ToList();
+            }
+        }
+
         private string? employeeNumberTechClock;
 
         public string? EmployeeNumberTechClock
@@ -173,6 +194,54 @@ namespace techsolaWorkClockTimer
 
 
         //-----WorkItemProperties-----Begin
+
+        private string? workItemOneNumber;
+
+        public string? WorkItemOneNumber
+        {
+            get => workItemOneNumber;
+            set { Set(ref workItemOneNumber, value); }
+        }
+
+        private string? workItemTwoNumber;
+
+        public string? WorkItemTwoNumber
+        {
+            get => workItemTwoNumber;
+            set { Set(ref workItemTwoNumber, value); }
+        }
+
+        private string? workItemThreeNumber;
+
+        public string? WorkItemThreeNumber
+        {
+            get => workItemThreeNumber;
+            set { Set(ref workItemThreeNumber, value); }
+        }
+
+        private string? workItemFourNumber;
+
+        public string? WorkItemFourNumber
+        {
+            get => workItemFourNumber;
+            set { Set(ref workItemFourNumber, value); }
+        }
+
+        private string? workItemFiveNumber;
+
+        public string? WorkItemFiveNumber
+        {
+            get => workItemFiveNumber;
+            set { Set(ref workItemFiveNumber, value); }
+        }
+
+        private string? workItemSixNumber;
+
+        public string? WorkItemSixNumber
+        {
+            get => workItemSixNumber;
+            set { Set(ref workItemSixNumber, value); }
+        }
 
         private string? workItemOneTechsolaClock;
 
@@ -332,7 +401,7 @@ namespace techsolaWorkClockTimer
             ? runningSegment
             : null;
 
-        public void Start(string project, string? workItem, string? employeeNumber, string? projectFeature, string? phase)
+        public void Start(string project, string? workItem, string? employeeNumber, string? projectFeature, string? workItemNumber, string? phase)
         {
             if (RunningSegment is not null)
                 throw new InvalidOperationException("Multiple segments must not run at the same time.");
@@ -344,7 +413,7 @@ namespace techsolaWorkClockTimer
 
             UpdateBreaktimeLeft(EndOfDayTargetTime, WorkDayHours);
 
-            segments.Add(new TimeSegment(DateTime.Now, project, workItem, employeeNumber, projectFeature, phase));
+            segments.Add(new TimeSegment(DateTime.Now, project, workItem, employeeNumber, projectFeature, workItemNumber, phase));
             OnPropertyChanged(nameof(RunningSegment));
 
             cancellationTokenSource = new();
@@ -371,8 +440,11 @@ namespace techsolaWorkClockTimer
 
         public void Stop()
         {
+
             segments[^1].End = DateTime.Now;
             OnPropertyChanged(nameof(RunningSegment));
+
+            segments[^1].Day = DateTime.Now.DayOfWeek.ToString();
 
             cancellationTokenSource!.Cancel();
 
@@ -488,6 +560,13 @@ namespace techsolaWorkClockTimer
             OnPropertyChanged(nameof(GetEndOfDayTargetTime));
             UpdateBreaktimeLeft(EndOfDayTargetTime, WorkDayHours);
 
+            WorkItemOneNumber = Properties.Settings.Default.workItemOneNumber;
+            WorkItemTwoNumber = Properties.Settings.Default.workItemTwoNumber;
+            WorkItemThreeNumber = Properties.Settings.Default.workItemThreeNumber;
+            WorkItemFourNumber = Properties.Settings.Default.workItemFourNumber;
+            WorkItemFiveNumber = Properties.Settings.Default.workItemFiveNumber;
+            WorkItemSixNumber = Properties.Settings.Default.workItemSixNumber;
+
             WorkItemOneTechsolaClock = Properties.Settings.Default.workItemOne;
             WorkItemTwoTechsolaClock = Properties.Settings.Default.workItemTwo;
             WorkItemThreeTechsolaClock = Properties.Settings.Default.workItemThree;
@@ -516,6 +595,13 @@ namespace techsolaWorkClockTimer
         {
             Properties.Settings.Default.endOfDayTargetTime = EndOfDayTargetTime!.Value;
             Properties.Settings.Default.workDayHours = WorkDayHours!.Value;
+
+            Properties.Settings.Default.workItemOneNumber = workItemOneNumber;
+            Properties.Settings.Default.workItemTwoNumber = workItemTwoNumber;
+            Properties.Settings.Default.workItemThreeNumber = workItemThreeNumber;
+            Properties.Settings.Default.workItemFourNumber = workItemFourNumber;
+            Properties.Settings.Default.workItemFiveNumber = workItemFiveNumber;
+            Properties.Settings.Default.workItemSixNumber = workItemSixNumber;
 
             Properties.Settings.Default.workItemOne = workItemOneTechsolaClock;
             Properties.Settings.Default.workItemTwo = workItemTwoTechsolaClock;

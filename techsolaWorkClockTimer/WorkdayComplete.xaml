@@ -56,7 +56,6 @@
 
                             <DockPanel Height="27"
                                        Background="{Binding Color}" />
-
                         </Border>
                         <TextBlock Grid.Column="0"
                                    HorizontalAlignment="Center"
@@ -66,7 +65,6 @@
                                    HorizontalAlignment="Center"
                                    Text="{Binding DecimalDisplayTime}"
                                    FontSize="20" />
-
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
@@ -75,7 +73,7 @@
         <DataGrid
             Grid.Column="2"
             Grid.Row="1"
-            ItemsSource="{Binding Segments}"
+            ItemsSource="{Binding EndOfDaySegments}"
             AutoGenerateColumns="False">
 
             <DataGrid.Columns>
@@ -92,12 +90,17 @@
                     Header="Project - Feature" 
                     Binding="{Binding ProjectFeature}"/>
                 <DataGridTextColumn 
+                    Header="Work Item"
+                    Binding="{Binding WorkItemNumber}"/>
+                <DataGridTextColumn 
                     Header="Phase" 
                     Binding="{Binding Phase}"/>
                 <DataGridTextColumn
                     Header="Description of Work Performed"
                     Binding="{Binding WorkItem}" />
-                <DataGridTextColumn Header="Hours" />
+                <DataGridTextColumn 
+                    Header="Hours" 
+                    Binding="{Binding Hours}"/>
             </DataGrid.Columns>
         </DataGrid>
 

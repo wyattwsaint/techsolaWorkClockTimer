@@ -274,5 +274,77 @@ namespace techsolaWorkClockTimer.Properties {
                 this["workItemSixPhase"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string workItemOneNumber {
+            get {
+                return ((string)(this["workItemOneNumber"]));
+            }
+            set {
+                this["workItemOneNumber"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string workItemTwoNumber {
+            get {
+                return ((string)(this["workItemTwoNumber"]));
+            }
+            set {
+                this["workItemTwoNumber"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string workItemThreeNumber {
+            get {
+                return ((string)(this["workItemThreeNumber"]));
+            }
+            set {
+                this["workItemThreeNumber"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string workItemFourNumber {
+            get {
+                return ((string)(this["workItemFourNumber"]));
+            }
+            set {
+                this["workItemFourNumber"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string workItemFiveNumber {
+            get {
+                return ((string)(this["workItemFiveNumber"]));
+            }
+            set {
+                this["workItemFiveNumber"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string workItemSixNumber {
+            get {
+                return ((string)(this["workItemSixNumber"]));
+            }
+            set {
+                this["workItemSixNumber"] = value;
+            }
+        }
     }
 }

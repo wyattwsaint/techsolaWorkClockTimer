@@ -33,6 +33,7 @@ namespace techsolaWorkClockTimer
                                 WorkItem, 
                                 EmployeeNumber, 
                                 ProjectFeature,
+                                WorkItemNumber,
                                 Phase
                                 ) 
                                 values(
@@ -41,7 +42,8 @@ namespace techsolaWorkClockTimer
                                     @Project, 
                                     @WorkItem, 
                                     @EmployeeNumber, 
-                                    @ProjectFeature, 
+                                    @ProjectFeature,
+                                    @WorkItemNumber,
                                     @Phase
                                     )",
                         new
@@ -52,6 +54,7 @@ namespace techsolaWorkClockTimer
                             segment.WorkItem,
                             segment.EmployeeNumber,
                             segment.ProjectFeature,
+                            segment.WorkItemNumber,
                             segment.Phase,
                         });
             }
