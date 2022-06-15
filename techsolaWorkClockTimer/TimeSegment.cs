@@ -27,12 +27,12 @@ public sealed record TimeSegment
 
     public string? Day
     {
-        get
+        get => day;
+        set
         {
-            var abbrevDay = day != null ? day[..3] : "";
-            return abbrevDay;
+            value = day != null ? day[..3] : "";
+            Set(ref day, value);
         }
-        set => Set(ref day, value);
     }
 
     private string? date;
@@ -47,7 +47,12 @@ public sealed record TimeSegment
 
     public double? Hours
     {
-        get => Math.Round((End is not null ? End - Start : new TimeSpan(0, 0, 0, 0)).Value.TotalHours * 4, MidpointRounding.ToEven) / 4;
-        set => Set(ref hours, value);
+        get => hours;
+        set
+        {
+            value = Math.Round((End is not null ? End - Start : new TimeSpan(0, 0, 0, 0)).Value.TotalHours * 4,
+                MidpointRounding.ToEven) / 4;
+            Set(ref hours, value);
+        }
     }
 }
