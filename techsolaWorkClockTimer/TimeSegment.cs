@@ -30,8 +30,7 @@ public sealed record TimeSegment
         get => day;
         set
         {
-            value = day != null ? day[..3] : "";
-            Set(ref day, value);
+            Set(ref day, value != null ? value[..3] : "");
         }
     }
 

@@ -13,12 +13,6 @@
 	<RollForward>Major</RollForward>
 	<RuntimeIdentifier>win10-x64</RuntimeIdentifier>
 	<PublishSingleFile>true</PublishSingleFile>
-
-	<Product>TRAVERSE Workstation Manager</Product>
-	<Version>0.3.2</Version>
-	<Company>Technology Solutions Associates</Company>
-	<Copyright>Copyright © 2019–2022 Technology Solutions Associates</Copyright>
-	<AssemblyTitle>TRAVERSE Workstation Manager</AssemblyTitle>
 	<ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
