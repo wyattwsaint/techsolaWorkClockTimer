@@ -640,6 +640,13 @@ namespace techsolaWorkClockTimer
             WorkItemFivePhase = Properties.Settings.Default.workItemFivePhase;
             WorkItemSixPhase = Properties.Settings.Default.workItemSixPhase;
 
+            EffortOne = Properties.Settings.Default.effortOne;
+            EffortTwo = Properties.Settings.Default.effortTwo;
+            EffortThree = Properties.Settings.Default.effortThree;
+            EffortFour = Properties.Settings.Default.effortFour;
+            EffortFive = Properties.Settings.Default.effortFive;
+            EffortSix = Properties.Settings.Default.effortSix;
+
             EmployeeNumberTechClock = Properties.Settings.Default.employeeNumber;
         }
 
@@ -675,6 +682,13 @@ namespace techsolaWorkClockTimer
             Properties.Settings.Default.workItemFourPhase = workItemFourPhase;
             Properties.Settings.Default.workItemFivePhase = workItemFivePhase;
             Properties.Settings.Default.workItemSixPhase = workItemSixPhase;
+
+            Properties.Settings.Default.effortOne = effortOne;
+            Properties.Settings.Default.effortTwo = effortTwo;
+            Properties.Settings.Default.effortThree = effortThree;
+            Properties.Settings.Default.effortFour = effortFour;
+            Properties.Settings.Default.effortFive = effortFive;
+            Properties.Settings.Default.effortSix = effortSix;
 
             Properties.Settings.Default.employeeNumber = EmployeeNumberTechClock;
 

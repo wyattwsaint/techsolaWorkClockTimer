@@ -346,5 +346,77 @@ namespace techsolaWorkClockTimer.Properties {
                 this["workItemSixNumber"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string effortOne {
+            get {
+                return ((string)(this["effortOne"]));
+            }
+            set {
+                this["effortOne"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string effortTwo {
+            get {
+                return ((string)(this["effortTwo"]));
+            }
+            set {
+                this["effortTwo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string effortThree {
+            get {
+                return ((string)(this["effortThree"]));
+            }
+            set {
+                this["effortThree"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string effortFour {
+            get {
+                return ((string)(this["effortFour"]));
+            }
+            set {
+                this["effortFour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string effortFive {
+            get {
+                return ((string)(this["effortFive"]));
+            }
+            set {
+                this["effortFive"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string effortSix {
+            get {
+                return ((string)(this["effortSix"]));
+            }
+            set {
+                this["effortSix"] = value;
+            }
+        }
     }
 }
