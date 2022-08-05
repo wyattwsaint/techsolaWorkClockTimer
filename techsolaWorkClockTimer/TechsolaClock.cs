@@ -397,6 +397,58 @@ namespace techsolaWorkClockTimer
 
         //-----PhaseProperties-----End
 
+        //-----EffortProperties-----Begin
+
+        private string? effortOne;
+
+        public string? EffortOne
+        {
+            get => effortOne;
+            set { Set(ref effortOne, value); }
+        }
+
+        private string? effortTwo;
+
+        public string? EffortTwo
+        {
+            get => effortTwo;
+            set { Set(ref effortTwo, value); }
+        }
+
+        private string? effortThree;
+
+        public string? EffortThree
+        {
+            get => effortThree;
+            set { Set(ref effortThree, value); }
+        }
+
+        private string? effortFour;
+
+        public string? EffortFour
+        {
+            get => effortFour;
+            set { Set(ref effortFour, value); }
+        }
+
+        private string? effortFive;
+
+        public string? EffortFive
+        {
+            get => effortFive;
+            set { Set(ref effortFive, value); }
+        }
+
+        private string? effortSix;
+
+        public string? EffortSix
+        {
+            get => effortSix;
+            set { Set(ref effortSix, value); }
+        }
+
+        //-----EffortProperties-----End
+
         public TimeSegment? RunningSegment => segments.LastOrDefault() is { End: null } runningSegment
             ? runningSegment
             : null;
