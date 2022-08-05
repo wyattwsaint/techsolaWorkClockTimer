@@ -367,6 +367,7 @@
                                       Width="180"
                                       Height="25"
                                       HorizontalAlignment="Right" />
+
                             <Label Content="Effort"
                                    Grid.Column="2"
                                    Grid.ColumnSpan="3"
@@ -375,6 +376,7 @@
                                    Name="Effort1Label"
                                    Height="25"/>
                             <TextBox Name="Effort1TextEdit"
+                                     Text="{Binding EffortOne}"
                                      Grid.Column="3"
                                      Grid.ColumnSpan="6"
                                      Grid.Row="7"
@@ -445,6 +447,7 @@
                                       Width="180"
                                       Height="25"
                                       HorizontalAlignment="Right" />
+
                             <Label Content="Effort"
                                    Grid.Column="2"
                                    Grid.ColumnSpan="3"
@@ -453,6 +456,7 @@
                                    Name="Effort2Label"
                                    Height="25"/>
                             <TextBox Name="Effort2TextEdit"
+                                     Text="{Binding EffortTwo}"
                                      Grid.Column="3"
                                      Grid.ColumnSpan="6"
                                      Grid.Row="12"
@@ -523,6 +527,7 @@
                                       Width="180"
                                       Height="25"
                                       HorizontalAlignment="Right" />
+
                             <Label Content="Effort"
                                    Grid.Column="2"
                                    Grid.ColumnSpan="3"
@@ -531,6 +536,7 @@
                                    Name="Effort3Label"
                                    Height="25"/>
                             <TextBox Name="Effort3TextEdit"
+                                     Text="{Binding EffortThree}"
                                      Grid.Column="3"
                                      Grid.ColumnSpan="6"
                                      Grid.Row="17"
@@ -601,6 +607,7 @@
                                       Width="180"
                                       Height="25"
                                       HorizontalAlignment="Right" />
+
                             <Label Content="Effort"
                                    Grid.Column="2"
                                    Grid.ColumnSpan="3"
@@ -609,6 +616,7 @@
                                    Name="Effort4Label"
                                    Height="25"/>
                             <TextBox Name="EffortTitle4TextEdit"
+                                     Text="{Binding EffortFour}"
                                      Grid.Column="3"
                                      Grid.ColumnSpan="6"
                                      Grid.Row="22"
@@ -679,6 +687,7 @@
                                       Width="180"
                                       Height="25"
                                       HorizontalAlignment="Right" />
+
                             <Label Content="Effort"
                                    Grid.Column="2"
                                    Grid.ColumnSpan="3"
@@ -687,6 +696,7 @@
                                    Name="Effort5Label"
                                    Height="25"/>
                             <TextBox Name="Effort5TextEdit"
+                                     Text="{Binding EffortFive}"
                                      Grid.Column="3"
                                      Grid.ColumnSpan="6"
                                      Grid.Row="27"
@@ -757,6 +767,7 @@
                                       Width="180"
                                       Height="25"
                                       HorizontalAlignment="Right" />
+
                             <Label Content="Effort"
                                    Grid.Column="2"
                                    Grid.ColumnSpan="3"
@@ -765,6 +776,7 @@
                                    Name="Effort6Label"
                                    Height="25"/>
                             <TextBox Name="Effort6TextEdit"
+                                     Text="{Binding EffortFive}"
                                      Grid.Column="3"
                                      Grid.ColumnSpan="6"
                                      Grid.Row="32"

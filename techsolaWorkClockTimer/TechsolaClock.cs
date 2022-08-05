@@ -161,11 +161,9 @@ namespace techsolaWorkClockTimer
         };
 
         private readonly ObservableCollection<TimeSegment> segments = new();
-
         public ReadOnlyObservableCollection<TimeSegment> Segments => new(segments);
 
         private List<TimeSegment> endOfDaySegments = new();
-
         public List<TimeSegment> EndOfDaySegments
         {
             get
