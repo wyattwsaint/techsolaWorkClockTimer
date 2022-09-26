@@ -18,18 +18,27 @@ namespace techsolaWorkClockTimer
 
             var timeSegments =
                 DataBase.Connection.Query<TimeSegment>(
-                    "select TimeSegmentStart, TimeSegmentEnd, Project, WorkItem, EmployeeNumber, ProjectFeature, WorkItemNumber, Phase from segments;");
+                    @"select 
+                      TimeSegmentStart, 
+                      TimeSegmentEnd, 
+                      Project, 
+                      WorkItem, 
+                      EmployeeNumber, 
+                      ProjectFeature, 
+                      WorkItemNumber, 
+                      Phase 
+                    from segments;");
 
             foreach (var timeSegment in timeSegments) segments.Add(timeSegment);
         }
 
         private CancellationTokenSource? cancellationTokenSource;
+
         private TimeSpan? totalTime;
         public string? DisplayTime => totalTime is not null ? $@"{totalTime:hh\:mm\:ss}" : null;
         public string? DecimalDisplayTime => totalTime is not null ? $@"{totalTime.Value.TotalHours:0.00}" : null;
 
         private string? breakTimeLeft;
-
         public string? BreakTimeLeft
         {
             get => breakTimeLeft;
@@ -37,6 +46,240 @@ namespace techsolaWorkClockTimer
         }
 
         public const string DefaultProjectName = "Techsola Internal";
+
+        private string? employeeNumberTechClock;
+
+        public string? EmployeeNumberTechClock
+        {
+            get => employeeNumberTechClock;
+            set { Set(ref employeeNumberTechClock, value); }
+        }
+
+        //-----WorkItemProperties-----Begin
+
+        private string? workItemOneNumber;
+        public string? WorkItemOneNumber
+        {
+            get => workItemOneNumber;
+            set { Set(ref workItemOneNumber, value); }
+        }
+
+        private string? workItemTwoNumber;
+        public string? WorkItemTwoNumber
+        {
+            get => workItemTwoNumber;
+            set { Set(ref workItemTwoNumber, value); }
+        }
+
+        private string? workItemThreeNumber;
+        public string? WorkItemThreeNumber
+        {
+            get => workItemThreeNumber;
+            set { Set(ref workItemThreeNumber, value); }
+        }
+
+        private string? workItemFourNumber;
+        public string? WorkItemFourNumber
+        {
+            get => workItemFourNumber;
+            set { Set(ref workItemFourNumber, value); }
+        }
+
+        private string? workItemFiveNumber;
+        public string? WorkItemFiveNumber
+        {
+            get => workItemFiveNumber;
+            set { Set(ref workItemFiveNumber, value); }
+        }
+
+        private string? workItemSixNumber;
+        public string? WorkItemSixNumber
+        {
+            get => workItemSixNumber;
+            set { Set(ref workItemSixNumber, value); }
+        }
+
+        private string? workItemOneTechsolaClock;
+        public string? WorkItemOneTechsolaClock
+        {
+            get => workItemOneTechsolaClock;
+            set { Set(ref workItemOneTechsolaClock, value); }
+        }
+
+        private string? workItemTwoTechsolaClock;
+        public string? WorkItemTwoTechsolaClock
+        {
+            get => workItemTwoTechsolaClock;
+            set { Set(ref workItemTwoTechsolaClock, value); }
+        }
+
+        private string? workItemThreeTechsolaClock;
+        public string? WorkItemThreeTechsolaClock
+        {
+            get => workItemThreeTechsolaClock;
+            set { Set(ref workItemThreeTechsolaClock, value); }
+        }
+
+        private string? workItemFourTechsolaClock;
+        public string? WorkItemFourTechsolaClock
+        {
+            get => workItemFourTechsolaClock;
+            set { Set(ref workItemFourTechsolaClock, value); }
+        }
+
+        private string? workItemFiveTechsolaClock;
+        public string? WorkItemFiveTechsolaClock
+        {
+            get => workItemFiveTechsolaClock;
+            set { Set(ref workItemFiveTechsolaClock, value); }
+        }
+
+        private string? workItemSixTechsolaClock;
+        public string? WorkItemSixTechsolaClock
+        {
+            get => workItemSixTechsolaClock;
+            set { Set(ref workItemSixTechsolaClock, value); }
+        }
+
+        //-----WorkItemProperties-----End
+
+        //-----ProjectFeatureProperties-----Start
+
+        private string? workItemOneProjectFeature;
+        public string? WorkItemOneProjectFeature
+        {
+            get => workItemOneProjectFeature;
+            set { Set(ref workItemOneProjectFeature, value); }
+        }
+
+        private string? workItemTwoProjectFeature;
+        public string? WorkItemTwoProjectFeature
+        {
+            get => workItemTwoProjectFeature;
+            set { Set(ref workItemTwoProjectFeature, value); }
+        }
+
+        private string? workItemThreeProjectFeature;
+        public string? WorkItemThreeProjectFeature
+        {
+            get => workItemThreeProjectFeature;
+            set { Set(ref workItemThreeProjectFeature, value); }
+        }
+
+        private string? workItemFourProjectFeature;
+        public string? WorkItemFourProjectFeature
+        {
+            get => workItemFourProjectFeature;
+            set { Set(ref workItemFourProjectFeature, value); }
+        }
+
+        private string? workItemFiveProjectFeature;
+        public string? WorkItemFiveProjectFeature
+        {
+            get => workItemFiveProjectFeature;
+            set { Set(ref workItemFiveProjectFeature, value); }
+        }
+
+        private string? workItemSixProjectFeature;
+        public string? WorkItemSixProjectFeature
+        {
+            get => workItemSixProjectFeature;
+            set { Set(ref workItemSixProjectFeature, value); }
+        }
+
+        //-----ProjectFeatureProperties-----End
+
+        //-----PhaseProperties-----Start
+
+        private string? workItemOnePhase;
+        public string? WorkItemOnePhase
+        {
+            get => workItemOnePhase;
+            set { Set(ref workItemOnePhase, value); }
+        }
+
+        private string? workItemTwoPhase;
+        public string? WorkItemTwoPhase
+        {
+            get => workItemTwoPhase;
+            set { Set(ref workItemTwoPhase, value); }
+        }
+
+        private string? workItemThreePhase;
+        public string? WorkItemThreePhase
+        {
+            get => workItemThreePhase;
+            set { Set(ref workItemThreePhase, value); }
+        }
+
+        private string? workItemFourPhase;
+        public string? WorkItemFourPhase
+        {
+            get => workItemFourPhase;
+            set { Set(ref workItemFourPhase, value); }
+        }
+
+        private string? workItemFivePhase;
+        public string? WorkItemFivePhase
+        {
+            get => workItemFivePhase;
+            set { Set(ref workItemFivePhase, value); }
+        }
+
+        private string? workItemSixPhase;
+        public string? WorkItemSixPhase
+        {
+            get => workItemSixPhase;
+            set { Set(ref workItemSixPhase, value); }
+        }
+
+        //-----PhaseProperties-----End
+
+        //-----EffortProperties-----Begin
+
+        private string? effortOne;
+        public string? EffortOne
+        {
+            get => effortOne;
+            set { Set(ref effortOne, value); }
+        }
+
+        private string? effortTwo;
+        public string? EffortTwo
+        {
+            get => effortTwo;
+            set { Set(ref effortTwo, value); }
+        }
+
+        private string? effortThree;
+        public string? EffortThree
+        {
+            get => effortThree;
+            set { Set(ref effortThree, value); }
+        }
+
+        private string? effortFour;
+        public string? EffortFour
+        {
+            get => effortFour;
+            set { Set(ref effortFour, value); }
+        }
+
+        private string? effortFive;
+        public string? EffortFive
+        {
+            get => effortFive;
+            set { Set(ref effortFive, value); }
+        }
+
+        private string? effortSix;
+        public string? EffortSix
+        {
+            get => effortSix;
+            set { Set(ref effortSix, value); }
+        }
+
+        //-----EffortProperties-----End
 
         public ObservableCollection<ProjectTime> Times { get; } = new()
         {
@@ -182,271 +425,6 @@ namespace techsolaWorkClockTimer
             }
         }
 
-        private string? employeeNumberTechClock;
-
-        public string? EmployeeNumberTechClock
-        {
-            get => employeeNumberTechClock;
-            set { Set(ref employeeNumberTechClock, value); }
-        }
-
-
-        //-----WorkItemProperties-----Begin
-
-        private string? workItemOneNumber;
-
-        public string? WorkItemOneNumber
-        {
-            get => workItemOneNumber;
-            set { Set(ref workItemOneNumber, value); }
-        }
-
-        private string? workItemTwoNumber;
-
-        public string? WorkItemTwoNumber
-        {
-            get => workItemTwoNumber;
-            set { Set(ref workItemTwoNumber, value); }
-        }
-
-        private string? workItemThreeNumber;
-
-        public string? WorkItemThreeNumber
-        {
-            get => workItemThreeNumber;
-            set { Set(ref workItemThreeNumber, value); }
-        }
-
-        private string? workItemFourNumber;
-
-        public string? WorkItemFourNumber
-        {
-            get => workItemFourNumber;
-            set { Set(ref workItemFourNumber, value); }
-        }
-
-        private string? workItemFiveNumber;
-
-        public string? WorkItemFiveNumber
-        {
-            get => workItemFiveNumber;
-            set { Set(ref workItemFiveNumber, value); }
-        }
-
-        private string? workItemSixNumber;
-
-        public string? WorkItemSixNumber
-        {
-            get => workItemSixNumber;
-            set { Set(ref workItemSixNumber, value); }
-        }
-
-        private string? workItemOneTechsolaClock;
-
-        public string? WorkItemOneTechsolaClock
-        {
-            get => workItemOneTechsolaClock;
-            set { Set(ref workItemOneTechsolaClock, value); }
-        }
-
-        private string? workItemTwoTechsolaClock;
-
-        public string? WorkItemTwoTechsolaClock
-        {
-            get => workItemTwoTechsolaClock;
-            set { Set(ref workItemTwoTechsolaClock, value); }
-        }
-
-        private string? workItemThreeTechsolaClock;
-
-        public string? WorkItemThreeTechsolaClock
-        {
-            get => workItemThreeTechsolaClock;
-            set { Set(ref workItemThreeTechsolaClock, value); }
-        }
-
-        private string? workItemFourTechsolaClock;
-
-        public string? WorkItemFourTechsolaClock
-        {
-            get => workItemFourTechsolaClock;
-            set { Set(ref workItemFourTechsolaClock, value); }
-        }
-         
-        private string? workItemFiveTechsolaClock;
-
-        public string? WorkItemFiveTechsolaClock
-        {
-            get => workItemFiveTechsolaClock;
-            set { Set(ref workItemFiveTechsolaClock, value); }
-        }
-
-        private string? workItemSixTechsolaClock;
-
-        public string? WorkItemSixTechsolaClock
-        {
-            get => workItemSixTechsolaClock;
-            set { Set(ref workItemSixTechsolaClock, value); }
-        }
-
-        //-----WorkItemProperties-----End
-
-        //-----ProjectFeatureProperties-----Start
-
-        private string? workItemOneProjectFeature;
-
-        public string? WorkItemOneProjectFeature
-        {
-            get => workItemOneProjectFeature;
-            set { Set(ref workItemOneProjectFeature, value); }
-        }
-
-        private string? workItemTwoProjectFeature;
-
-        public string? WorkItemTwoProjectFeature
-        {
-            get => workItemTwoProjectFeature;
-            set { Set(ref workItemTwoProjectFeature, value); }
-        }
-
-        private string? workItemThreeProjectFeature;
-
-        public string? WorkItemThreeProjectFeature
-        {
-            get => workItemThreeProjectFeature;
-            set { Set(ref workItemThreeProjectFeature, value); }
-        }
-
-        private string? workItemFourProjectFeature;
-
-        public string? WorkItemFourProjectFeature
-        {
-            get => workItemFourProjectFeature;
-            set { Set(ref workItemFourProjectFeature, value); }
-        }
-
-        private string? workItemFiveProjectFeature;
-
-        public string? WorkItemFiveProjectFeature
-        {
-            get => workItemFiveProjectFeature;
-            set { Set(ref workItemFiveProjectFeature, value); }
-        }
-
-        private string? workItemSixProjectFeature;
-
-        public string? WorkItemSixProjectFeature
-        {
-            get => workItemSixProjectFeature;
-            set { Set(ref workItemSixProjectFeature, value); }
-        }
-
-        //-----ProjectFeatureProperties-----End
-
-        //-----PhaseProperties-----Start
-
-        private string? workItemOnePhase;
-
-        public string? WorkItemOnePhase
-        {
-            get => workItemOnePhase;
-            set { Set(ref workItemOnePhase, value); }
-        }
-
-        private string? workItemTwoPhase;
-
-        public string? WorkItemTwoPhase
-        {
-            get => workItemTwoPhase;
-            set { Set(ref workItemTwoPhase, value); }
-        }
-
-        private string? workItemThreePhase;
-
-        public string? WorkItemThreePhase
-        {
-            get => workItemThreePhase;
-            set { Set(ref workItemThreePhase, value); }
-        }
-
-        private string? workItemFourPhase;
-
-        public string? WorkItemFourPhase
-        {
-            get => workItemFourPhase;
-            set { Set(ref workItemFourPhase, value); }
-        }
-
-        private string? workItemFivePhase;
-
-        public string? WorkItemFivePhase
-        {
-            get => workItemFivePhase;
-            set { Set(ref workItemFivePhase, value); }
-        }
-
-        private string? workItemSixPhase;
-
-        public string? WorkItemSixPhase
-        {
-            get => workItemSixPhase;
-            set { Set(ref workItemSixPhase, value); }
-        }
-
-        //-----PhaseProperties-----End
-
-        //-----EffortProperties-----Begin
-
-        private string? effortOne;
-
-        public string? EffortOne
-        {
-            get => effortOne;
-            set { Set(ref effortOne, value); }
-        }
-
-        private string? effortTwo;
-
-        public string? EffortTwo
-        {
-            get => effortTwo;
-            set { Set(ref effortTwo, value); }
-        }
-
-        private string? effortThree;
-
-        public string? EffortThree
-        {
-            get => effortThree;
-            set { Set(ref effortThree, value); }
-        }
-
-        private string? effortFour;
-
-        public string? EffortFour
-        {
-            get => effortFour;
-            set { Set(ref effortFour, value); }
-        }
-
-        private string? effortFive;
-
-        public string? EffortFive
-        {
-            get => effortFive;
-            set { Set(ref effortFive, value); }
-        }
-
-        private string? effortSix;
-
-        public string? EffortSix
-        {
-            get => effortSix;
-            set { Set(ref effortSix, value); }
-        }
-
-        //-----EffortProperties-----End
-
         public TimeSegment? RunningSegment => segments.LastOrDefault() is { End: null } runningSegment
             ? runningSegment
             : null;
@@ -559,7 +537,6 @@ namespace techsolaWorkClockTimer
                             (workHours - GetCurrentTime(project: null));
             return BreakTimeLeft = breakTime?.Ticks < 0 ? $@"-{breakTime:hh\:mm\:ss}" : $@"{breakTime:hh\:mm\:ss}";
         }
-
 
         //-----------End of day display stuff-----------
 

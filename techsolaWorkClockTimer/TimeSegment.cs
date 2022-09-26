@@ -16,7 +16,6 @@ public sealed record TimeSegment
     }
 
     private DateTime? end;
-
     public DateTime? End
     {
         get => end;
@@ -24,18 +23,13 @@ public sealed record TimeSegment
     }
 
     private string? day;
-
     public string? Day
     {
         get => day;
-        set
-        {
-            Set(ref day, value != null ? value[..3] : "");
-        }
+        set => Set(ref day, value != null ? value[..3] : "");
     }
 
     private string? date;
-
     public string? Date
     {
         get => DateTime.Today.ToShortDateString();
@@ -43,7 +37,6 @@ public sealed record TimeSegment
     }
 
     private double? hours;
-
     public double? Hours
     {
         get => hours;

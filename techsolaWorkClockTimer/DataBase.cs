@@ -7,7 +7,7 @@ namespace techsolaWorkClockTimer
     public static class DataBase
     {
 #if DEBUG
-        public static SqlConnection Connection = new SqlConnection(@"Server=localhost; Database=techsolaclockdev; Integrated Security=True;");
+        public static SqlConnection Connection = new(@"Server=localhost; Database=techsolaclockdev; Integrated Security=True;");
 #else
         public static SqlConnection Connection = new SqlConnection(@"Server=localhost; Database=techsolaclock; Integrated Security=True;");
 #endif
